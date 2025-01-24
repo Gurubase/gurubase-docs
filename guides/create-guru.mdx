@@ -1,0 +1,187 @@
+---
+title: 'Create Your First Guru'
+description: 'Learn how to create and configure an AI-powered Q&A assistant'
+---
+
+
+## What is a Guru?
+
+A Guru is an AI-powered Q&A assistant that can answer questions about any topic based on the sources you provide. Each Guru can process multiple types of content:
+- 📄 Websites
+- 📑 PDF documents
+- 🎥 YouTube videos
+- 💻 GitHub repositories
+
+
+<Note type="warning">
+  Currently, only the Gurubase team can create new Gurus on [Gurubase.io](https://gurubase.io/). You'll need to request [Guru creation](#request-a-new-guru-gurubase-io) and [claim it](#claim-your-guru-gurubase-io) for management. 
+  
+  For self-hosted users, you can [create your own Gurus](#creating-a-new-guru-self-hosted).
+</Note>
+
+## Request a New Guru (Gurubase.io)
+
+To get a new Guru for your project:
+
+1. [Open an issue](https://github.com/Gurubase/gurubase/issues/new?template=guru_creation_request.md) with the title "Guru Creation Request"
+2. Include:
+   - GitHub repository link
+   - Whether you are the maintainer
+   - If not a maintainer, proof of maintainer's permission
+
+<Note>
+  We prioritize requests from project maintainers to ensure the best quality of AI assistants.
+</Note>
+
+## Claim Your Guru (Gurubase.io)
+
+After your Guru is created, you can claim it to manage sources and settings:
+
+1. [Open an issue](https://github.com/Gurubase/gurubase/issues/new?template=guru_claim_request.md) with the title "Guru Claim Request"
+2. Provide:
+   - Guru link (e.g., `https://gurubase.io/g/anteon`)
+   - Your Gurubase username
+   - Proof of maintainership (e.g., merged PR link)
+
+<Note>
+  You must have a Gurubase account and be one of the project maintainers to claim a Guru.
+</Note>
+
+
+
+## Creating a New Guru (Self-hosted)
+
+If you're using self-hosted Gurubase, you can create Gurus directly:
+
+### 1. Access the Create Page
+
+<Frame>
+  <img src="/images/gurubase-create-guru-1.png" alt="Create New Guru" />
+</Frame>
+
+From the dashboard, click the "Create New Guru" button.
+
+### 2. Configure Basic Settings
+
+<Frame>
+  <img src="/images/gurubase-create-guru-2.png" alt="Configure Guru Settings" />
+</Frame>
+
+Fill in the following information:
+- **Guru Name**: Choose a descriptive name for your Guru
+- **Guru Logo**: Upload a logo (PNG or JPEG under 1MB)
+- **Topics**: Add comma-separated topics related to this Guru, e.g., "programming, microservices, containers". This helps the AI understand the Guru's expertise and context.
+- **Codebase Indexing**: (Optional) Provide a link to a GitHub repository to index its codebase. The Guru can then use this codebase to generate answers based on it.
+
+### 3. Add Knowledge Sources
+
+Your Guru needs sources to learn from. You can add:
+
+1. **YouTube Videos**: Click "Add YouTube" and paste video URLs
+2. **Websites**: Click "Add Website" and enter webpage URLs
+3. **PDF Documents**: Click "Upload PDFs" to add documentation files
+
+<Note>
+  Make sure your sources are publicly accessible. Private repositories or documents cannot be indexed.
+</Note>
+
+### 4. Publish Your Guru
+
+Click "Publish Guru" to create your assistant. The system will:
+1. Process all your sources
+2. Generate embeddings
+3. Create the knowledge base
+4. Make your Guru available for questions
+
+## Managing Your Guru
+
+<img src="/images/gurubase-edit-guru.png" alt="Edit Guru Settings" />
+
+After claiming your Guru, you can manage it in several ways:
+
+### Managing Website Sources
+
+<Frame>
+  <img src="/images/gurubase-edit-website-links.jpg" alt="Edit Website Links" />
+</Frame>
+
+To manage website sources:
+1. Click the menu icon (⋮) next to a website source
+2. Select "Edit" to open the URLs management dialog
+3. Here you can:
+   - Search through existing URLs
+   - Select and delete specific URLs
+   - See when each URL was last indexed
+   - Add new URLs to the source
+
+### PDF Privacy Settings
+
+<Frame>
+  <img src="/images/gurubase-change-pdf-privacy.jpg" alt="Change PDF Privacy" />
+</Frame>
+
+For PDF documents, you can control their visibility:
+1. Click the menu icon (⋮) next to a PDF source
+2. Toggle between "Public" and "Private" status
+3. Private PDFs are only accessible to you and your team
+
+### Reindexing Sources
+
+<Frame>
+  <img src="/images/gurubase-reindex.jpg" alt="Reindex Sources" />
+</Frame>
+
+To update your Guru with the latest content:
+1. Click the menu icon (⋮) next to any source
+2. Select "Reindex" to fetch and process the latest content
+3. The system will:
+   - Fetch the latest version of the content
+   - Update embeddings
+   - Refresh the knowledge base
+
+<Note>
+  Reindex your sources regularly to ensure your Guru has the most up-to-date information. This is especially important for websites and documentation that change frequently.
+</Note>
+
+### Other Management Options
+
+You can also:
+- Update basic information like name and topics
+- Generate widget IDs for website integration
+- Monitor source indexing status
+- Delete the Guru if needed
+
+## Using Your Guru
+
+<img src="/images/gurubase-ask-guru.png" alt="Ask Guru Questions" />
+
+Once your Guru is ready:
+1. Navigate to your Guru's page
+2. Type your question in the search box
+3. Get AI-powered answers with:
+   - Source references
+   - Trust score indicators
+   - Follow-up suggestions
+
+<Note>
+  The trust score shows how confident the Guru is about the answer based on the provided sources. Higher scores mean more reliable answers.
+</Note>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="Add Widget to Your Site"
+    icon="code"
+    href="/integrations/website-widget"
+  >
+    Learn how to embed your Guru on your website
+  </Card>
+  <Card
+    title="API Integration"
+    icon="plug"
+    href="/api-reference/introduction"
+  >
+    Integrate Guru with your applications
+  </Card>
+</CardGroup>

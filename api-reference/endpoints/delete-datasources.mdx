@@ -1,0 +1,51 @@
+---
+title: 'Delete Data Sources'
+api: 'DELETE /{guru_slug}/data-sources/'
+description: 'Delete one or more data sources'
+---
+
+Delete one or more data sources from your Guru.
+
+## Path Parameters
+
+<ParamField path="guru_slug" type="string" required>
+  The slug of the Guru to delete data sources from
+</ParamField>
+
+### Body Parameters
+
+<ParamField body="ids" type="number[]" required>
+  Array of data source IDs to delete (e.g., [3268, 3273])
+</ParamField>
+
+### Response
+
+<ResponseField name="msg" type="string">
+  Status message for the operation
+</ResponseField>
+
+<ResponseExample>
+```json 200
+{
+    "msg": "Data sources deleted successfully"
+}
+```
+
+```json 400
+{
+    "msg": "Invalid request parameters"
+}
+```
+
+```json 401
+{
+    "msg": "Invalid API key"
+}
+```
+
+```json 429
+{
+    "msg": "Request was throttled. Expected available in 56 seconds."
+}
+```
+</ResponseExample>

@@ -1,0 +1,27 @@
+---
+title: 'Authentication'
+description: 'Learn how to authenticate your Gurubase API requests'
+---
+
+<Frame>
+  <img src="/images/gurubase-api-keys.jpg" alt="Gurubase API Keys" />
+</Frame>
+
+All API endpoints require authentication using an API key. You can obtain your API key from the [Gurubase.io](https://gurubase.io/api-keys) or Gurubase Self-Hosted.
+
+## API Key Authentication
+
+Include your API key in the `x-api-key` header with all requests:
+
+```bash
+curl --location 'https://api.gurubase.io/api/v1/<guru_slug>/answer' \
+--header 'x-api-key: YOUR_API_KEY' \
+--header 'Content-Type: application/json' \
+--data '{
+    "question": "What is Gurubase?"
+}'
+```
+
+<Note>
+Keep your API key secure and never share it publicly. If you believe your API key has been compromised, you can generate a new one from the dashboard.
+</Note>

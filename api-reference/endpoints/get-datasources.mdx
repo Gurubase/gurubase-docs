@@ -1,0 +1,114 @@
+---
+title: 'Get Data Sources'
+api: 'GET /{guru_slug}/data-sources/'
+description: 'Retrieve all data sources (YouTube URLs, Website URLs, and PDFs) for your Guru'
+---
+
+Get a list of all data sources added to your Guru, including their status and metadata.
+
+## Path Parameters
+
+<ParamField path="guru_slug" type="string" required>
+  The slug of the Guru to get data sources from
+</ParamField>
+
+### Response
+
+<Note>
+The response includes pagination information and an array of data sources. Page size is 1000.
+</Note>
+<ResponseField name="count" type="number">
+  Total number of data sources
+</ResponseField>
+
+<ResponseField name="next" type="string">
+  URL for the next page of results (null if no more pages)
+</ResponseField>
+
+<ResponseField name="previous" type="string">
+  URL for the previous page of results (null if first page)
+</ResponseField>
+
+<ResponseField name="results" type="array">
+  Array of data sources
+
+  <Expandable title="Data Source Object">
+    <ResponseField name="id" type="number">
+      Unique identifier for the data source
+    </ResponseField>
+    <ResponseField name="type" type="string">
+      Type of data source (PDF, WEBSITE, YOUTUBE)
+    </ResponseField>
+    <ResponseField name="url" type="string">
+      URL for website and YouTube sources
+    </ResponseField>
+    <ResponseField name="title" type="string">
+      Title of the data source
+    </ResponseField>
+    <ResponseField name="status" type="string">
+      Processing status (NOT_PROCESSED, SUCCESS, FAIL)
+    </ResponseField>
+    <ResponseField name="error" type="string">
+      Error message if processing failed
+    </ResponseField>
+    <ResponseField name="date_created" type="string">
+      Creation date in ISO format
+    </ResponseField>
+    <ResponseField name="private" type="boolean">
+      Privacy setting for PDF files. For other data sources, this is always false.
+    </ResponseField>
+    <ResponseField name="last_reindex_date" type="string">
+      Date of last reindexing in ISO format
+    </ResponseField>
+    <ResponseField name="reindex_count" type="number">
+      Number of times the source has been reindexed
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+```json 200
+{
+    "count": 2,
+    "next": null,
+    "previous": null,
+    "results": [
+        {
+            "id": 3272,
+            "type": "YOUTUBE",
+            "url": "https://youtube.com/watch?v=example1",
+            "title": null,
+            "status": "NOT_PROCESSED",
+            "error": "",
+            "date_created": "2025-01-22T21:45:17.212381Z",
+            "private": false,
+            "last_reindex_date": "2025-01-22T21:45:17.212394Z",
+            "reindex_count": 0
+        },
+        {
+            "id": 3271,
+            "type": "PDF",
+            "title": "document.pdf",
+            "status": "SUCCESS",
+            "error": "",
+            "date_created": "2025-01-22T21:43:58.423588Z",
+            "private": false,
+            "last_reindex_date": "2025-01-22T21:43:58.423608Z",
+            "reindex_count": 0
+        }
+    ]
+}
+```
+
+```json 401
+{
+    "msg": "Invalid API key"
+}
+```
+
+```json 429
+{
+    "msg": "Request was throttled. Expected available in 56 seconds."
+}
+```
+</ResponseExample>

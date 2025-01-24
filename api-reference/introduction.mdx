@@ -1,33 +1,35 @@
 ---
-title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+title: 'API Reference'
+description: 'Complete API reference for Gurubase'
 ---
 
+Welcome to the Gurubase API reference documentation. Our API enables you to programmatically manage AI-powered Q&A assistants ("Gurus").
+
 <Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
+  Gurus can only be created through the Gurubase platform interface. The API is used for managing and interacting with existing Gurus.
 </Note>
 
-## Welcome
+## Base URL
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
-
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
-
-## Authentication
-
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
-
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+```bash
+https://api.gurubase.io/api/v1/<guru_slug>
 ```
+
+The `guru_slug` is a unique identifier for your Guru that can be found in the URL when accessing your Guru through the Gurubase platform interface. For example, if your Guru is accessible at https://gurubase.io/g/kubernetes, then the `guru_slug` is `kubernetes`.
+
+## Rate Limiting
+
+All API endpoints are subject to rate limiting:
+- 10 requests per minute per user
+- Returns `429` status code if exceeded
+- Contact contact@gurubase.io for increased limits
+
+## Response Codes
+
+| Code | Description |
+|------|-------------|
+| 200  | Success |
+| 400  | Bad Request - Invalid input |
+| 401  | Unauthorized - Invalid or missing API key |
+| 429  | Too Many Requests - Rate limit exceeded |
+| 500  | Internal Server Error | 

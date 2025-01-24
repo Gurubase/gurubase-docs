@@ -1,29 +1,36 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
+  "name": "Gurubase",
   "logo": {
     "dark": "/logo/dark.svg",
     "light": "/logo/light.svg"
   },
   "favicon": "/favicon.svg",
   "colors": {
-    "primary": "#0D9373",
-    "light": "#07C983",
-    "dark": "#0D9373",
+    "primary": "#006BFF",
+    "light": "#3389FF",
+    "dark": "#006BFF",
     "anchors": {
-      "from": "#0D9373",
-      "to": "#07C983"
+      "from": "#006BFF",
+      "to": "#3389FF"
+    }
+  },
+  "api": {
+    "baseUrl": "https://kubernetesguru-backend-staging-api.getanteon.com/api/v1/",
+    "auth": {
+      "method": "key",
+      "name": "x-api-key"
     }
   },
   "topbarLinks": [
     {
-      "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "name": "Discord",
+      "url": "https://discord.gg/9CMRSQPqx6"
     }
   ],
   "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "name": "⭐ Star on GitHub",
+    "url": "https://github.com/Gurubase/gurubase"
   },
   "tabs": [
     {
@@ -33,19 +40,19 @@
   ],
   "anchors": [
     {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
+      "name": "GitHub",
+      "icon": "github",
+      "url": "https://github.com/Gurubase/gurubase"
     },
     {
-      "name": "Community",
-      "icon": "slack",
-      "url": "https://mintlify.com/community"
+      "name": "Discord",
+      "icon": "discord",
+      "url": "https://discord.gg/9CMRSQPqx6"
     },
     {
-      "name": "Blog",
-      "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
+      "name": "Try Gurubase.io",
+      "icon": "robot",
+      "url": "https://gurubase.io"
     }
   ],
   "navigation": [
@@ -53,39 +60,42 @@
       "group": "Get Started",
       "pages": [
         "introduction",
-        "quickstart",
-        "development"
+        "quickstart"
       ]
     },
     {
-      "group": "Essentials",
+      "group": "Guides",
       "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
+        "guides/create-guru"
+      ]
+    },
+    {
+      "group": "Integrations",
+      "pages": [
+        "integrations/website-widget"
       ]
     },
     {
       "group": "API Documentation",
       "pages": [
-        "api-reference/introduction"
+        "api-reference/introduction",
+        "api-reference/authentication"
       ]
     },
     {
-      "group": "Endpoint Examples",
+      "group": "Endpoints",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "api-reference/endpoints/ask-question",
+        "api-reference/endpoints/create-datasources",
+        "api-reference/endpoints/get-datasources",
+        "api-reference/endpoints/delete-datasources",
+        "api-reference/endpoints/reindex-datasources"
       ]
     }
   ],
   "footerSocials": {
-    "x": "https://x.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://linkedin.com/company/mintlify"
+    "twitter": "https://x.com/gurubaseio",
+    "github": "https://github.com/Gurubase/gurubase",
+    "discord": "https://discord.gg/9CMRSQPqx6"
   }
 }

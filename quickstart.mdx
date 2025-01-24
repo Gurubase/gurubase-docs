@@ -1,86 +1,106 @@
 ---
 title: 'Quickstart'
-description: 'Start building awesome documentation in under 5 minutes'
+description: 'Get started with Gurubase in minutes'
 ---
 
-## Setup your development
+## Installation Options
 
-Learn how to update your docs locally and deploy them to the public.
+You can use Gurubase in two ways:
 
-### Edit and preview
+1. **[Gurubase.io](https://gurubase.io)** - Start using immediately without any setup
+2. **Self-hosted** - Deploy on your own infrastructure
+
+## Self-hosted Installation
+
+### Prerequisites
+
+Before installation, ensure you have:
+- [Docker](https://docs.docker.com/get-docker/) `19.0.3` or later
+- [Docker Compose](https://docs.docker.com/compose/install/) `2.6.1` or later
+- OpenAI API key - Get it from [platform.openai.com/api-keys](https://platform.openai.com/api-keys)
+- Firecrawl API key - Get it from [firecrawl.dev/app/api-keys](https://www.firecrawl.dev/app/api-keys)
+
+### Quick Install
+
+Run this command to install Gurubase:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Gurubase/gurubase/refs/heads/master/gurubase.sh -o gurubase.sh
+bash gurubase.sh
+```
+
+The installer will:
+1. Create a `.gurubase` directory in your home folder
+2. Prompt for required API keys
+3. Download and start all necessary services
+4. Open the web interface at `http://localhost:8029`
+
+### System Requirements
+
+- **Supported OS**: Linux and macOS (Windows via WSL2)
+- **CPU**: 4 cores minimum
+- **RAM**: 8GB minimum
+- **Storage**: 10GB SSD
+- **Ports**: 8028 and 8029 must be available
+
+<Note>
+  Only Linux and macOS are supported. For Windows users, please use WSL2.
+</Note>
+
+## Architecture Overview
+
+Gurubase follows a microservices architecture designed for scalability and performance. Here's a quick overview of the key components:
 
 <AccordionGroup>
-  <Accordion icon="github" title="Clone your docs locally">
-    During the onboarding process, we created a repository on your Github with
-    your docs content. You can find this repository on our
-    [dashboard](https://dashboard.mintlify.com). To clone the repository
-    locally, follow these
-    [instructions](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
-    in your terminal.
+  <Accordion icon="layer-group" title="Core Components">
+    - **Frontend**: Next.js application for the user interface
+    - **Backend**: Django REST framework for API and business logic
+    - **Vector Store**: Milvus for similarity search and embeddings
+    - **Message Queue**: RabbitMQ for task distribution
+    - **Cache**: Redis for rate limiting and session management
+    - **Database**: PostgreSQL for application data
   </Accordion>
-  <Accordion icon="rectangle-terminal" title="Preview changes">
-    Previewing helps you make sure your changes look as intended. We built a
-    command line interface to render these changes locally. 1. Install the
-    [Mintlify CLI](https://www.npmjs.com/package/mintlify) to preview the
-    documentation changes locally with this command: ``` npm i -g mintlify ```
-    2. Run the following command at the root of your documentation (where
-    `mint.json` is): ``` mintlify dev ```
+  
+  <Accordion icon="gears" title="Key Features">
+    - **RAG System**: Retrieval Augmented Generation for accurate answers
+    - **Multi-source Processing**: Support for websites, PDFs, YouTube videos and GitHub repositories
+    - **Embedding Options**: OpenAI or custom embedding API
+    - **Trust Scoring**: LLM-based context relevance evaluation
+    - **Binge Sessions**: Structured exploration of related questions
   </Accordion>
 </AccordionGroup>
 
-### Deploy your changes
+<Note>
+  For detailed architecture documentation, including system diagrams, data flows, and configuration options, see our [Architecture Guide](https://github.com/Gurubase/gurubase/blob/master/src/gurubase-backend/ARCHITECTURE.md) on GitHub.
+</Note>
 
-<AccordionGroup>
+## Additional Resources
 
-<Accordion icon="message-bot" title="Install our Github app">
-  Our Github app automatically deploys your changes to your docs site, so you
-  don't need to manage deployments yourself. You can find the link to install on
-  your [dashboard](https://dashboard.mintlify.com). Once the bot has been
-  successfully installed, there should be a check mark next to the commit hash
-  of the repo.
-</Accordion>
-<Accordion icon="rocket" title="Push your changes">
-  [Commit and push your changes to
-  Git](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository#about-git-push)
-  for your changes to update in your docs site. If you push and don't see that
-  the Github app successfully deployed your changes, you can also manually
-  update your docs through our [dashboard](https://dashboard.mintlify.com).
-</Accordion>
+For detailed information about:
+- Advanced configuration
+- System architecture
+- Available services
+- Data storage
+- Security considerations
+- Upgrade and removal instructions
 
-</AccordionGroup>
+Please visit our [GitHub repository](https://github.com/Gurubase/gurubase#installation).
 
-## Update your docs
+## Next Steps
 
-Add content directly in your files with MDX syntax and React components. You can use any of our components, or even build your own.
-
-<CardGroup>
-
-<Card title="Style Your Docs" icon="paintbrush" href="/settings/global">
-  Add flair to your docs with personalized branding.
-</Card>
-
-<Card
-  title="Add API Endpoints"
-  icon="square-code"
-  href="/api-playground/configuration"
->
-  Implement your OpenAPI spec and enable API user interaction.
-</Card>
-
-<Card
-  title="Integrate Analytics"
-  icon="chart-mixed"
-  href="/analytics/supported-integrations"
->
-  Draw insights from user interactions with your documentation.
-</Card>
-
-<Card
-  title="Host on a Custom Domain"
-  icon="browser"
-  href="/settings/custom-domain/subdomain"
->
-  Keep your docs on your own website's subdomain.
-</Card>
-
+<CardGroup cols={2}>
+  <Card
+    title="Create Your First Guru"
+    icon="wand-magic-sparkles"
+    href="/guides/create-guru"
+  >
+    Learn how to create and configure your first AI assistant
+  </Card>
+  <Card
+    title="Join Discord"
+    icon="discord"
+    href="https://discord.gg/9CMRSQPqx6"
+  >
+    Get help from our community
+  </Card>
 </CardGroup>

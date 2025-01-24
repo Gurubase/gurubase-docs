@@ -1,0 +1,104 @@
+---
+title: 'Create Data Sources'
+api: 'POST /{guru_slug}/data-sources/'
+description: 'Add new data sources to your Guru'
+---
+
+Add new data sources (YouTube videos and websites) to your Guru. The processing is asynchronous. Check the status of the data sources with the [Get Data Sources](/api-reference/endpoints/get-datasources) endpoint.
+
+<Note>
+PDF files should be uploaded directly through the Gurubase platform interface. We will add support for uploading PDFs via the API in the future.
+</Note>
+
+## Path Parameters
+
+<ParamField path="guru_slug" type="string" required>
+  The slug of the Guru to add data sources to
+</ParamField>
+
+### Body Parameters
+
+<ParamField body="youtube_urls" type="string[]">
+    Array of YouTube video URLs to process
+</ParamField>
+
+<ParamField body="website_urls" type="string[]">
+    Array of website URLs to index
+</ParamField>
+
+### Response
+
+The response is an array of processed data sources.
+
+<ResponseField name="type" type="string">
+  Type of data source (Website, YouTube)
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  URL of the data source
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Processing status (e.g., "exists", "success")
+</ResponseField>
+
+<ResponseField name="id" type="number">
+  Unique identifier for the data source
+</ResponseField>
+
+<ResponseField name="title" type="string">
+  Title of the data source (can be null)
+</ResponseField>
+
+<ResponseExample>
+```json 200
+[
+    {
+        "type": "YouTube",
+        "url": "https://youtu.be/gAkwW2tuIqE",
+        "status": "success",
+        "id": 3275,
+        "title": null
+    },
+    {
+        "type": "YouTube",
+        "url": "https://youtu.be/AhZ3YStdaQs",
+        "status": "exists",
+        "id": 3274,
+        "title": null
+    },
+    {
+        "type": "Website",
+        "url": "https://kubernetes.io/docs/home/",
+        "status": "success",
+        "id": 3276,
+        "title": null
+    },
+    {
+        "type": "Website",
+        "url": "https://kubernetes.io/docs/concepts/",
+        "status": "exists",
+        "id": 3269,
+        "title": null
+    }
+]
+```
+
+```json 400
+{
+    "msg": "Invalid request parameters"
+} 
+```
+
+```json 401
+{
+    "msg": "Invalid API key"
+}
+```
+
+```json 429
+{
+    "msg": "Request was throttled. Expected available in 56 seconds."
+}
+```
+</ResponseExample>

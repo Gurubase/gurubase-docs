@@ -1,0 +1,114 @@
+---
+title: 'Ask Question'
+api: 'POST /{guru_slug}/answer/'
+description: 'Ask a question to your Guru'
+---
+
+Ask a question to your AI-powered Q&A assistant and receive a detailed response with references.
+
+<Note>
+To ask follow-up questions, include the `session_id` from a previous response in your request. This allows the Guru to maintain context of the conversation.
+</Note>
+
+## Path Parameters
+
+<ParamField path="guru_slug" type="string" required>
+  The slug of the Guru to ask a question to
+</ParamField>
+
+
+### Body Parameters
+
+<ParamField body="question" type="string" required>
+  The question to ask your Guru
+</ParamField>
+
+<ParamField body="stream" type="boolean" default={false}>
+  Whether to stream the response or not. If true, only the content of the response will be returned in chunks.
+</ParamField>
+
+<ParamField body="session_id" type="string">
+  Maintain conversation context for follow-up questions. When a question is asked, the response includes a session_id that can be used in subsequent requests. On the Gurubase platform, these conversation sessions are called "Binges".
+</ParamField>
+
+
+### Response
+
+<ResponseField name="slug" type="string">
+  Unique identifier for the question-answer pair
+</ResponseField>
+
+<ResponseField name="content" type="string">
+  The answer in Markdown format
+</ResponseField>
+
+<ResponseField name="question" type="string">
+  The original question
+</ResponseField>
+
+<ResponseField name="date_updated" type="string">
+  The date when the answer was generated
+</ResponseField>
+
+<ResponseField name="trust_score" type="number">
+  Confidence score of the answer (0-100)
+</ResponseField>
+
+<ResponseField name="references" type="array">
+  Array of reference sources used to generate the answer
+
+  <Expandable title="Reference Object">
+    <ResponseField name="link" type="string">
+      URL of the reference
+    </ResponseField>
+    <ResponseField name="icon" type="string">
+      Icon URL for the reference source
+    </ResponseField>
+    <ResponseField name="title" type="string">
+      Title of the reference
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="session_id" type="string">
+  Unique identifier for the conversation session
+</ResponseField>
+
+
+<ResponseExample>
+```json 200
+{
+    "slug": "is-slack-supported-on-anteon-5fdf19ad-de4c-4f07-9dff-0fe1003dccac",
+    "content": "# Is Slack supported on Anteon?\n\n**Yes, Slack is supported on Anteon.** You can integrate Slack to receive notifications about anomalies in your Kubernetes cluster. This integration is available for Anteon Cloud and the Self-Hosted Enterprise Edition. For the Self-Hosted version, you need to create a Slack application and configure it with specific OAuth scopes. Once set up, you can receive alerts directly in your Slack channels. For detailed instructions, refer to the [Slack Integration Guide](https://getanteon.com/docs/self-hosted/self-hosted-slack-integration/).",
+    "question": "Is Slack supported on Anteon?",
+    "date_updated": "22 January 2025",
+    "trust_score": 76,
+    "references": [
+        {
+            "link": "https://getanteon.com/docs/self-hosted/self-hosted-slack-integration/",
+            "icon": "https://getanteon.com/img/favicon.ico",
+            "title": "📧 Slack Integration | Anteon"
+        }
+    ],
+    "session_id": "3cdbdc4c-023f-45ce-832f-f1881b4f238b"
+} 
+```
+
+```json 400
+{
+    "msg": "<error message>"
+} 
+```
+
+```json 401
+{
+    "msg": "Invalid API key"
+}
+```
+
+```json 429
+{
+    "msg": "Request was throttled. Expected available in 56 seconds."
+}
+```
+</ResponseExample>

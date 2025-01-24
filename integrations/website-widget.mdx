@@ -1,0 +1,129 @@
+---
+title: 'Website Widget Integration'
+description: 'Add Gurubase AI assistant to your website'
+---
+
+<video
+  autoPlay
+  muted
+  loop
+  playsInline
+  className="w-full aspect-video"
+  src="https://s3.eu-central-1.amazonaws.com/anteon-strapi-cms-wuby8hpna3bdecoduzfibtrucp5x/gurubase_widget_84ebd94c0f.mp4"
+></video>
+
+<Note>
+You can try the widget live on [getanteon.com](https://getanteon.com) to see how it works in a real-world setting.
+</Note>
+
+You can add your Guru directly to your website using our widget. The widget adds an "Ask AI" button that opens a chat interface when clicked.
+
+## Prerequisites
+
+Before adding the widget, make sure you have:
+- A Guru on Gurubase (either on [Gurubase.io](https://gurubase.io) or self-hosted)
+- Access to your website's HTML
+- A Widget ID from your Guru's settings
+
+## Getting Your Widget ID
+
+1. Go to your Guru's settings page
+2. Navigate to the "Widget" section
+3. Click "New Widget ID"
+4. Enter your website's domain
+5. Copy the generated Widget ID
+
+<img src="/images/gurubase-create-widget.jpg" alt="Create Widget ID" className="mt-4" />
+
+<Note>
+Widget IDs are domain-specific. If you create an ID for `https://www.example.com`, it won't work on subdomains or different domains. For local testing, create a separate Widget ID using your localhost URL.
+</Note>
+
+## Basic Installation
+
+Add this script to your website's HTML:
+
+```html
+<!-- Gurubase Widget -->
+<script async src="https://widget.gurubase.io/widget.latest.min.js" 
+    data-widget-id="YOUR_WIDGET_ID"
+    id="guru-widget-id">
+</script>
+```
+
+For more examples like Astro - Starlight, Docusaurus, Mintlify, MKDocs, Next.js, JS, React, Remix, Sphinx, see our [demo projects](https://github.com/Gurubase/gurubase-widget?tab=readme-ov-file#demos).
+
+## Configuration Options
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `data-widget-id` | Your widget ID (required) | - |
+| `data-text` | Button text | "Ask AI" |
+| `data-margins` | Button positioning | `{"bottom": "1rem", "right": "1rem"}` |
+| `data-light-mode` | Light mode toggle | `"true"` |
+| `data-bg-color` | Primary color | Fetched from Gurubase |
+| `data-icon-url` | Custom logo URL | Fetched from Gurubase |
+| `data-name` | Custom name | Fetched from Gurubase |
+
+## Self-hosted Installation
+
+<Note type="warning">
+If you're using self-hosted Gurubase, you must set the backend URL using the `data-baseUrl` attribute:
+
+```html
+<script async src="https://widget.gurubase.io/widget.latest.min.js" 
+    data-widget-id="YOUR_WIDGET_ID"
+    data-baseUrl="YOUR_BACKEND_URL"
+    id="guru-widget-id">
+</script>
+```
+</Note>
+
+## Customization Examples
+
+### Custom Button Text and Position
+```html
+<script async src="https://widget.gurubase.io/widget.latest.min.js" 
+    data-widget-id="YOUR_WIDGET_ID"
+    data-text="Need Help?"
+    data-margins='{"bottom": "2rem", "right": "2rem"}'
+    id="guru-widget-id">
+</script>
+```
+
+### Light Mode with Custom Colors
+```html
+<script async src="https://widget.gurubase.io/widget.latest.min.js" 
+    data-widget-id="YOUR_WIDGET_ID"
+    data-light-mode="true"
+    data-bg-color="#0D9373"
+    id="guru-widget-id">
+</script>
+```
+
+## Source Code
+
+The widget is open-source and available on [GitHub](https://github.com/Gurubase/gurubase-widget). Feel free to:
+- Report issues
+- Suggest features
+- Contribute improvements
+- Create custom implementations
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="API Reference"
+    icon="code"
+    href="/api-reference/introduction"
+  >
+    Explore our API documentation
+  </Card>
+  <Card
+    title="Star Gurubase on GitHub"
+    icon="github"
+    href="https://github.com/Gurubase/gurubase"
+  >
+    Star Gurubase on GitHub
+  </Card>
+</CardGroup>

@@ -1,0 +1,51 @@
+---
+title: 'Reindex Data Sources'
+api: 'POST /{guru_slug}/data-sources/reindex/'
+description: 'Reindex one or more data sources'
+---
+
+Reindex one or more data sources to update their content in your Guru. This is useful when the source content has changed.
+
+## Path Parameters
+
+<ParamField path="guru_slug" type="string" required>
+  The slug of the Guru to reindex data sources from
+</ParamField>
+
+### Body Parameters
+
+<ParamField body="ids" type="number[]" required>
+  Array of data source IDs to reindex (e.g., [3271, 3272])
+</ParamField>
+
+### Response
+
+<ResponseField name="msg" type="string">
+  Status message for the operation
+</ResponseField>
+
+<ResponseExample>
+```json 200
+{
+    "msg": "Data sources reindexed successfully"
+}
+```
+
+```json 400
+{
+    "msg": "Invalid request parameters"
+}
+```
+
+```json 401
+{
+    "msg": "Invalid API key"
+}
+```
+
+```json 429
+{
+    "msg": "Request was throttled. Expected available in 56 seconds."
+}
+```
+</ResponseExample>
