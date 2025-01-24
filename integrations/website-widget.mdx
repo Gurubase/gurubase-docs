@@ -22,7 +22,6 @@ You can add your Guru directly to your website using our widget. The widget adds
 
 Before adding the widget, make sure you have:
 - A Guru on Gurubase (either on [Gurubase.io](https://gurubase.io) or self-hosted)
-- Access to your website's HTML
 - A Widget ID from your Guru's settings
 
 ## Getting Your Widget ID
@@ -36,7 +35,14 @@ Before adding the widget, make sure you have:
 <img src="/images/gurubase-create-widget.jpg" alt="Create Widget ID" className="mt-4" />
 
 <Note>
-Widget IDs are domain-specific. If you create an ID for `https://www.example.com`, it won't work on subdomains or different domains. For local testing, create a separate Widget ID using your localhost URL.
+Each Widget ID is restricted to work only on the specific domain it was created for. For example:
+
+- A Widget ID created for `https://www.example.com` will only work on that exact domain
+- It won't work on subdomains like `https://docs.example.com` 
+- It won't work on different domains like `https://example.org`
+- For local development, you'll need to create a separate Widget ID using your development URL (e.g. `http://localhost:3000`)
+
+Make sure to create Widget IDs for each domain where you want to use the widget.
 </Note>
 
 ## Basic Installation
@@ -68,12 +74,12 @@ For more examples like Astro - Starlight, Docusaurus, Mintlify, MKDocs, Next.js,
 ## Self-hosted Installation
 
 <Note type="warning">
-If you're using self-hosted Gurubase, you must set the backend URL using the `data-baseUrl` attribute:
+If you're using self-hosted Gurubase, you must set the backend URL using the `data-baseUrl` attribute. The default backend URL of Self-hosted Gurubase is `http://localhost:8029/api/`.
 
 ```html
 <script async src="https://widget.gurubase.io/widget.latest.min.js" 
     data-widget-id="YOUR_WIDGET_ID"
-    data-baseUrl="YOUR_BACKEND_URL"
+    data-baseUrl="http://localhost:8029/api/"
     id="guru-widget-id">
 </script>
 ```
@@ -103,11 +109,7 @@ If you're using self-hosted Gurubase, you must set the backend URL using the `da
 
 ## Source Code
 
-The widget is open-source and available on [GitHub](https://github.com/Gurubase/gurubase-widget). Feel free to:
-- Report issues
-- Suggest features
-- Contribute improvements
-- Create custom implementations
+The widget is open-source and available on [GitHub](https://github.com/Gurubase/gurubase-widget) where you can report issues, suggest features, and contribute improvements.
 
 ## Next Steps
 
