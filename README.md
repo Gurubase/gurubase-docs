@@ -1,12 +1,6 @@
-# Mintlify Starter Kit
+# Gurubase Documentation
 
-Click on `Use this template` to copy the Mintlify starter kit. The starter kit contains examples including
-
-- Guide pages
-- Navigation
-- Customizations
-- API Reference pages
-- Use of popular components
+You can find the documentation for Gurubase [here](https://docs.gurubase.io).
 
 ### Development
 
