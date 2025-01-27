@@ -16,7 +16,7 @@
     }
   },
   "api": {
-    "baseUrl": "https://kubernetesguru-backend-staging-api.getanteon.com/api/v1/",
+    "baseUrl": "https://api.gurubase.io/api/v1/",
     "auth": {
       "method": "key",
       "name": "x-api-key"
