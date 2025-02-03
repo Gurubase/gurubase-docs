@@ -73,7 +73,9 @@
     {
       "group": "Integrations",
       "pages": [
-        "integrations/website-widget"
+        "integrations/website-widget",
+        "integrations/slack-bot",
+        "integrations/discord-bot"
       ]
     },
     {
