@@ -7,8 +7,8 @@ description: 'Connect Gurubase with Slack to enhance your workflow'
 
 Integrate Gurubase with Slack to ask your Guru directly within your Slack workspace.
 
-<Note type="warning">
-Self-hosted version does not currently support Slack and Discord integrations. We will release it soon.
+<Note>
+For self-hosted version, you first need to setup a Slack App manually to get a bot token. Please refer to the [Slack App Setup for Self-hosted version](#slack-app-setup-for-self-hosted-version) section for more details.
 </Note>
 
 ## Steps to Integrate
@@ -55,6 +55,46 @@ Gurubase will request the following permissions:
 ## Using the Bot
 
 Once integrated, you can mention the bot using `@Gurubase.io` in your Slack channels to ask questions directly to your Guru.
+<Note>
+For self-hosted version, you need to mention the bot using `@<app_name_you_gave_to_the_bot>` instead of `@Gurubase.io`.
+</Note>
+
+## Slack App Setup for Self-hosted version
+For self-hosted version, you need to create your own Slack app to create a bot to integrate with your Gurubase Self-hosted instance. Below are the steps to create the app and get the bot token.
+
+1. Go to https://api.slack.com/apps and click "Create New App".
+2. Select "From scratch", give it a name and pick your workspace.
+3. Slack will send events to your backend. If your backend is not public, you need to open it to public. You can use [ngrok](https://ngrok.com/) to do this, for example: `ngrok http <your_backend_url>`.
+4. Go to "Event Subscriptions" page on your Slack app and enable it.
+5. Set your public url along with the path `/slack/events` as "Request Url", this is the url that Slack will send the events to.
+    - `${your_public_backend_url}/slack/events`
+6. Expand the "Subscribe to bot events" section on "Event Subscriptions" page and add the following events:
+    - `message.channels`
+    - `message.groups`
+
+<img src="/images/slack-event-subscriptions.png" width="500"/>
+
+7. Save changes.
+8. Go to "OAuth & Permissions" page on Slack app. Scroll to "Bot Token Scopes" under "Scopes" section and add the following permissions:
+    - `channels:join`
+    - `channels:read`
+    - `chat:write`
+    - `groups:read`
+    - `channels:history`
+    - `groups:history`
+
+<img src="/images/slack-bot-permissions.png" width="500"/>
+
+9. Go to "Install App" page on Slack app. Then click "Install to [your_workspace_name]".
+10. Go through the OAuth flow.
+11. After installation, you will be redirected to the same page.
+12. Copy "Bot User OAuth Token".
+13. Go to your guru's Slack integration page in the Gurubase UI and paste the bot token you copied and click "Connect".
+
+<img src="/images/slack-bot-token-input.png" className="mt-4"/>
+
+14. You can now follow the [Steps to Integrate](/integrations/slack-bot#steps-to-integrate).
+
 
 ## Next Steps
 
