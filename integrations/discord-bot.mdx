@@ -8,7 +8,7 @@ description: 'Connect Gurubase with Discord to enhance your workflow'
 Integrate Gurubase with Discord to ask your Guru directly within your Discord server.
 
 <Note type="warning">
-Self-hosted version does not currently support Slack and Discord integrations. We will release it soon.
+For self-hosted version, you first need to create a Discord App manually to get a bot token. Please refer to the [Discord App Setup for Self-hosted version](#discord-app-setup-for-self-hosted-version) section for more details.
 </Note>
 
 ## Steps to Integrate
@@ -53,6 +53,25 @@ Gurubase will request the following permissions:
 ## Using the Bot
 
 Once integrated, you can mention the bot using `@Gurubase.io` in your Discord channels to ask questions directly to your Guru.
+
+## Discord App Setup for Self-hosted version
+
+For self-hosted version, you need to create your own Discord app to create a bot to integrate with your Gurubase Self-hosted instance. Below are the steps to create the app and get the bot token.
+
+1. Go to https://discord.com/developers/applications and click "New Application".
+3. Go to "Bot" page and enable "Message Content Intent". This is required for the bot to read messages in the server.
+4. Save changes.
+5. Go to "Installation" page
+6. Under "Installation Contexts", de-select "User Install" and save changes.
+7. Under "Default Install Settings", and under "Guild Install", add "bot" to the "Scopes". Then, "Permissions" will become visible. Add "Send Messages" to the permissions.
+<img src="/images/discord-bot-permissions.png" width="500" className="mt-4"/>
+9. Save changes.
+10. There should be a "Install Link" section in this page. Copy it and open it in your browser.
+11. Pick the server you want to install the app to. And follow through the OAuth flow.
+12. Go to "Bot" page. There will be a "Token" subheader. Under it, click "Reset Token" then copy the new token.
+13. Go to your guru's Discord integration page in the Gurubase UI and paste the bot token you copied.
+<img src="/images/discord-bot-token-input.png" className="mt-4"/>
+14. You can now follow the [Steps to Integrate](/integrations/discord-bot#steps-to-integrate).
 
 ## Next Steps
 
