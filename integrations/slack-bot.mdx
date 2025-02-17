@@ -64,10 +64,21 @@ For self-hosted version, you need to create your own Slack app to create a bot t
 
 1. Go to https://api.slack.com/apps and click "Create New App".
 2. Select "From scratch", give it a name and pick your workspace.
-3. Slack will send events to your backend. If your backend is not public, you need to open it to public. You can use [ngrok](https://ngrok.com/) to do this, for example: `ngrok http <your_backend_url>`.
+3. Slack will send events to  `/slack/events/` endpoint of your Gurubase backend instance. If the backend URL is not public, you need to open it to public. You can use [ngrok](https://ngrok.com/) to do this:
+   - If you haven't changed the default ports of Gurubase, port 8029 is for the frontend UI, and port 8028 is for the backend. You need to use the backend URL to make it accessible to the public.
+   - Make backend URL public with `ngrok http http://localhost:8028`
+   - Copy the public URL from the ngrok terminal as shown below:
+
+<img src="/images/slack-ngrok-url.png" width="500"/>
+
 4. Go to "Event Subscriptions" page on your Slack app and enable it.
-5. Set your public url along with the path `/slack/events` as "Request Url", this is the url that Slack will send the events to.
-    - `${your_public_backend_url}/slack/events`
+5. Set your public url along with the path `/slack/events/` as "Request URL", this is the url that Slack will send the events to. Be careful with the trailing slash at the end of the url.
+    - `${your_public_backend_url}/slack/events/`
+
+<Note type="warning">
+If you change the backend URL, you need to update the "Request URL" with the new URL.
+</Note>
+
 6. Expand the "Subscribe to bot events" section on "Event Subscriptions" page and add the following events:
     - `message.channels`
     - `message.groups`
@@ -85,7 +96,7 @@ For self-hosted version, you need to create your own Slack app to create a bot t
 
 <img src="/images/slack-bot-permissions.png" width="500"/>
 
-9. Go to "Install App" page on Slack app. Then click "Install to [your_workspace_name]".
+9. Go to "Install App" page. Then click "Install to [your_workspace_name]".
 10. Go through the OAuth flow.
 11. After installation, you will be redirected to the same page.
 12. Copy "Bot User OAuth Token".
