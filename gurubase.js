@@ -1,6 +1,6 @@
 // Customize widget settings
 const widgetSettings = {
-    widgetId: "SGWF4dOdCj-erFgLDlhMAeenGh7M48cR3MP2HyPHWN8", // Replace with your widget ID
+    widgetId: "OeiknZ38j9YuuZpaeiCb1I_i14MDtqr64eHotQNKNoY", // Replace with your widget ID
     // Optional configurations:
     // text: "Ask AI",                                    // Button text
     // margins: { bottom: "20px", right: "20px" },       // Widget positioning
@@ -52,3 +52,4 @@ const widgetSettings = {
     // Stop checking after 20 seconds
     setTimeout(() => clearInterval(initWidget), 20000);
   });
+  document.body.appendChild(guruScript);
