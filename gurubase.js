@@ -1,6 +1,6 @@
 // Customize widget settings
 const widgetSettings = {
-    widgetId: "OeiknZ38j9YuuZpaeiCb1I_i14MDtqr64eHotQNKNoY", // Replace with your widget ID
+    widgetId: "SGWF4dOdCj-erFgLDlhMAeenGh7M48cR3MP2HyPHWN8", // Replace with your widget ID
     // Optional configurations:
     // text: "Ask AI",                                    // Button text
     // margins: { bottom: "20px", right: "20px" },       // Widget positioning
