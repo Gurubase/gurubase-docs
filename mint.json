@@ -100,5 +100,10 @@
     "twitter": "https://x.com/gurubaseio",
     "github": "https://github.com/Gurubase/gurubase",
     "discord": "https://discord.gg/9CMRSQPqx6"
-  }
+  },
+  "scripts": [
+    {
+      "src": "/gurubase.js"
+    }
+  ]
 }
