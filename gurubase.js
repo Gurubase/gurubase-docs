@@ -23,9 +23,6 @@ const widgetSettings = {
     guruScript.setAttribute(dataKey, dataValue);
   });
   
-  // Append the script to the document
-  document.body.appendChild(guruScript);
-
   // Initialize theme handling
   guruScript.addEventListener('load', () => {
     const initWidget = setInterval(() => {
