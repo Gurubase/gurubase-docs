@@ -23,5 +23,30 @@ const widgetSettings = {
     guruScript.setAttribute(dataKey, dataValue);
   });
   
-  // Append the script to the document
+  // Initialize theme handling
+  guruScript.addEventListener('load', () => {
+    const initWidget = setInterval(() => {
+      if (window.chatWidget?.switchTheme) {
+        clearInterval(initWidget);
+        
+        // Handle theme changes
+        const syncTheme = () => {
+          const isDark = document.documentElement.classList.contains('dark');
+          window.chatWidget.switchTheme(!isDark);
+        };
+
+        // Watch for theme changes
+        new MutationObserver(syncTheme).observe(document.documentElement, {
+          attributes: true,
+          attributeFilter: ['class']
+        });
+        
+        // Set initial theme
+        syncTheme();
+      }
+    }, 1000);
+
+    // Stop checking after 20 seconds
+    setTimeout(() => clearInterval(initWidget), 20000);
+  });
   document.body.appendChild(guruScript);
