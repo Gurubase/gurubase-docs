@@ -92,7 +92,10 @@
         "api-reference/endpoints/create-datasources",
         "api-reference/endpoints/get-datasources",
         "api-reference/endpoints/delete-datasources",
-        "api-reference/endpoints/reindex-datasources"
+        "api-reference/endpoints/reindex-datasources",
+        "api-reference/endpoints/crawler-start",
+        "api-reference/endpoints/crawler-stop",
+        "api-reference/endpoints/crawler-status"
       ]
     }
   ],
