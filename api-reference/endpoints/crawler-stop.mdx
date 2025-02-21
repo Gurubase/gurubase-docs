@@ -1,0 +1,78 @@
+---
+title: 'Stop Website Crawl'
+api: 'POST /{guru_slug}/crawl/{crawl_id}/stop/'
+description: 'Stop an ongoing website crawl operation'
+---
+
+Stops a running website crawl operation. This endpoint allows you to halt the crawling process before it completes naturally.
+
+## Path Parameters
+
+<ParamField path="guru_slug" type="string" required>
+  The slug of the Guru type associated with the crawl
+</ParamField>
+
+<ParamField path="crawl_id" type="string" required>
+  The unique identifier of the crawl operation to stop
+</ParamField>
+
+### Response
+
+<ResponseField name="id" type="string">
+  Unique identifier for the crawl operation
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  The root URL that was being crawled
+</ResponseField>
+
+<ResponseField name="status" type="string" enum={["RUNNING", "COMPLETED", "FAILED", "STOPPED"]}>
+  Current status of the crawl operation
+</ResponseField>
+
+<ResponseField name="guru_type" type="string">
+  The Guru type that the crawl was initiated for
+</ResponseField>
+
+<ResponseField name="discovered_urls" type="list">
+  List of URLs discovered during crawling
+</ResponseField>
+
+<ResponseField name="start_time" type="string">
+  Timestamp when crawl started (ISO 8601 format)
+</ResponseField>
+
+<ResponseField name="end_time" type="string">
+  Timestamp when crawl ended (ISO 8601 format)
+</ResponseField>
+
+<ResponseField name="link_limit" type="number">
+  Maximum links specified in the original request
+</ResponseField>
+
+<ResponseExample>
+```json 200
+{
+    "id": 211,
+    "url": "https://fastapi.tiangolo.com/",
+    "status": "STOPPED",
+    "guru_type": "fastapi",
+    "discovered_urls": [],
+    "start_time": "2025-02-21T10:25:22.710211Z",
+    "end_time": "2025-02-21T10:26:15.521433Z",
+    "link_limit": 1500
+}
+```
+
+```json 404
+{
+    "msg": "Crawl not found"
+}
+```
+
+```json 400
+{
+    "msg": "Invalid request"
+}
+```
+</ResponseExample>
