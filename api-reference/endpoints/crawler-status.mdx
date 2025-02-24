@@ -6,6 +6,8 @@ description: 'Get the current status of a website crawl operation'
 
 Retrieves the current status and details of a specific crawl operation. This endpoint allows you to monitor the progress of an ongoing crawl or check the results of a completed crawl.
 
+When the crawl is completed, the discovered URLs are not indexed immediately. You need to manually add the discovered URLs as a data source by passing them to [Create Data Source](/api-reference/endpoints/create-datasources) endpoint.
+
 ## Path Parameters
 
 <ParamField path="guru_slug" type="string" required>
@@ -44,10 +46,6 @@ Retrieves the current status and details of a specific crawl operation. This end
 
 <ResponseField name="end_time" type="string">
   Timestamp when crawl ended (ISO 8601 format)
-</ResponseField>
-
-<ResponseField name="link_limit" type="number">
-  Maximum links specified in the original request
 </ResponseField>
 
 <ResponseField name="error_message" type="string">

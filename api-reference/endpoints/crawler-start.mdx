@@ -4,11 +4,16 @@ api: 'POST /{guru_slug}/crawl/start/'
 description: 'Initiate a crawl to explore the URLs of a website'
 ---
 
-Starts an asynchronous website crawl operation to find all the URLs on a specified website. 
+Starts an **asynchronous** website crawl operation to find all the sub URLs of the provided root URL. 
+
+You can check the status of created crawl operation using the [Get Crawl Status](/api-reference/endpoints/crawler-status) endpoint or stop it using the [Stop Crawl](/api-reference/endpoints/crawler-stop) endpoint.
+
+Crawling does not mean that the discovered URLs are indexed immediately. You need to manually add the discovered URLs as a data source by passing them to [Create Data Source](/api-reference/endpoints/create-datasources) endpoint.
 
 <Note>
 Crawls are rate limited to 1 concurrent operation per Guru type. Subsequent requests will fail if a crawl is already running.
 </Note>
+
 
 ## Path Parameters
 
@@ -30,7 +35,7 @@ Unique identifier for the crawl operation
 </ResponseField>
 
 <ResponseField name="url" type="string">
-The root URL to be crawled. The crawler will start from this URL and follow all links that begin with it. For example, if the URL is https://example.com/a/b/c, the crawler will follow all links that start with https://example.com/a/b/c.
+The root URL to be crawled. The crawler will start from this URL and follow all links that begin with it. For example, if the URL is https://example.com/a/b/c, the crawler will extract all links that start with https://example.com/a/b/c.
 </ResponseField>
 
 <ResponseField name="status" type="string" enum={["RUNNING", "COMPLETED", "FAILED", "STOPPED"]}>
@@ -52,14 +57,6 @@ Timestamp when crawl started (ISO 8601 format)
 <ResponseField name="end_time" type="string">
 Timestamp when crawl ended (ISO 8601 format)
 </ResponseField>
-
-<ResponseField name="link_limit" type="number">
-The crawler will stop once the number of discovered URLs reaches this value.
-For Gurubase.io, the default and maximum limit is 1500. You can set it lower, but not higher.
-For self-hosted instances, the default is 1500, but you can set it lower or higher.
-</ResponseField>
-
-
 
 <ResponseExample>
 ```json 200
