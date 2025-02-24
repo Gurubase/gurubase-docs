@@ -54,7 +54,9 @@ Timestamp when crawl ended (ISO 8601 format)
 </ResponseField>
 
 <ResponseField name="link_limit" type="number">
-Maximum links specified in the request
+The crawler will stop once the number of discovered URLs reaches this value.
+For Gurubase.io, the default and maximum limit is 1500. You can set it lower, but not higher.
+For self-hosted instances, the default is 1500, but you can set it lower or higher.
 </ResponseField>
 
 
@@ -63,9 +65,9 @@ Maximum links specified in the request
 ```json 200
 {
     "id": 211,
-    "url": "https://fastapi.tiangolo.com/",
+    "url": "https://getanteon.com/",
     "status": "RUNNING",
-    "guru_type": "fastapi",
+    "guru_type": "anteon",
     "discovered_urls": [],
     "start_time": "2025-02-21T10:25:22.710211Z",
     "end_time": null,
