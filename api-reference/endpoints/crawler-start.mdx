@@ -1,0 +1,90 @@
+---
+title: 'Start Website Crawl'
+api: 'POST /{guru_slug}/crawl/start/'
+description: 'Initiate a crawl to explore the URLs of a website'
+---
+
+Starts an asynchronous website crawl operation to find all the URLs on a specified website.
+
+<Note>
+Crawls are rate limited to 1 concurrent operation per Guru type. Subsequent requests will fail if a crawl is already running.
+</Note>
+
+## Path Parameters
+
+<ParamField path="guru_slug" type="string" required>
+The slug of the Guru type to associate the crawled content with
+</ParamField>
+
+
+### Body Parameters
+
+<ParamField body="url" type="string" required>
+The root URL to start crawling from. Must include http:// or https:// protocol.
+</ParamField>
+
+### Response
+
+<ResponseField name="id" type="string">
+Unique identifier for the crawl operation
+</ResponseField>
+
+<ResponseField name="url" type="string">
+The root URL that was crawled
+</ResponseField>
+
+<ResponseField name="status" type="string" enum={["RUNNING", "COMPLETED", "FAILED", "STOPPED"]}>
+Current status of the crawl operation
+</ResponseField>
+
+<ResponseField name="guru_type" type="string">
+The Guru type that the crawl was initiated for
+</ResponseField>
+
+<ResponseField name="discovered_urls" type="list">
+List of URLs discovered during crawling
+</ResponseField>
+
+<ResponseField name="start_time" type="string">
+Timestamp when crawl started (ISO 8601 format)
+</ResponseField>
+
+<ResponseField name="end_time" type="string">
+Timestamp when crawl ended (ISO 8601 format)
+</ResponseField>
+
+<ResponseField name="link_limit" type="number">
+The crawler will stop once the number of discovered URLs reaches this value.
+For Gurubase.io, the default and maximum limit is 1500. You can set it lower, but not higher.
+For self-hosted instances, the default is 1500, but you can set it lower or higher.
+</ResponseField>
+
+
+
+<ResponseExample>
+```json 200
+{
+    "id": 211,
+    "url": "https://getanteon.com/",
+    "status": "RUNNING",
+    "guru_type": "anteon",
+    "discovered_urls": [],
+    "start_time": "2025-02-21T10:25:22.710211Z",
+    "end_time": null,
+    "link_limit": 1500
+}
+```
+
+```json 400
+{
+    "msg": "Invalid URL format"
+}
+```
+
+
+```json 429
+{
+    "msg": "Request was throttled. Expected available in 56 seconds."
+}
+```
+</ResponseExample>
