@@ -60,8 +60,7 @@
       "group": "Get Started",
       "pages": [
         "introduction",
-        "quickstart",
-        "changelog"
+        "quickstart"
       ]
     },
     {
