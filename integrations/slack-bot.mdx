@@ -21,13 +21,17 @@ For self-hosted version, you first need to setup a Slack App manually to get a b
 2. **Select Slack Bot**
    - Click on the "Slack Bot" option.
 
-<img src="/images/gurubase-integrations-1.png" alt="Gurubase integrations page" className="mt-4" />
+<Frame>
+  <img src="/images/gurubase-integrations-1.png" alt="Gurubase integrations page"/>
+</Frame>
 
 3. **Connect to Slack**
    - Click the "Connect" button.
    - Authorize Gurubase to access your Slack workspace.
 
-<img src="/images/gurubase-slack-integrations-2.png" alt="Gurubase slack integration page" className="mt-4" />
+<Frame>
+  <img src="/images/gurubase-slack-integrations-2.png" alt="Gurubase slack integration page" />
+</Frame>
 
 
 4. **Select Channels**
@@ -38,13 +42,17 @@ For self-hosted version, you first need to setup a Slack App manually to get a b
 To subscribe to a private channel and send test messages to it, you need to invite the bot to the channel. You can do so from the Slack app using the "Add apps to this channel" command. This is not needed for public channels.
 </Note>
 
-<img src="/images/gurubase-slack-integrations-3.png" alt="Gurubase slack integration page" className="mt-4" />
+<Frame>
+  <img src="/images/gurubase-slack-integrations-3.png" alt="Gurubase slack integration page" />
+</Frame>
 
 
 5. **Test the Connection**
    - Use the "Send Test Message" button to ensure the integration is working.
 
-<img src="/images/gurubase-slack-integrations-4.png" alt="Gurubase slack integration page" className="mt-4" />
+<Frame>
+  <img src="/images/gurubase-slack-integrations-4.png" alt="Gurubase slack integration page" />
+</Frame>
 
 ## Permissions
 
@@ -64,26 +72,34 @@ For self-hosted version, you need to create your own Slack app to create a bot t
 
 1. Go to https://api.slack.com/apps and click "Create New App".
 2. Select "From scratch", give it a name and pick your workspace.
-3. Slack will send events to  `/api/slack/events/` endpoint of your Gurubase frontend. If the frontend URL is not public, you need to open it to public. You can use [ngrok](https://ngrok.com/) to do this:
-   - If you haven't changed the default ports of Gurubase, port 8029 is for the frontend UI. You need to use this to make it accessible to the public.
-   - Make frontend URL public with `ngrok http http://localhost:8029`
+3. Slack will send events to  `/api/slack/events/` endpoint of your Gurubase instance. If the Gurubase instance URL is not public, you need to open it to public. You can use [ngrok](https://ngrok.com/) to do this:
+   - If you haven't changed, the default port of Gurubase instance is 8029. You need to use this to make it publicly accessible.
+   - Make Gurubase instance URL public with `ngrok http http://localhost:8029`
    - Copy the public URL from the ngrok terminal as shown below:
 
-<img src="/images/slack-ngrok-url.png" width="500"/>
+<Frame>
+  <img src="/images/slack-ngrok-url.png"/>
+</Frame>
 
 4. Go to "Event Subscriptions" page on your Slack app and enable it.
-5. Set your public url along with the path `/api/slack/events/` as "Request URL", this is the url that Slack will send the events to. Be careful with the trailing slash at the end of the url.
-    - `${your_public_frontend_url}/api/slack/events/`
+5. Set your public url along with the path `/api/slack/events/` as "Request URL", this is the url that Slack will send the events to. Be careful with the trailing slash at the end of the url. You should see the "Verified" green text if the url is correct.
+    - `${your_public_gurubase_url}/api/slack/events/`
+
+<Frame>
+  <img src="/images/slack-url-verified.png"/>
+</Frame>
 
 <Note type="warning">
-If you change the frontend URL, you need to update the "Request URL" with the new URL.
+If you change the Gurubase instance URL, you need to update the "Request URL" with the new URL.
 </Note>
 
 6. Expand the "Subscribe to bot events" section on "Event Subscriptions" page and add the following events:
     - `message.channels`
     - `message.groups`
 
-<img src="/images/slack-event-subscriptions.png" width="500"/>
+<Frame>
+  <img src="/images/slack-event-subscriptions.png" width="500"/>
+</Frame>
 
 7. Save changes.
 8. Go to "OAuth & Permissions" page on Slack app. Scroll to "Bot Token Scopes" under "Scopes" section and add the following permissions:
@@ -94,7 +110,9 @@ If you change the frontend URL, you need to update the "Request URL" with the ne
     - `channels:history`
     - `groups:history`
 
-<img src="/images/slack-bot-permissions.png" width="500"/>
+<Frame>
+  <img src="/images/slack-bot-permissions.png" width="500"/>
+</Frame>
 
 9. Go to "Install App" page. Then click "Install to [your_workspace_name]".
 10. Go through the OAuth flow.
@@ -102,7 +120,9 @@ If you change the frontend URL, you need to update the "Request URL" with the ne
 12. Copy "Bot User OAuth Token".
 13. Go to your guru's Slack integration page in the Gurubase UI and paste the bot token you copied and click "Connect".
 
-<img src="/images/slack-bot-token-input.png" className="mt-4"/>
+<Frame>
+  <img src="/images/slack-bot-token-input.png"/>
+</Frame>
 
 14. You can now follow the [Steps to Integrate](/integrations/slack-bot#steps-to-integrate).
 
