@@ -37,16 +37,18 @@ Before adding the widget, make sure you have:
   <img src="/images/gurubase-create-widget.jpg" alt="Create Widget ID" className="mt-4" />
 </Frame>
 
-<Note>
 Each Widget ID is restricted to work only on the specific domain it was created for. For example:
 
-- A Widget ID created for `https://www.example.com` will only work on that exact domain
-- It won't work on subdomains like `https://docs.example.com` 
-- It won't work on different domains like `https://example.org`
-- For local development, you'll need to create a separate Widget ID using your development URL (e.g. `http://localhost:3000`)
+- If a Widget ID created for `https://www.example.com` will only work on that exact domain.
+  - It won't work on subdomains like `https://docs.example.com` 
+  - It won't work on different domains like `https://example.org`
+- For local development, you need to create a separate Widget ID using your development URL (e.g., `http://localhost:3000`)
+- Domain input supports wildcard (`*`) expression:
+  - `*.example.com` will match any subdomain of `example.com`
+  - `http://localhost:*` will match any port of `localhost`
+  - `*` will match any domain, so be careful with this option! Anyone who knows your Widget ID can send requests to your Guru.
 
 Make sure to create Widget IDs for each domain where you want to use the widget.
-</Note>
 
 ## Basic Installation
 
