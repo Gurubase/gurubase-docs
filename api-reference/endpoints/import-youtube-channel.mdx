@@ -1,0 +1,63 @@
+---
+title: 'Import YouTube Channel'
+api: 'POST /youtube/channel/'
+description: 'Fetch video URLs from a YouTube channel'
+---
+
+This endpoint allows you to fetch the list of all uploaded videos from a YouTube channel URL. The operation is **synchronous** and returns the list directly in the response.
+
+### Body Parameters
+
+<ParamField body="url" type="string" required>
+The YouTube channel URL to fetch data from. Must be a valid YouTube channel URL.
+
+The allowed formats look like these:
+
+- `youtube.com/channel/{channel_id}`
+- `youtube.com/@{user_handler}`
+</ParamField>
+
+### Response
+
+<ResponseField name="channel_identifier" type="string">
+Identifier used to find the channel. Can be either the id or the handler of the channel.
+</ResponseField>
+
+<ResponseField name="identifier_type" type="string">
+Identifier type used to find the channel. Can be either "channel_id" or "username"
+</ResponseField>
+
+<ResponseField name="video_count" type="int">
+The number of videos in the channel
+</ResponseField>
+
+<ResponseField name="videos" type="list">
+The urls of the videos
+</ResponseField>
+
+<ResponseExample>
+```json 200
+{
+    "channel_identifier": {identifier},
+    "identifier_type": "username",
+    "video_count": 3,
+    "videos": [
+        {url1},
+        {url2},
+        {url3}
+    ]
+}
+```
+
+```json 400
+{
+    "error": "URL is required"
+}
+```
+
+```json 429
+{
+    "msg": "Request was throttled."
+}
+```
+</ResponseExample>
