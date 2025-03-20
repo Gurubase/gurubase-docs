@@ -34,7 +34,7 @@ Before adding the widget, make sure you have:
 6. Copy the generated Widget ID
 
 <Frame>
-  <img src="/images/gurubase-create-widget.jpg" alt="Create Widget ID" className="mt-4" />
+  <img src="/images/gurubase-create-widget.png" alt="Create Widget ID" className="mt-4" />
 </Frame>
 
 Each Widget ID is restricted to work only on the specific domain it was created for. For example:
@@ -71,7 +71,7 @@ For more examples like Astro - Starlight, Docusaurus, Mintlify, MKDocs, Next.js,
 | `data-widget-id` | Your widget ID (required) | - |
 | `data-text` | Button text | "Ask AI" |
 | `data-margins` | Button positioning | `{"bottom": "1rem", "right": "1rem"}` |
-| `data-light-mode` | Light mode toggle | `"true"` |
+| `data-light-mode` | Light mode toggle. Possible values are `"light"`, `"dark"`, `"auto"`. Auto mode syncs the widget theme with the website's theme | `"dark"` |
 | `data-bg-color` | Primary color | Fetched from Gurubase |
 | `data-icon-url` | Custom logo URL | Fetched from Gurubase |
 | `data-name` | Custom name | Fetched from Gurubase |
@@ -106,7 +106,7 @@ If you're using self-hosted Gurubase, you must set the Gurubase instance URL usi
 ```html
 <script async src="https://widget.gurubase.io/widget.latest.min.js" 
     data-widget-id="YOUR_WIDGET_ID"
-    data-light-mode="true"
+    data-light-mode="light"
     data-bg-color="#0D9373"
     id="guru-widget-id">
 </script>
