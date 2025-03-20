@@ -6,6 +6,10 @@ description: 'Fetch video URLs from a YouTube channel'
 
 This endpoint allows you to fetch the list of all uploaded videos from a YouTube channel URL. The operation is **synchronous** and returns the list directly in the response.
 
+<Note>
+To be able to use this feature on selfhosted, you need to specify your YouTube API Key in the settings page. You can create one by following the instructions [here](https://developers.google.com/youtube/registering_an_application). After this, you also need to enable the "Youtube Data API v3" API in your Google Cloud project.
+</Note>
+
 ### Body Parameters
 
 <ParamField body="url" type="string" required>
