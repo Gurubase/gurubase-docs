@@ -1,0 +1,59 @@
+---
+title: 'Import YouTube Playlist'
+api: 'POST /youtube/playlist/'
+description: 'Fetch video URLs from a YouTube playlist'
+---
+
+This endpoint allows you to fetch the list of videos from a YouTube playlist. The operation is **synchronous** and returns the list directly in the response.
+
+<Note>
+To be able to use this feature on selfhosted, you need to specify your YouTube API Key in the settings page. You can create one by following the instructions [here](https://developers.google.com/youtube/registering_an_application). After this, you also need to enable the "Youtube Data API v3" API in your Google Cloud project.
+</Note>
+
+### Body Parameters
+
+<ParamField body="url" type="string" required>
+The YouTube channel URL to fetch data from. Must be a valid YouTube playlist URL. 
+
+The expected URL is of type `https://www.youtube.com/watch?v={video_id}&list={playlist_id}`
+</ParamField>
+
+### Response
+
+<ResponseField name="playlist_id" type="string">
+The ID of the playlist
+</ResponseField>
+
+<ResponseField name="video_count" type="int">
+The number of videos in the channel
+</ResponseField>
+
+<ResponseField name="videos" type="list">
+The urls of the videos
+</ResponseField>
+
+<ResponseExample>
+```json 200
+{
+    "playlist_id": {playlist_id},
+    "video_count": 3,
+    "videos": [
+        {url1},
+        {url2},
+        {url3}
+    ]
+}
+```
+
+```json 400
+{
+    "msg": "URL is required"
+}
+```
+
+```json 429
+{
+    "msg": "Request was throttled."
+}
+```
+</ResponseExample>
