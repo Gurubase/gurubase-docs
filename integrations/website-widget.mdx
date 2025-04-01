@@ -129,6 +129,40 @@ If you're using self-hosted Gurubase, you must set the Gurubase instance URL usi
 
   An example usage is shown in the [MKDocs](https://github.com/Gurubase/gurubase-widget/tree/master/examples/mkdocs/docs/js/theme-switch.js) example in the `theme-switch.js` script. It toggles the theme of the widget based on the MkDocs website by listening for changes in the theme and using this function with each change. 
 
+## Platform-Specific Integrations
+
+### Archbee
+
+To add the Gurubase widget to your Archbee documentation:
+
+1. Go to **Space Settings** > **Custom Code**
+2. Under the "Include Headers" text area, paste the Gurubase widget script that you received from the [Gurubase platform](#getting-your-widget-id):
+
+
+<Note type="warning">
+For security reasons, scripts are only included on a custom domain in Archbee. Make sure you have set up a custom domain for your documentation to use the widget.
+</Note>
+
+<Frame>
+  <img src="/images/gurubase-archbee-integration.jpg" alt="Archbee Custom Code Integration" className="mt-4" />
+</Frame>
+
+### GitBook
+
+GitBook offers an [official integration](https://www.gitbook.com/integrations/gurubase) that makes it easy to add Gurubase to your documentation:
+
+1. In your GitBook space, go to **Integrations** and search for **Gurubase**
+2. Click **Install** to add the integration
+3. Click **Install on a docs site** and select a site to install
+3. Enter your **Widget ID** from [Gurubase platform](#getting-your-widget-id)
+4. Configure additional options (optional)
+
+<Frame>
+  <img src="/images/gurubase-gitbook-integration.jpg" alt="GitBook Integration Configuration" className="mt-4" />
+</Frame>
+
+After few minutes, you will see the "Ask AI" button in your GitBook documentation.
+
 ## Source Code
 
 The widget is open-source and available on [GitHub](https://github.com/Gurubase/gurubase-widget) where you can report issues, suggest features, and contribute improvements.
