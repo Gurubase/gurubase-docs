@@ -1,0 +1,210 @@
+---
+title: 'GitHub Bot Integration'
+description: 'Connect Gurubase with GitHub to enhance your workflow'
+---
+
+## Introduction
+
+Integrate Gurubase with GitHub to ask your Guru directly within your repositories.
+
+<Note>
+For self-hosted version, you first need to setup a GitHub App manually. Please refer to the [GitHub App Setup for Self-hosted version](#github-app-setup-for-self-hosted-version) section for more details.
+</Note>
+
+## Steps to Integrate
+
+1. **Navigate to Integrations**
+   - Go to the Gurubase dashboard.
+   - Click on "My Gurus" under the profile
+   - Click on the Guru you want to integrate with Slack
+
+2. **Select Slack Bot**
+   - Click on the "GitHub Bot" option.
+
+# TODO: Change img
+<Frame>
+  <img src="/images/gurubase-integrations-1.png" alt="Gurubase integrations page"/>
+</Frame>
+
+3. **Connect to GitHub**
+   - Click the "Connect" button.
+   - Authorize Gurubase to access your GitHub repositories. You can allow Gurubase to connect to all of your repositories, or you can select which ones to do so.
+
+# TODO: Change img
+<Frame>
+  <img src="/images/gurubase-slack-integrations-2.png" alt="Gurubase slack integration page" />
+</Frame>
+
+
+4. **Set Repository Mode**
+
+- Next to each repository, there is a dropdown that allows "Auto" or "Manual" modes. 
+    - "Auto" mode replies to issues when they are created
+    - "Manual" mode always requires mentioning the bot for answers
+
+Independent of this setting, you can always tag `@gurubase` to ask a question in your GitHub issues.
+
+# TODO: Add img
+
+5. **Manage Repository Permissions**
+
+- At the end of the page, next to the "Save" button, there is a "Manage" button. It takes you to the GitHub app installation settings for you to add/remove repositories for the app. After an update, you can refresh the GitHub integration page on Gurubase to see the final version.
+
+# TODO: Add img
+
+## Permissions
+
+Gurubase will request the following permissions:
+- View repository metadata.
+- Read and write discussions, issues, and pull requests.
+
+<Note>
+The discussions and pull requests are not supported yet. The GitHub bot can only be used in issues.
+</Note>
+
+## Using the Bot
+
+Once integrated, you can mention the bot using `@gurubase` in your GitHub issues to ask questions directly to your Guru. The bot also considers the issue comments for generating answers.
+<Note>
+For self-hosted version, you need to mention the bot using `@<app_slug_you_gave_to_the_bot>` instead of `@gurubase`. You can find this slug in the URL when you navigate to the app settings.
+</Note>
+
+## GitHub App Setup for Self-hosted version
+For self-hosted version, you need to create your own GitHub app to create a bot to integrate with your Gurubase Self-hosted instance. Below are the steps to create the app and get the bot token.
+
+1. GitHub will send events to  `/api/github/` endpoint of your Gurubase instance. If the Gurubase instance URL is not public, you need to open it to public. You can use [ngrok](https://ngrok.com/) to do this:
+   - If you haven't changed, the default port of Gurubase instance is 8029. You need to use this to make it publicly accessible.
+   - Make Gurubase instance URL public with `ngrok http http://localhost:8029`
+   - Copy the public URL from the ngrok terminal as shown below:
+
+<Frame>
+  <img src="/images/slack-ngrok-url.png"/>
+</Frame>
+
+2. Go to https://github.com/settings/apps and click "New GitHub App".
+3. Type in the name, description, and homepage URL. You can specify `https://gurubase.io/` for the Homepage URL.
+4. Leave the "Callback URL" empty and untick all of the checkboxes below it.
+
+<Frame>
+  <img src="/images/github-bot/github-callback.png" alt="GitHub Callback" />
+</Frame>
+
+5. Under "Post installation", keep the "Setup URL" empty and untick "Redirect on update".
+
+<Frame>
+  <img src="/images/github-bot/github-post-installation.png" alt="GitHub Post Installation" />
+</Frame>
+
+6. Under "Webhook", make it active.
+
+7. Set the Webhook URL as `<ngrok_url>/api/github/`
+
+<Note>
+Make sure you keep the `/` at the end.
+</Note>
+
+8. Optionally, you can set a secret.
+
+9. Keep SSL verification enabled.
+
+<Frame>
+  <img src="/images/github-bot/github-webhook.png" alt="GitHub Webhook" />
+</Frame>
+
+10. Under "Permissions", click "Repository permissions"
+
+11. Select "Read and write" for these:
+
+- Discussions (disabled on bot for now)
+- Issues
+- Pull requests (disabled on bot for now)
+
+<Note>
+This will also add Read-only permission to Metadata. Keep it.
+</Note>
+
+<Frame>
+  <img src="/images/github-bot/github-permissions.png" alt="GitHub Permissions" />
+</Frame>
+
+12. Under "Subscribe to events", tick these:
+
+- Discussion
+- Discussion comment
+- Issues
+- Issue comment
+- Pull request
+- Pull request review
+- Pull request review comment
+- Pull request review thread
+
+<Frame>
+  <img src="/images/github-bot/github-events.png" alt="GitHub Events" />
+</Frame>
+
+13. In the final section "Where can this GitHub App be installed?
+", keep "Only on this account".
+
+14. Then, create the app. This will take you to the app settings page.
+
+15. Get the "Client ID" from this page.
+
+16. Scroll down to the "Private keys". Click "Generate a private key". This will download the generated private key.
+
+17. Scroll top. On the left menu, click "Install App".
+
+18. Go through the instructions.
+
+19. Once done, it will take you to a page with URL `https://github.com/settings/installations/<installation_id>`. Get the installation ID from here.
+
+<Note>
+This connects the app to your repositories, but you still need to connect the app to your guru.
+</Note>
+
+20. Now, open Gurubase and go to the GitHub integration page. 
+
+<Frame>
+  <img src="/images/github-bot/gurubase-github-empty.png" alt="Gurubase Github Empty" />
+</Frame>
+
+21. Paste the client ID, installation ID, and the private key to the sections. If you have configured a webhook secret, provide it as well. Then click "Connect".
+
+<Note>
+If you do not provide a webhook secret, it will not be checked even if it is configured on GitHub.
+</Note>
+
+22. And that is done. You can now start to use the app.
+
+<Frame>
+  <img src="/images/github-bot/gurubase-github-full.png" alt="Gurubase Github Full" />
+</Frame>
+
+## Next Steps
+
+Explore more integrations and enhance your productivity with Gurubase. 
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="API Reference"
+    icon="code"
+    href="/api-reference/introduction"
+  >
+    Explore our API documentation
+  </Card>
+  <Card
+    title="Star Gurubase on GitHub"
+    icon="github"
+    href="https://github.com/Gurubase/gurubase"
+  >
+    Star Gurubase on GitHub
+  </Card>
+  <Card
+    title="Add Discord Bot to Your Server"
+    icon="discord"
+    href="/integrations/discord-bot"
+  >
+    Learn how to add a Discord bot to your server
+  </Card>
+</CardGroup>
