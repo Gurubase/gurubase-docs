@@ -5,7 +5,7 @@ description: 'Connect Gurubase with GitHub to enhance your workflow'
 
 ## Introduction
 
-Integrate Gurubase with GitHub to ask your Guru directly within your repositories.
+Integrate Gurubase with GitHub to ask your Guru directly within your GitHub repository issues.
 
 <Note>
 For self-hosted version, you first need to setup a GitHub App manually. Please refer to the [GitHub App Setup for Self-hosted version](#github-app-setup-for-self-hosted-version) section for more details.
@@ -14,60 +14,54 @@ For self-hosted version, you first need to setup a GitHub App manually. Please r
 ## Steps to Integrate
 
 1. **Navigate to Integrations**
-   - Go to the Gurubase dashboard.
+   - Go to the Gurubase dashboard
    - Click on "My Gurus" under the profile
    - Click on the Guru you want to integrate with Slack
+   - Click on the "GitHub Bot" option
 
-2. **Select Slack Bot**
-   - Click on the "GitHub Bot" option.
-
-# TODO: Change img
-<Frame>
-  <img src="/images/gurubase-integrations-1.png" alt="Gurubase integrations page"/>
-</Frame>
-
-3. **Connect to GitHub**
+2. **Connect to GitHub**
    - Click the "Connect" button.
    - Authorize Gurubase to access your GitHub repositories. You can allow Gurubase to connect to all of your repositories, or you can select which ones to do so.
+<Note>
+If you are using a self-hosted version, you will see different options on this page. Before proceeding, please refer to the [GitHub App Setup for Self-hosted version](#github-app-setup-for-self-hosted-version) section for more details.
+</Note>
 
-# TODO: Change img
 <Frame>
-  <img src="/images/gurubase-slack-integrations-2.png" alt="Gurubase slack integration page" />
+  <img src="/images/gurubase-github-integrations-1.png" alt="Gurubase github integration page" />
 </Frame>
 
 
-4. **Set Repository Mode**
+3. **Set Repository Mode**
 
-- Next to each repository, there is a dropdown that allows "Auto" or "Manual" modes. 
-    - "Auto" mode replies to issues when they are created
-    - "Manual" mode always requires mentioning the bot for answers
+Next to each repository, there is a dropdown that allows "Auto" or "Manual" modes. 
+    - In "Auto" mode, the bot replies to issues immediately after they are created. For subsequent comments, users must mention the bot to receive a response.
+    - In "Manual" mode, users must mention the bot to receive a response.
 
-Independent of this setting, you can always tag `@gurubase` to ask a question in your GitHub issues.
+Independent of this setting, you can always mention the bot to ask a question in your GitHub issues.
 
-# TODO: Add img
+4. **Add/Remove Repositories**
 
-5. **Manage Repository Permissions**
-
-- At the end of the page, next to the "Save" button, there is a "Manage" button. It takes you to the GitHub app installation settings for you to add/remove repositories for the app. After an update, you can refresh the GitHub integration page on Gurubase to see the final version.
-
-# TODO: Add img
+You need to edit the connected repositories on GitHub side. At the bottom of the page, there is a button labeled "Manage". Clicking it will take you to the GitHub app installation settings, where you can add or remove repositories for the app. After updating, you need to refresh the GitHub integration page on Gurubase to see the final version.
 
 ## Permissions
 
-Gurubase will request the following permissions:
+Gurubase will request the following permissions from your GitHub account to integrate with your repositories:
 - View repository metadata.
 - Read and write discussions, issues, and pull requests.
 
 <Note>
-The discussions and pull requests are not supported yet. The GitHub bot can only be used in issues.
+The discussions and pull requests are not supported yet but will be in the future. The bot can only be used in issues at the moment.
 </Note>
 
 ## Using the Bot
 
-Once integrated, you can mention the bot using `@gurubase` in your GitHub issues to ask questions directly to your Guru. The bot also considers the issue comments for generating answers.
+Once integrated, you can mention the bot using `@gurubase` in your GitHub issues to ask questions directly to your Guru.
+
 <Note>
 For self-hosted version, you need to mention the bot using `@<app_slug_you_gave_to_the_bot>` instead of `@gurubase`. You can find this slug in the URL when you navigate to the app settings.
 </Note>
+
+When generating an answer, the bot considers not only the question mentioned in the comment that tags it, but also the issue's title, body, and other comments.
 
 ## GitHub App Setup for Self-hosted version
 For self-hosted version, you need to create your own GitHub app to create a bot to integrate with your Gurubase Self-hosted instance. Below are the steps to create the app and get the bot token.
@@ -97,7 +91,7 @@ For self-hosted version, you need to create your own GitHub app to create a bot 
 
 6. Under "Webhook", make it active.
 
-7. Set the Webhook URL as `<ngrok_url>/api/github/`
+7. Set the Webhook URL as `${your_public_gurubase_url}/api/github/`
 
 <Note>
 Make sure you keep the `/` at the end.
