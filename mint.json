@@ -75,7 +75,8 @@
       "pages": [
         "integrations/website-widget",
         "integrations/slack-bot",
-        "integrations/discord-bot"
+        "integrations/discord-bot",
+        "integrations/github-bot"
       ]
     },
     {
