@@ -1,6 +1,7 @@
 // Customize widget settings
 const widgetSettings = {
     widgetId: "SGWF4dOdCj-erFgLDlhMAeenGh7M48cR3MP2HyPHWN8", // Replace with your widget ID
+    overlapContent: true,
     // Optional configurations:
     // text: "Ask AI",                                    // Button text
     // margins: { bottom: "20px", right: "20px" },       // Widget positioning
