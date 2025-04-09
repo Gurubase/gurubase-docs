@@ -96,7 +96,8 @@
         "api-reference/endpoints/reindex-datasources",
         "api-reference/endpoints/crawler-start",
         "api-reference/endpoints/crawler-stop",
-        "api-reference/endpoints/crawler-status"
+        "api-reference/endpoints/crawler-status",
+        "api-reference/endpoints/analytics-export"
       ]
     }
   ],

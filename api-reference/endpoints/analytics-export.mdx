@@ -1,0 +1,99 @@
+---
+title: 'Export Analytics Data'
+api: 'POST /{guru_slug}/analytics/export/'
+description: 'Export analytics data in various formats (Excel, CSV, or JSON)'
+---
+
+Export analytics data for questions, out-of-context queries, and referenced sources. The data can be exported in different formats and filtered based on various criteria.
+
+## Request Body
+
+<ParamField body="export_type" type="string" default="xlsx" required>
+  Format of the export file. Possible values: `xlsx`, `csv`, `json`
+  - `xlsx`: Microsoft Excel format
+  - `csv`: Compressed ZIP containing CSV files
+  - `json`: JSON format
+</ParamField>
+
+<ParamField body="interval" type="string" default="today">
+  Time period for the analytics data. Possible values:
+  - `today`: Current day
+  - `yesterday`: Previous day
+  - `7d`: Last 7 days
+  - `30d`: Last 30 days
+  - `3m`: Last 3 months
+  - `6m`: Last 6 months
+  - `12m`: Last 12 months
+</ParamField>
+
+<ParamField body="filters" type="object">
+  Filters for different types of data
+
+  <Expandable title="Filter options">
+    <ParamField body="questions" type="string" default="all">
+      Filter for questions data. Possible values:
+      - `all`: All sources
+      - `widget`: Widget source
+      - `user`: Gurubase UI source
+      - `api`: API source
+      - `discord`: Discord source
+      - `slack`: Slack source
+      - `github`: GitHub source
+    </ParamField>
+
+    <ParamField body="out_of_context" type="string" default="all">
+      Filter for out-of-context queries. Same values as questions filter.
+    </ParamField>
+
+    <ParamField body="referenced_sources" type="string" default="all">
+      Filter for referenced sources. Possible values:
+      - `all`: All sources
+      - `github_repo`: GitHub repositories
+      - `website`: Websites
+      - `youtube`: YouTube videos
+      - `pdf`: PDF documents
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+### Response
+
+The response will be a file download with the appropriate content type header based on the export_type:
+- XLSX: `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`
+- CSV: `application/zip`
+- JSON: `application/json`
+
+<ResponseExample>
+```bash cURL
+curl -X POST "localhost:8008/api/v1/gurubase/analytics/export/" \
+  -H "Content-Type: application/json" \
+  -H "x-api-key: gb-3virjrrnwwlpwefykebuvurc77u5zu" \
+  -d '{
+    "export_type": "json",
+    "interval": "today",
+    "filters": {
+      "questions": "all",
+      "out_of_context": "all",
+      "referenced_sources": "all"
+    }
+  }'
+```
+
+```json 404
+{
+    "msg": "No data found to export"
+}
+```
+
+```json 400
+{
+    "msg": "Invalid request"
+}
+```
+
+```json 500
+{
+    "msg": "Internal server error"
+}
+```
+</ResponseExample>
