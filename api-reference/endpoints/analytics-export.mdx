@@ -64,19 +64,44 @@ The response will be a file download with the appropriate content type header ba
 - JSON: `application/json`
 
 <ResponseExample>
-```bash cURL
-curl -X POST "localhost:8008/api/v1/gurubase/analytics/export/" \
-  -H "Content-Type: application/json" \
-  -H "x-api-key: gb-3virjrrnwwlpwefykebuvurc77u5zu" \
-  -d '{
-    "export_type": "json",
-    "interval": "today",
-    "filters": {
-      "questions": "all",
-      "out_of_context": "all",
-      "referenced_sources": "all"
+
+```json 200 (JSON)
+{
+  "questions": [
+    {
+      "datetime": "2025-04-10 07:06",
+      "source": "Gurubase UI",
+      "question": "details for self hosted",
+      "trust_score": 0.6,
+      "follow_up": true,
+      "url": "https://gurubase.io/g/gurubase/what-is-gurubase/binge/0f973a34-7867-46ca-9c38-896d4b644d63?question_slug=details-for-self-hosting-gurubase-6014cb17-1a95-4308-969d-b61cf435f312"
     }
-  }'
+  ],
+  "out_of_context": [
+    {
+      "datetime": "2025-04-08 06:45",
+      "source": "Github",
+      "question": "who made gurubase?"
+    }
+  ],
+  "referenced_sources": [
+    {
+      "last_update_date": "2025-04-04 12:23",
+      "data_source_type": "Website",
+      "data_source_title": "Quickstart - Gurubase",
+      "referenced_count": 187,
+      "url": "https://docs.gurubase.ai/quickstart"
+    }
+  ]
+}
+```
+
+```binary 200 (XLSX)
+[Binary Excel file content]
+```
+
+```binary 200 (ZIP/CSV)
+[Binary ZIP file containing CSV files]
 ```
 
 ```json 404
