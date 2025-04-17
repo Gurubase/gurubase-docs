@@ -1,0 +1,65 @@
+---
+title: 'Zendesk Integration'
+description: 'Connect Gurubase with Zendesk to use tickets as data sources'
+---
+
+## Introduction
+
+Integrate Gurubase with Zendesk to use your Zendesk tickets as data sources for Gurubase.
+
+
+## Steps to Integrate
+
+1. **Create your API Key**
+    - Go to your Zendesk API key settings. Its URL is of format:
+
+    `https://{subdomain}.zendesk.com/admin/apps-integrations/apis/zendesk-api/settings/tokens`
+    
+    Replace `{subdomain}` with your subdomain.
+    - Click "Add API token"
+    - Copy it
+
+2. **Navigate to Integrations**
+   - Go to the Gurubase dashboard
+   - Click on "My Gurus" under the profile
+   - Click on the Guru you want to integrate with Zendesk
+   - Click on the "Zendesk Bot" option
+
+3. **Fill in the fields**
+    - Domain
+    - User Email
+    - API Key
+
+<Frame>
+  <img src="/images/zendesk-fields.png" alt="Zendesk Integration Fields" />
+</Frame>
+
+## Using the Bot
+
+In the Guru edit page, you can now use the "Add Zendesk Tickets" button to add them as data sources.
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="API Reference"
+    icon="code"
+    href="/api-reference/introduction"
+  >
+    Explore our API documentation
+  </Card>
+  <Card
+    title="Star Gurubase on GitHub"
+    icon="github"
+    href="https://github.com/Gurubase/gurubase"
+  >
+    Star Gurubase on GitHub
+  </Card>
+  <Card
+    title="Add Discord Bot to Your Server"
+    icon="discord"
+    href="/integrations/discord-bot"
+  >
+    Learn how to add a Discord bot to your server
+  </Card>
+</CardGroup>

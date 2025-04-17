@@ -76,7 +76,8 @@
         "integrations/website-widget",
         "integrations/slack-bot",
         "integrations/discord-bot",
-        "integrations/github-bot"
+        "integrations/github-bot",
+        "integrations/zendesk-bot"
       ]
     },
     {
