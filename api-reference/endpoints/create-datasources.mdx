@@ -26,12 +26,20 @@ PDF files should be uploaded directly through the Gurubase platform interface. W
     Array of website URLs to index
 </ParamField>
 
+<ParamField body="jira_urls" type="string[]">
+    Array of Jira Issue URLs to index
+    <Note>
+      For Gurubase Self-hosted version, Jira integration is currently in beta and available to selected users.
+      For Gurubase Cloud version, Jira integration is available to all users.
+    </Note>
+</ParamField>
+
 ### Response
 
 The response is an array of processed data sources.
 
 <ResponseField name="type" type="string">
-  Type of data source (Website, YouTube)
+  Type of data source (Website, YouTube, Jira)
 </ResponseField>
 
 <ResponseField name="url" type="string">
@@ -80,7 +88,21 @@ The response is an array of processed data sources.
         "status": "exists",
         "id": 3269,
         "title": null
-    }
+    },
+    {
+        "type": "Jira",
+        "url": "https://domain.atlassian.net/browse/KAN-1",
+        "status": "success",
+        "id": 3167,
+        "title": null
+    },
+    {
+        "type": "Jira",
+        "url": "https://domain.atlassian.net/browse/KAN-2",
+        "status": "exists",
+        "id": 3168,
+        "title": null
+    }    
 ]
 ```
 
