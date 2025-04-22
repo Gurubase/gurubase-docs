@@ -78,7 +78,8 @@
         "integrations/discord-bot",
         "integrations/github-bot",
         "integrations/zendesk-bot",
-        "integrations/jira-bot"
+        "integrations/jira-bot",
+        "integrations/confluence-bot"
       ]
     },
     {
