@@ -11,7 +11,7 @@ PDF files should be uploaded directly through the Gurubase platform interface. W
 </Note>
 
 <Note>
-If you do not have the relevant integration for Jira and Zendesk while adding a new data source, an error is returned.
+If you do not have the relevant integration for Jira, Zendesk, and Confluence while adding a new data source, an error is returned.
 </Note>
 
 ## Path Parameters
@@ -44,13 +44,20 @@ If you do not have the relevant integration for Jira and Zendesk while adding a 
       For Gurubase Cloud version, Jira integration is available to all users.
     </Note>
 </ParamField>
+<ParamField body="confluence_urls" type="string[]">
+    Array of Confluence Page URLs to index
+    <Note>
+      For Gurubase Self-hosted version, Confluence integration is currently in beta and available to selected users.
+      For Gurubase Cloud version, Confluence integration is available to all users.
+    </Note>
+</ParamField>
 
 ### Response
 
 The response is an array of processed data sources.
 
 <ResponseField name="type" type="string">
-  Type of data source (Website, YouTube, Jira)
+  Type of data source (Website, YouTube, Jira, Zendesk, Confluence)
 </ResponseField>
 
 <ResponseField name="url" type="string">
@@ -126,7 +133,21 @@ The response is an array of processed data sources.
         "url": "https://domain.atlassian.net/browse/KAN-2",
         "status": "exists",
         "id": 3168,
+        "title": "Test issue"
+    },
+    {
+        "type": "Confluence",
+        "url": "https://aral-yektatest.atlassian.net/wiki/spaces/araltestsp/overview",
+        "status": "success",
+        "id": 3335,
         "title": null
+    },
+    {
+        "type": "Confluence",
+        "url": "https://aral-yektatest.atlassian.net/wiki/spaces/araltestsp/pages/884737/Gurubase+inner+workings",
+        "status": "exists",
+        "id": 3342,
+        "title": "Gurubase inner workings"
     }    
 ]
 ```
