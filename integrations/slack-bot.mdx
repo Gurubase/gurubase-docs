@@ -35,13 +35,19 @@ For self-hosted version, you first need to setup a Slack App manually to get a b
 
 
 4. **Select Channels**
-   - Choose the channels you want to integrate with Gurubase.
+   - Choose the channels you want to integrate with Gurubase. 
+   - Select "Auto" or "Manual" mode for usage. Auto mode responds to every message sent in the channel while Manual mode requires mentioning the bot for responses.
    - Click "Save".
+
+<Note>
+In Auto mode, you still need to mention the bot under threads. It only responds to initial messages that do not belong to threads.
+</Note>
 
 <Note>
 To subscribe to a private channel and send test messages to it, you need to invite the bot to the channel. You can do so from the Slack app using the "Add apps to this channel" command. This is not needed for public channels.
 </Note>
 
+# TODO: Update below image
 <Frame>
   <img src="/images/gurubase-slack-integrations-3.png" alt="Gurubase slack integration page" />
 </Frame>
@@ -50,6 +56,11 @@ To subscribe to a private channel and send test messages to it, you need to invi
 5. **Test the Connection**
    - Use the "Send Test Message" button to ensure the integration is working.
 
+
+6. **Enable Direct Message Mode (Optional)**
+   - Tick the "Enable Direct Messages" checkbox to allow the bot to respond to your direct messages. In this mode, the bot will respond to all of your messages without mentions whether in thread or not. 
+
+# TODO: Update below image
 <Frame>
   <img src="/images/gurubase-slack-integrations-4.png" alt="Gurubase slack integration page" />
 </Frame>
@@ -96,6 +107,7 @@ If you change the Gurubase instance URL, you need to update the "Request URL" wi
 6. Expand the "Subscribe to bot events" section on "Event Subscriptions" page and add the following events:
     - `message.channels`
     - `message.groups`
+    - `message.im`
 
 <Frame>
   <img src="/images/slack-event-subscriptions.png" width="500"/>
@@ -109,16 +121,27 @@ If you change the Gurubase instance URL, you need to update the "Request URL" wi
     - `groups:read`
     - `channels:history`
     - `groups:history`
+    - `im:history`
 
 <Frame>
   <img src="/images/slack-bot-permissions.png" width="500"/>
 </Frame>
 
-9. Go to "Install App" page. Then click "Install to [your_workspace_name]".
-10. Go through the OAuth flow.
-11. After installation, you will be redirected to the same page.
-12. Copy "Bot User OAuth Token".
-13. Go to your guru's Slack integration page in the Gurubase UI and paste the bot token you copied and click "Connect".
+9. Go to the following URL by replacing your app id (you can see it in the URL):
+
+`https://api.slack.com/apps/<app_id>/app-home`
+
+10. Under "Show Tabs", enable "Messages Tab" and tick "Allow users to send Slash commands and messages from the messages tab".
+
+<Frame>
+  <img src="/images/slack-show-tabs.png"/>
+</Frame>
+
+11. Go to "Install App" page. Then click "Install to [your_workspace_name]".
+12. Go through the OAuth flow.
+13. After installation, you will be redirected to the same page.
+14. Copy "Bot User OAuth Token".
+15. Go to your guru's Slack integration page in the Gurubase UI and paste the bot token you copied and click "Connect".
 
 <Frame>
   <img src="/images/slack-bot-token-input.png"/>
