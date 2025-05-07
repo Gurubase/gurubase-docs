@@ -47,7 +47,6 @@ In Auto mode, you still need to mention the bot under threads. It only responds 
 To subscribe to a private channel and send test messages to it, you need to invite the bot to the channel. You can do so from the Slack app using the "Add apps to this channel" command. This is not needed for public channels.
 </Note>
 
-# TODO: Update below image
 <Frame>
   <img src="/images/gurubase-slack-integrations-3.png" alt="Gurubase slack integration page" />
 </Frame>
@@ -60,7 +59,6 @@ To subscribe to a private channel and send test messages to it, you need to invi
 6. **Enable Direct Message Mode (Optional)**
    - Tick the "Enable Direct Messages" checkbox to allow the bot to respond to your direct messages. In this mode, the bot will respond to all of your messages without mentions whether in thread or not. 
 
-# TODO: Update below image
 <Frame>
   <img src="/images/gurubase-slack-integrations-4.png" alt="Gurubase slack integration page" />
 </Frame>
@@ -82,7 +80,10 @@ For self-hosted version, you need to mention the bot using `@<app_name_you_gave_
 For self-hosted version, you need to create your own Slack app to create a bot to integrate with your Gurubase Self-hosted instance. Below are the steps to create the app and get the bot token.
 
 1. Go to https://api.slack.com/apps and click "Create New App".
-2. Select "From scratch", give it a name and pick your workspace.
+2. Select "From scratch" to create a new app:
+   - Enter a name for your app (e.g., "Gurubase")
+   - Choose your Slack workspace from the dropdown
+   - Click "Create App" to proceed
 3. Slack will send events to  `/api/slack/events/` endpoint of your Gurubase instance. If the Gurubase instance URL is not public, you need to open it to public. You can use [ngrok](https://ngrok.com/) to do this:
    - If you haven't changed, the default port of Gurubase instance is 8029. You need to use this to make it publicly accessible.
    - Make Gurubase instance URL public with `ngrok http http://localhost:8029`
@@ -124,12 +125,12 @@ If you change the Gurubase instance URL, you need to update the "Request URL" wi
     - `im:history`
 
 <Frame>
-  <img src="/images/slack-bot-permissions.png" width="500"/>
+  <img src="/images/slack-bot-permissions.jpg" width="500"/>
 </Frame>
 
-9. Go to the following URL by replacing your app id (you can see it in the URL):
+9. Navigate to "App Home" under Features in the left sidebar. You can also access it directly at:
 
-`https://api.slack.com/apps/<app_id>/app-home`
+`https://api.slack.com/apps/<app_id>/app-home` 
 
 10. Under "Show Tabs", enable "Messages Tab" and tick "Allow users to send Slash commands and messages from the messages tab".
 
@@ -149,10 +150,6 @@ If you change the Gurubase instance URL, you need to update the "Request URL" wi
 
 14. You can now follow the [Steps to Integrate](/integrations/slack-bot#steps-to-integrate).
 
-
-## Next Steps
-
-Explore more integrations and enhance your productivity with Gurubase. 
 
 ## Next Steps
 
