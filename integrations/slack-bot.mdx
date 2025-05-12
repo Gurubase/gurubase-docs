@@ -35,21 +35,36 @@ For self-hosted version, you first need to setup a Slack App manually to get a b
 
 
 4. **Select Channels**
-   - Choose the channels you want to integrate with Gurubase. 
+   - Click "Add Channel"
+   - Type in the ID of the channel you want to integrate with Gurubase.
    - Select "Auto" or "Manual" mode for usage. Auto mode responds to every message sent in the channel while Manual mode requires mentioning the bot for responses.
    - Click "Save".
+
+
+<Frame>
+  <img src="/images/gurubase-slack-integrations-3.png" alt="Gurubase slack integration page" />
+</Frame>
+
 
 <Note>
 In Auto mode, you still need to mention the bot under threads. It only responds to initial messages that do not belong to threads.
 </Note>
 
+### Finding out Channel IDs
+
+The ID of a channel can be found with two approaches:
+
+- The web URL
+  - Right click to your channel, hover to "Copy" and click "Copy link". This will give you a link in this format:
+  - `https://workspace.slack.com/archives/C08AH3Y4Z5K`. Here, `C08AH3Y4Z5K` is the channel ID.
+- The channel details in the UI
+  - Right click to your channel, click to "View channel details". At the bottom, you will see "Channel ID".
+
+You can copy these to the UI and integrate your channel.
+
 <Note>
 To subscribe to a private channel and send test messages to it, you need to invite the bot to the channel. You can do so from the Slack app using the "Add apps to this channel" command. This is not needed for public channels.
 </Note>
-
-<Frame>
-  <img src="/images/gurubase-slack-integrations-3.png" alt="Gurubase slack integration page" />
-</Frame>
 
 
 5. **Test the Connection**
