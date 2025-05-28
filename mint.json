@@ -67,7 +67,8 @@
       "group": "Guides",
       "pages": [
         "guides/create-guru",
-        "guides/analyze-usage"
+        "guides/analyze-usage",
+        "guides/prompting-your-guru"
       ]
     },
     {
