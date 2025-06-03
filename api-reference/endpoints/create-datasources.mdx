@@ -4,10 +4,10 @@ api: 'POST /{guru_slug}/data-sources/'
 description: 'Add new data sources to your Guru'
 ---
 
-Add new data sources (YouTube videos, websites, and Zendesk tickets/articles) to your Guru. The processing is asynchronous. Check the status of the data sources with the [Get Data Sources](/api-reference/endpoints/get-datasources) endpoint.
+Add new data sources (YouTube videos, websites, Zendesk tickets/articles, etc.) to your Guru. The processing is asynchronous. Check the status of the data sources with the [Get Data Sources](/api-reference/endpoints/get-datasources) endpoint.
 
 <Note>
-PDF files should be uploaded directly through the Gurubase platform interface. We will add support for uploading PDFs via the API in the future.
+PDF and Excel files should be uploaded directly through the Gurubase platform interface. We will add support for uploading PDFs and Excel files via the API in the future.
 </Note>
 
 <Note>
@@ -51,17 +51,30 @@ If you do not have the relevant integration for Jira, Zendesk, and Confluence wh
       For Gurubase Cloud version, Confluence integration is available to all users.
     </Note>
 </ParamField>
+<ParamField body="text_sources" type="object[]">
+  Array of text sources to index.
+  Each object should contain:
+  - `name` (string): Name of the source
+  - `content` (string): Text content to index
+
+  <Note>
+    If you send a text data source that has the same name as an existing one, it will be updated with the new content.
+  </Note>
+</ParamField>
 
 ### Response
 
 The response is an array of processed data sources.
 
 <ResponseField name="type" type="string">
-  Type of data source (Website, YouTube, Jira, Zendesk, Confluence)
+  Type of data source (Website, YouTube, Jira, Zendesk, Confluence, etc.)
 </ResponseField>
 
 <ResponseField name="url" type="string">
   URL of the data source
+    <Note>
+      This field is not present for data sources of `Text` type.
+    </Note>
 </ResponseField>
 
 <ResponseField name="status" type="string">
@@ -74,6 +87,13 @@ The response is an array of processed data sources.
 
 <ResponseField name="title" type="string">
   Title of the data source (can be null)
+</ResponseField>
+
+<ResponseField name="content" type="string">
+  Content of the data source
+    <Note>
+    This field is only present for data sources of `Text` type.
+    </Note>
 </ResponseField>
 
 <ResponseExample>
@@ -148,6 +168,13 @@ The response is an array of processed data sources.
         "status": "exists",
         "id": 3342,
         "title": "Gurubase inner workings"
+    },
+    {
+        "type": "Text",
+        "title": "Text data source",
+        "content": "This is a text data source",
+        "status": "success",
+        "id": 8302
     }    
 ]
 ```
