@@ -34,7 +34,7 @@ Before adding the widget, make sure you have:
 6. Copy the generated Widget ID
 
 <Frame>
-  <img src="/images/gurubase-create-widget.jpg" alt="Create Widget ID" className="mt-4" />
+  <img src="/images/gurubase-create-widget.png" alt="Create Widget ID" className="mt-4" />
 </Frame>
 
 Each Widget ID is restricted to work only on the specific domain it was created for. For example:
@@ -71,10 +71,14 @@ For more examples like Astro - Starlight, Docusaurus, Mintlify, MKDocs, Next.js,
 | `data-widget-id` | Your widget ID (required) | - |
 | `data-text` | Button text | "Ask AI" |
 | `data-margins` | Button positioning | `{"bottom": "1rem", "right": "1rem"}` |
-| `data-light-mode` | Light mode toggle | `"true"` |
+| `data-light-mode` | Light mode toggle. Possible values are `"light"`, `"dark"`, `"auto"`. Auto mode syncs the widget theme with the website's theme | `"dark"` |
 | `data-bg-color` | Primary color | Fetched from Gurubase |
 | `data-icon-url` | Custom logo URL | Fetched from Gurubase |
 | `data-name` | Custom name | Fetched from Gurubase |
+| `data-baseUrl` | URL to your Gurubase backend. **Only for self-hosted Gurubase.** | Gurubase Cloud |
+| `data-tooltip` | Tooltip text | null |
+| `data-tooltip-side` | `"top"`, `"bottom"`, `"left"`, `"right"`, `"top left"`, `"top right"`, `"bottom left"`, `"bottom right"` | `"left"` |
+| `data-overlap-content` | Whether to overlap the main content or shrink its width with the sidebar | `"false"` |
 
 ## Self-hosted Installation
 
@@ -106,7 +110,7 @@ If you're using self-hosted Gurubase, you must set the Gurubase instance URL usi
 ```html
 <script async src="https://widget.gurubase.io/widget.latest.min.js" 
     data-widget-id="YOUR_WIDGET_ID"
-    data-light-mode="true"
+    data-light-mode="light"
     data-bg-color="#0D9373"
     id="guru-widget-id">
 </script>
@@ -125,6 +129,40 @@ If you're using self-hosted Gurubase, you must set the Gurubase instance URL usi
 
   An example usage is shown in the [MKDocs](https://github.com/Gurubase/gurubase-widget/tree/master/examples/mkdocs/docs/js/theme-switch.js) example in the `theme-switch.js` script. It toggles the theme of the widget based on the MkDocs website by listening for changes in the theme and using this function with each change. 
 
+## Platform-Specific Integrations
+
+### Archbee
+
+To add the Gurubase widget to your Archbee documentation:
+
+1. Go to **Space Settings** > **Custom Code**
+2. Under the "Include Headers" text area, paste the Gurubase widget script that you received from the [Gurubase platform](#getting-your-widget-id):
+
+
+<Note type="warning">
+For security reasons, scripts are only included on a custom domain in Archbee. Make sure you have set up a custom domain for your documentation to use the widget.
+</Note>
+
+<Frame>
+  <img src="/images/gurubase-archbee-integration.jpg" alt="Archbee Custom Code Integration" className="mt-4" />
+</Frame>
+
+### GitBook
+
+GitBook offers an [official integration](https://www.gitbook.com/integrations/gurubase) that makes it easy to add Gurubase to your documentation:
+
+1. In your GitBook space, go to **Integrations** and search for **Gurubase**
+2. Click **Install** to add the integration
+3. Click **Install on a docs site** and select a site to install
+3. Enter your **Widget ID** from [Gurubase platform](#getting-your-widget-id)
+4. Configure additional options (optional)
+
+<Frame>
+  <img src="/images/gurubase-gitbook-integration.jpg" alt="GitBook Integration Configuration" className="mt-4" />
+</Frame>
+
+After few minutes, you will see the "Ask AI" button in your GitBook documentation.
+
 ## Source Code
 
 The widget is open-source and available on [GitHub](https://github.com/Gurubase/gurubase-widget) where you can report issues, suggest features, and contribute improvements.
@@ -138,12 +176,5 @@ The widget is open-source and available on [GitHub](https://github.com/Gurubase/
     href="/api-reference/introduction"
   >
     Explore our API documentation
-  </Card>
-  <Card
-    title="Star Gurubase on GitHub"
-    icon="github"
-    href="https://github.com/Gurubase/gurubase"
-  >
-    Star Gurubase on GitHub
   </Card>
 </CardGroup>

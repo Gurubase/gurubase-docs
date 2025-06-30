@@ -4,10 +4,14 @@ api: 'POST /{guru_slug}/data-sources/'
 description: 'Add new data sources to your Guru'
 ---
 
-Add new data sources (YouTube videos and websites) to your Guru. The processing is asynchronous. Check the status of the data sources with the [Get Data Sources](/api-reference/endpoints/get-datasources) endpoint.
+Add new data sources (YouTube videos, websites, Zendesk tickets/articles, etc.) to your Guru. The processing is asynchronous. Check the status of the data sources with the [Get Data Sources](/api-reference/endpoints/get-datasources) endpoint.
 
 <Note>
-PDF files should be uploaded directly through the Gurubase platform interface. We will add support for uploading PDFs via the API in the future.
+PDF and Excel files should be uploaded directly through the Gurubase platform interface. We will add support for uploading PDFs and Excel files via the API in the future.
+</Note>
+
+<Note>
+If you do not have the relevant integration for Jira, Zendesk, and Confluence while adding a new data source, an error is returned.
 </Note>
 
 ## Path Parameters
@@ -26,16 +30,51 @@ PDF files should be uploaded directly through the Gurubase platform interface. W
     Array of website URLs to index
 </ParamField>
 
+<ParamField body="zendesk_urls" type="string[]">
+    Array of Zendesk ticket/article URLs to index
+    <Note>
+      For Gurubase Self-hosted version, Zendesk integration is currently in beta and available to selected users.
+      For Gurubase Cloud version, Zendesk integration is available to all users.
+    </Note>
+</ParamField>
+<ParamField body="jira_urls" type="string[]">
+    Array of Jira Issue URLs to index
+    <Note>
+      For Gurubase Self-hosted version, Jira integration is currently in beta and available to selected users.
+      For Gurubase Cloud version, Jira integration is available to all users.
+    </Note>
+</ParamField>
+<ParamField body="confluence_urls" type="string[]">
+    Array of Confluence Page URLs to index
+    <Note>
+      For Gurubase Self-hosted version, Confluence integration is currently in beta and available to selected users.
+      For Gurubase Cloud version, Confluence integration is available to all users.
+    </Note>
+</ParamField>
+<ParamField body="text_sources" type="object[]">
+  Array of text sources to index.
+  Each object should contain:
+  - `name` (string): Name of the source
+  - `content` (string): Text content to index
+
+  <Note>
+    If you send a text data source that has the same name as an existing one, it will be updated with the new content.
+  </Note>
+</ParamField>
+
 ### Response
 
 The response is an array of processed data sources.
 
 <ResponseField name="type" type="string">
-  Type of data source (Website, YouTube)
+  Type of data source (Website, YouTube, Jira, Zendesk, Confluence, etc.)
 </ResponseField>
 
 <ResponseField name="url" type="string">
   URL of the data source
+    <Note>
+      This field is not present for data sources of `Text` type.
+    </Note>
 </ResponseField>
 
 <ResponseField name="status" type="string">
@@ -48,6 +87,13 @@ The response is an array of processed data sources.
 
 <ResponseField name="title" type="string">
   Title of the data source (can be null)
+</ResponseField>
+
+<ResponseField name="content" type="string">
+  Content of the data source
+    <Note>
+    This field is only present for data sources of `Text` type.
+    </Note>
 </ResponseField>
 
 <ResponseExample>
@@ -80,7 +126,56 @@ The response is an array of processed data sources.
         "status": "exists",
         "id": 3269,
         "title": null
-    }
+    },
+    {
+        "type": "Zendesk",
+        "url": "https://gurubase.zendesk.com/hc/en-us/articles/36075266746139-How-to-troubleshoot-Gurubase-self-hosted",
+        "status": "success",
+        "id": 3231,
+        "title": "How to troubleshoot Gurubase self hosted"
+    },
+    {
+        "type": "Zendesk",
+        "url": "https://gurubase.zendesk.com/agent/tickets/7",
+        "status": "exists",
+        "id": 3232,
+        "title": "Test Subject"
+    },
+    {
+        "type": "Jira",
+        "url": "https://domain.atlassian.net/browse/KAN-1",
+        "status": "success",
+        "id": 3167,
+        "title": null
+    },
+    {
+        "type": "Jira",
+        "url": "https://domain.atlassian.net/browse/KAN-2",
+        "status": "exists",
+        "id": 3168,
+        "title": "Test issue"
+    },
+    {
+        "type": "Confluence",
+        "url": "https://aral-yektatest.atlassian.net/wiki/spaces/araltestsp/overview",
+        "status": "success",
+        "id": 3335,
+        "title": null
+    },
+    {
+        "type": "Confluence",
+        "url": "https://aral-yektatest.atlassian.net/wiki/spaces/araltestsp/pages/884737/Gurubase+inner+workings",
+        "status": "exists",
+        "id": 3342,
+        "title": "Gurubase inner workings"
+    },
+    {
+        "type": "Text",
+        "title": "Text data source",
+        "content": "This is a text data source",
+        "status": "success",
+        "id": 8302
+    }    
 ]
 ```
 

@@ -31,7 +31,12 @@ For self-hosted version, you first need to create a Discord App manually to get 
 
 4. **Select Channels**
    - Choose the channels you want to integrate with Gurubase.
+   - Select "Auto" or "Manual" mode for usage. Auto mode responds to every message sent in the channel while Manual mode requires mentioning the bot for responses.   
    - Click "Save".
+
+<Note>
+In Auto mode, you still need to mention the bot under threads. It only responds to initial messages that do not belong to threads.
+</Note>
 
 <Note>
 To subscribe to a private channel and send test messages to it, you need to invite the bot to the channel. You can do so from the channel settings in the Discord app. This is not needed for public channels.
@@ -63,7 +68,15 @@ For self-hosted version, you need to create your own Discord app to create a bot
 4. Save changes.
 5. Go to "Installation" page
 6. Under "Installation Contexts", de-select "User Install" and save changes.
-7. Under "Default Install Settings", and under "Guild Install", add "bot" to the "Scopes". Then, "Permissions" will become visible. Add "Send Messages" to the permissions.
+7. Under "Default Install Settings", and under "Guild Install", add "bot" to the "Scopes". Then, "Permissions" will become visible. Then add the following permissions:
+
+- "View Channels"
+- "Create Public Threads"
+- "Send Messages"
+- "Send Messages in Threads"
+- "Read Message History"
+- "Embed Links"
+
 <img src="/images/discord-bot-permissions.png" width="500" className="mt-4"/>
 9. Save changes.
 10. There should be a "Install Link" section in this page. Copy it and open it in your browser.
@@ -86,13 +99,6 @@ Explore more integrations and enhance your productivity with Gurubase.
     href="/api-reference/introduction"
   >
     Explore our API documentation
-  </Card>
-  <Card
-    title="Star Gurubase on GitHub"
-    icon="github"
-    href="https://github.com/Gurubase/gurubase"
-  >
-    Star Gurubase on GitHub
   </Card>
     <Card
     title="Add Slack Bot to Your Workspace"

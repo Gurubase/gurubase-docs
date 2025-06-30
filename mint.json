@@ -29,8 +29,8 @@
     }
   ],
   "topbarCtaButton": {
-    "name": "⭐ Star on GitHub",
-    "url": "https://github.com/Gurubase/gurubase"
+    "name": "Gurubase.io",
+    "url": "https://gurubase.io"
   },
   "tabs": [
     {
@@ -40,19 +40,14 @@
   ],
   "anchors": [
     {
-      "name": "GitHub",
-      "icon": "github",
-      "url": "https://github.com/Gurubase/gurubase"
+      "name": "Try Gurubase.io",
+      "icon": "robot",
+      "url": "https://gurubase.io"
     },
     {
       "name": "Discord",
       "icon": "discord",
       "url": "https://discord.gg/9CMRSQPqx6"
-    },
-    {
-      "name": "Try Gurubase.io",
-      "icon": "robot",
-      "url": "https://gurubase.io"
     }
   ],
   "navigation": [
@@ -67,7 +62,8 @@
       "group": "Guides",
       "pages": [
         "guides/create-guru",
-        "guides/analyze-usage"
+        "guides/analyze-usage",
+        "guides/prompting-your-guru"
       ]
     },
     {
@@ -75,7 +71,11 @@
       "pages": [
         "integrations/website-widget",
         "integrations/slack-bot",
-        "integrations/discord-bot"
+        "integrations/discord-bot",
+        "integrations/github-bot",
+        "integrations/zendesk-bot",
+        "integrations/jira-bot",
+        "integrations/confluence-bot"
       ]
     },
     {
@@ -98,12 +98,12 @@
         "api-reference/endpoints/crawler-status",
         "api-reference/endpoints/import-youtube-channel",
         "api-reference/endpoints/import-youtube-playlist"
+        "api-reference/endpoints/analytics-export"
       ]
     }
   ],
   "footerSocials": {
     "twitter": "https://x.com/gurubaseio",
-    "github": "https://github.com/Gurubase/gurubase",
     "discord": "https://discord.gg/9CMRSQPqx6"
   },
   "scripts": [
