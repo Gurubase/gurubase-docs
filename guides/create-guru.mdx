@@ -1,150 +1,175 @@
 ---
 title: 'Create Your First Guru'
-description: 'Learn how to create and configure your first Guru.'
+description: 'Step-by-step guide to creating and configuring your AI assistant.'
 ---
-
 
 ## What is a Guru?
 
-A Guru is an AI-powered Q&A assistant that can answer questions about any topic based on the sources you provide. You can give the below content types to your Guru as a data source:
-- 📄 Websites
-- 📑 PDF documents
-- 🎥 YouTube videos
-- 💻 GitHub repositories
+A Guru is an intelligent AI assistant that answers questions about specific topics based on the knowledge sources you provide. Transform your existing content into a powerful Q&A system that can support users, provide documentation assistance, and serve as an expert knowledge base.
 
-After creating a Guru, you can start using it through the Gurubase UI, [Website Widget](/integrations/website-widget), [Slack](/integrations/slack-bot), [Discord](/integrations/discord-bot), [GitHub](/integrations/github-bot) or [API](/api-reference/introduction).
+### Supported Data Sources
+
+Create comprehensive knowledge bases from multiple content types:
+
+- Websites (sitemap import or crawling)
+- PDF documents and manuals
+- Custom text snippets
+- Excel files and spreadsheets
+- GitHub repositories and codebases
+- Confluence documents
+- Technical documentation
+- Zendesk tickets and articles
+- Jira issues and project data
+- YouTube videos and tutorials
+
+### Deployment Options
+
+After creating your Guru, deploy it across multiple channels:
+- **Gurubase Platform**: Direct access through the web interface
+- **[Website Widget](/integrations/website-widget)**: Embed directly into your website
+- **[Slack Integration](/integrations/slack-bot)**: Add as a Slack bot for team support
+- **[Discord Integration](/integrations/discord-bot)**: Deploy as a Discord bot for community support
+- **[GitHub Integration](/integrations/github-bot)**: Integrate with repositories for code assistance
+- **[API Access](/api-reference/introduction)**: Programmatic integration with your applications
 
 ## Creating a New Guru
 
-If you're using [Gurubase.io](https://gurubase.io/), you can't create Gurus directly. You need to request a new Guru from the Gurubase team by opening an [Guru Creation Request issue](https://github.com/Gurubase/gurubase/issues/new?template=guru_creation_request.md). If you want to claim a Guru that already exists, you can open an [Guru Claim Request issue](https://github.com/Gurubase/gurubase/issues/new?template=guru_claim_request.md).
+The creation process differs depending on your Gurubase deployment:
 
-If you're using Gurubase Self-hosted, you can create Gurus as follows:
+### Gurubase.io (Hosted Platform)
 
-### 1. Access the Dashboard
+If you're using [Gurubase.io](https://gurubase.io/), request a new Guru from our team by completing [this form](https://gurubase.io/guru/create). Our team will set up your Guru and provide access credentials.
+
+### Self-Hosted Installation
+
+For self-hosted deployments, follow these steps to create your Guru:
+
+#### 1. Access the Dashboard
+
+Navigate to your Gurubase dashboard at [http://localhost:8020](http://localhost:8020) and click the "Create New Guru" button to begin the setup process.
+
+#### 2. Configure Basic Settings
 
 <Frame>
-  <img src="/images/gurubase-create-guru-1.png" alt="Create New Guru" />
+  <img src="/images/gurubase-create-guru-2.jpg" alt="Configure Guru Settings" />
 </Frame>
 
-From the dashboard, click the "Create New Guru" button.
+Complete the essential configuration fields:
 
-### 2. Configure Basic Settings
+- **Guru Name**: Choose a descriptive, memorable name for your AI assistant
+- **Guru Logo**: Upload a logo image (PNG or JPEG format, maximum 1MB)
+- **Topics**: Add comma-separated topics that define your Guru's expertise (e.g., "programming, microservices, containers"). This contextual information helps the AI provide more accurate, relevant responses
 
-<Frame>
-  <img src="/images/gurubase-create-guru-2.png" alt="Configure Guru Settings" />
-</Frame>
+#### 3. Add Knowledge Sources
 
-Fill in the following information:
-- **Guru Name**: Choose a descriptive name for your Guru.
-- **Guru Logo**: Upload a logo (PNG or JPEG under 1MB).
-- **Topics**: Add comma-separated topics related to this Guru, e.g., "programming, microservices, containers". This helps the AI understand the Guru's expertise and context.
-- **Codebase Indexing**: (Optional) Provide a link to a GitHub repository to index its codebase. The Guru can then use this codebase to generate answers based on it.
+Build your Guru's knowledge base by adding relevant content sources:
+- **Websites**: Add website URLs to index and answer questions about your website content. You can use sitemap import or crawl website to add multiple pages at once.
+- **PDF Documents**: Upload PDF files to index and answer questions about your documentation.
+- **GitHub Repositories**: Link your GitHub repositories to enable code-aware assistance and documentation.
+- **Zendesk Tickets**: Link your Zendesk tickets to enable support and answer questions about your Zendesk content.
+- **Jira Issues**: Link your Jira issues to enable support and answer questions about your Jira content.
+- **YouTube Videos**: Add YouTube video URLs to index and answer questions about your YouTube content. You can use channel import or playlist import to add multiple videos at once.
+- **Confluence Documents**: Add Confluence document URLs to index and answer questions about your Confluence content.
+- **Excel Files**: Upload Excel files to index and answer questions about your spreadsheet data.
+- **Custom Text Snippets**: Add custom text snippets to index and answer questions about your custom content
 
-### 3. Add Knowledge Sources
 
-Your Guru needs sources to learn from. On the "Sources" section, you can add:
 
-1. **YouTube Videos**: Click "Add YouTube" and paste video URLs on the sidebar opened on the right.
-2. **Websites**: Click "Add Website" and enter webpage URLs. You can use the 'Crawl Website' and 'Import from Sitemap' tools at the top right of the sidebar to find the URLs of a website.
-3. **PDF Documents**: Click "Upload PDFs" to add documentation files.
+#### 4. Publish Your Guru
 
-<Note>
-  Make sure your sources are publicly accessible. Private repositories or documents cannot be indexed.
-</Note>
+Click "Publish Guru" to initiate the creation process. The system will:
+1. Index all provided sources
+2. Process and embed the content
+3. Make your Guru available for questions
 
-### 4. Publish Your Guru
-
-Click "Publish Guru" to create your Guru. The system will start indexing your sources and make your Guru available for questions. The processing time depends on the size of the sources.
+Processing time varies based on the volume and complexity of your sources.
 
 ## Managing Your Guru
 
-Once your Guru is created, you can manage it in several ways.
+Once deployed, use these management tools to maintain and optimize your Guru's performance.
 
-### Managing Website Sources
-
-<Frame>
-  <img src="/images/gurubase-edit-website-links.jpg" alt="Edit Website Links" />
-</Frame>
-
-1. Click the menu icon (⋮) next to a website source.
-2. Select "Edit" to open the URLs management dialog.
-3. Here you can:
-   - Search through existing URLs.
-   - Select and delete specific URLs.
-   - See when each URL was last indexed.
-
-### PDF Privacy Settings
+### Website Source Management
 
 <Frame>
-  <img src="/images/gurubase-change-pdf-privacy.jpg" alt="Change PDF Privacy" />
+  <img src="/images/gurubase-edit-website-links.jpg" alt="Edit Website Links Interface" />
 </Frame>
 
-For PDF documents, you can control their visibility in the references of the answers:
-1. Click the menu icon (⋮) next to a PDF source.
-2. Toggle between "Public" and "Private" status.
-3. Private PDFs are only accessible to you and your team.
+Efficiently manage your website sources:
 
-### Reindexing Sources
+1. Click the menu icon (⋮) next to any website source
+2. Select "Edit" to access the URL management interface
+3. Available actions:
+   - **Search**: Find specific URLs within your indexed content
+   - **Selective Deletion**: Remove outdated or irrelevant URLs
+   - **Index Status**: Monitor when each URL was last processed
+
+### PDF Privacy Controls
 
 <Frame>
-  <img src="/images/gurubase-reindex.jpg" alt="Reindex Sources" />
+  <img src="/images/gurubase-change-pdf-privacy.jpg" alt="PDF Privacy Settings" />
 </Frame>
 
-To update your Guru with the latest content:
-1. Click the menu icon (⋮) next to any source.
-2. Select "Reindex" to fetch and process the latest content.
-3. The system will reindex the source and update the Guru with the latest content.
+Control document visibility and access:
+
+1. Click the menu icon (⋮) next to any PDF source
+2. Toggle between "Public" and "Private" visibility settings
+3. **Private PDFs**: Accessible only to you and your team members
+4. **Public PDFs**: Visible in answer references and citations
+
+### Content Reindexing
+
+<Frame>
+  <img src="/images/gurubase-reindex.jpg" alt="Reindex Sources Interface" />
+</Frame>
+
+Keep your knowledge base current with regular updates:
+
+1. Click the menu icon (⋮) next to any source
+2. Select "Reindex" to fetch the latest content
+3. The system will process updates and refresh your Guru's knowledge base
 
 <Note>
-  Reindex your sources regularly to ensure your Guru has the most up-to-date information. This is especially important for websites and documentation that change frequently.
+  **Best Practice**: Reindex sources regularly, especially for frequently updated websites and documentation. This ensures your Guru provides current, accurate information to users.
 </Note>
 
-### Other Management Options
+### Additional Management Features
 
-You can also:
-- Update basic information like name and topics.
-- Monitor source indexing status.
-- Delete the Guru if needed.
-
-## Using Your Guru
-
-Once your Guru is ready, you can start using it in 5 ways:
-1. Gurubase UI: Navigate to homepage then select your Guru and start asking questions.
-2. [Website Widget](/integrations/website-widget): Embed your Guru on your website.
-3. [Slack Bot](/integrations/slack-bot): Add your Guru as a Slack bot.
-4. [Discord Bot](/integrations/discord-bot): Add your Guru as a Discord bot.
-4. [GitHub Bot](/integrations/github-bot): Add your Guru as a Github bot.
-5. [API](/api-reference/introduction): Interact and manage your Gurus via API.
+Maintain your Guru with these additional capabilities:
+- **Profile Updates**: Modify name, topics, and basic configuration
+- **Indexing Monitoring**: Track processing status across all sources
+- **Guru Deletion**: Remove Gurus that are no longer needed
 
 ## Next Steps
 
+Expand your Gurubase implementation with these advanced features and integrations.
+
 <CardGroup cols={2}>
   <Card
-    title="Analyze Usage"
+    title="Analyze Usage Patterns"
     icon="chart-simple"
     href="/guides/analyze-usage"
   >
-    Learn how to analyze the usage of your Guru
+    Monitor and analyze how users interact with your Guru
   </Card>
   <Card
-    title="Add GitHub Bot to Your Workspace"
+    title="GitHub Integration"
     icon="github"
     href="/integrations/github-bot"
   >
-    Learn how to add a GitHub bot to your repositories
+    Add intelligent code assistance to your repositories
   </Card>
   <Card
-    title="Add Discord Bot to Your Server"
+    title="Discord Community Bot"
     icon="discord"
     href="/integrations/discord-bot"
   >
-    Learn how to add a Discord bot to your server
+    Deploy your Guru as a Discord bot for community support
   </Card>
   <Card
     title="API Integration"
     icon="plug"
     href="/api-reference/introduction"
   >
-    Integrate Guru with your applications
+    Build custom integrations with the Gurubase API
   </Card>
 </CardGroup>

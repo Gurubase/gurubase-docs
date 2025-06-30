@@ -40,19 +40,14 @@
   ],
   "anchors": [
     {
-      "name": "GitHub",
-      "icon": "github",
-      "url": "https://github.com/Gurubase/gurubase"
+      "name": "Try Gurubase.io",
+      "icon": "robot",
+      "url": "https://gurubase.io"
     },
     {
       "name": "Discord",
       "icon": "discord",
       "url": "https://discord.gg/9CMRSQPqx6"
-    },
-    {
-      "name": "Try Gurubase.io",
-      "icon": "robot",
-      "url": "https://gurubase.io"
     }
   ],
   "navigation": [
@@ -107,7 +102,6 @@
   ],
   "footerSocials": {
     "twitter": "https://x.com/gurubaseio",
-    "github": "https://github.com/Gurubase/gurubase",
     "discord": "https://discord.gg/9CMRSQPqx6"
   },
   "scripts": [
