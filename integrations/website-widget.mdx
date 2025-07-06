@@ -21,7 +21,7 @@ You can add your Guru directly to your website using our widget. The widget adds
 ## Prerequisites
 
 Before adding the widget, make sure you have:
-- A Guru on Gurubase (either on [Gurubase.io](https://gurubase.io) or self-hosted)
+- A Guru on Gurubase (either on [Gurubase.io](https://gurubase.io) or self-hosted with Enterprise plan)
 - A Widget ID from your Guru's settings
 
 ## Getting Your Widget ID
@@ -75,14 +75,16 @@ For more examples like Astro - Starlight, Docusaurus, Mintlify, MKDocs, Next.js,
 | `data-bg-color` | Primary color | Fetched from Gurubase |
 | `data-icon-url` | Custom logo URL | Fetched from Gurubase |
 | `data-name` | Custom name | Fetched from Gurubase |
-| `data-baseUrl` | URL to your Gurubase backend. **Only for self-hosted Gurubase.** | Gurubase Cloud |
+| `data-baseUrl` | URL to your Gurubase backend. **Only for self-hosted Gurubase (Enterprise plan).** | Gurubase Cloud |
 | `data-tooltip` | Tooltip text | null |
 | `data-tooltip-side` | `"top"`, `"bottom"`, `"left"`, `"right"`, `"top left"`, `"top right"`, `"bottom left"`, `"bottom right"` | `"left"` |
 | `data-overlap-content` | Whether to overlap the main content or shrink its width with the sidebar | `"false"` |
 
-## Self-hosted Installation
+## Self-hosted Installation (Enterprise Only)
 
 <Note type="warning">
+Self-hosted installations are exclusively available under the Enterprise plan. To request access, contact us at **contact@gurubase.io**.
+
 If you're using self-hosted Gurubase, you must set the Gurubase instance URL using the `data-baseUrl` attribute. The default URL of Self-hosted Gurubase instance is `http://localhost:8029/api/`. 
 
 ```html

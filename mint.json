@@ -55,7 +55,8 @@
       "group": "Get Started",
       "pages": [
         "introduction",
-        "quickstart"
+        "quickstart",
+        "self-hosted"
       ]
     },
     {
@@ -97,7 +98,7 @@
         "api-reference/endpoints/crawler-stop",
         "api-reference/endpoints/crawler-status",
         "api-reference/endpoints/import-youtube-channel",
-        "api-reference/endpoints/import-youtube-playlist"
+        "api-reference/endpoints/import-youtube-playlist",
         "api-reference/endpoints/analytics-export"
       ]
     }
