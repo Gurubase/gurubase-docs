@@ -143,27 +143,33 @@ If you change the Gurubase instance URL, you need to update the "Request URL" wi
   <img src="/images/slack-bot-permissions.jpg" width="500"/>
 </Frame>
 
-9. Navigate to "App Home" under Features in the left sidebar. You can also access it directly at:
+9. Go to "Interactivity & Shortcuts" page on Slack App. Enable it and set the Request URL as `${your_public_gurubase_url}/api/slack/interactive/`
+
+<Frame>
+  <img src="/images/slack-Interactivity.png" width="500"/>
+</Frame>
+
+10. Navigate to "App Home" under Features in the left sidebar. You can also access it directly at:
 
 `https://api.slack.com/apps/<app_id>/app-home` 
 
-10. Under "Show Tabs", enable "Messages Tab" and tick "Allow users to send Slash commands and messages from the messages tab".
+11. Under "Show Tabs", enable "Messages Tab" and tick "Allow users to send Slash commands and messages from the messages tab".
 
 <Frame>
   <img src="/images/slack-show-tabs.png"/>
 </Frame>
 
-11. Go to "Install App" page. Then click "Install to [your_workspace_name]".
-12. Go through the OAuth flow.
-13. After installation, you will be redirected to the same page.
-14. Copy "Bot User OAuth Token".
-15. Go to your guru's Slack integration page in the Gurubase UI and paste the bot token you copied and click "Connect".
+12. Go to "Install App" page. Then click "Install to [your_workspace_name]".
+13. Go through the OAuth flow.
+14. After installation, you will be redirected to the same page.
+15. Copy "Bot User OAuth Token".
+16. Go to your guru's Slack integration page in the Gurubase UI and paste the bot token you copied and click "Connect".
 
 <Frame>
   <img src="/images/slack-bot-token-input.png"/>
 </Frame>
 
-14. You can now follow the [Steps to Integrate](/integrations/slack-bot#steps-to-integrate).
+17. You can now follow the [Steps to Integrate](/integrations/slack-bot#steps-to-integrate).
 
 
 ## Next Steps
