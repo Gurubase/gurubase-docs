@@ -1,0 +1,39 @@
+---
+title: 'PII Masking'
+description: 'Step-by-step guide to protecting your sensitive data'
+---
+## PII Masking
+
+PII (Personally Identifiable Information) masking automatically redacts sensitive data from your content to protect privacy and comply with data protection regulations.
+
+### How PII Masking Works
+
+PII masking operates across three key areas:
+- **Questions asked**: User queries are scanned and sensitive data is masked before processing
+- **File attachments**: Documents uploaded during question asking are processed for PII removal
+- **Data source indexing**: All data sources are masked during the indexing process
+
+When a regex pattern matches content, it's replaced with `<<label>>` format (e.g., `<<EMAIL>>`, `<<SSN>>`).
+
+### Configuration
+
+<Frame>
+  <img src="/images/pii-masks.png" alt="PII Mask Configuration" />
+</Frame>
+
+Configure PII masks using regex patterns:
+- **Case sensitive**: All pattern matching is case-sensitive
+- **PCRE 2 standard**: Follows Perl Compatible Regular Expressions 2 specification
+- **Validation**: Test your regex patterns at [regex101.com](https://regex101.com/) before implementation
+
+### Example Results
+
+<Frame>
+  <img src="/images/unmasked-content.png" alt="Content Before PII Masking" />
+</Frame>
+
+<Frame>
+  <img src="/images/masked-content.png" alt="Content After PII Masking" />
+</Frame>
+
+The masking process automatically identifies and replaces sensitive information while preserving the overall context and readability of your content.
