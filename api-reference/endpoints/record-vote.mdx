@@ -1,0 +1,94 @@
+---
+title: 'Record Vote'
+api: 'POST /{guru_type}/record_vote/'
+description: 'Record a vote (upvote or downvote) on a question'
+---
+
+Record a user's vote on a specific question. Users can vote once per question, and downvotes can include optional feedback.
+
+## Path Parameters
+
+<ParamField path="guru_type" type="string" required>
+  The type/slug of the Guru
+</ParamField>
+
+## Body Parameters
+
+<ParamField body="content_slug" type="string" required>
+  The slug identifier of the question to vote on
+</ParamField>
+
+<ParamField body="binge_id" type="string">
+  Optional binge session identifier. Can be None
+</ParamField>
+
+<ParamField body="vote_type" type="string" required>
+  The type of vote to record. Must be either "upvote" or "downvote"
+</ParamField>
+
+<ParamField body="feedback" type="string">
+  Optional feedback text for downvotes. Maximum 200 characters
+</ParamField>
+
+## Response
+
+<ResponseField name="vote" type="string">
+  The recorded vote type ("upvote" or "downvote")
+</ResponseField>
+
+<ResponseField name="feedback" type="string">
+  The feedback provided with the vote (if any)
+</ResponseField>
+
+<ResponseField name="msg" type="string">
+  Error message or status message
+</ResponseField>
+
+<ResponseExample>
+```json 200 Success - Vote Recorded
+{
+    "vote": "upvote",
+    "feedback": null
+}
+```
+
+```json 200 Success - Downvote with Feedback
+{
+    "vote": "downvote",
+    "feedback": "This answer was not helpful because..."
+}
+```
+
+```json 200 Already Voted
+{
+    "msg": "Already voted",
+    "vote": "upvote"
+}
+```
+
+```json 400 Invalid Parameters
+{
+    "msg": "Invalid parameters"
+}
+```
+
+```json 400 Feedback Too Long
+{
+    "msg": "Feedback must be 200 characters or less"
+}
+```
+
+```json 404 Question Not Found
+{
+    "msg": "Question not found"
+}
+```
+</ResponseExample>
+
+## Notes
+
+- Each question can only be voted once.
+- If the question has already been voted, the endpoint returns a 200 status with the existing vote
+- Feedback is optional but limited to 200 characters
+- The `binge_id` parameter can be null, empty string, or "None" and will be treated as null
+- Only "upvote" and "downvote" are valid vote types
