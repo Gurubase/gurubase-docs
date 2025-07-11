@@ -64,7 +64,8 @@
       "pages": [
         "guides/create-guru",
         "guides/analyze-usage",
-        "guides/prompting-your-guru"
+        "guides/prompting-your-guru",
+        "guides/pii-masking"
       ]
     },
     {
