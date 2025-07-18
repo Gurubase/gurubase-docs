@@ -71,13 +71,24 @@
     {
       "group": "Integrations",
       "pages": [
-        "integrations/website-widget",
-        "integrations/slack-bot",
-        "integrations/discord-bot",
-        "integrations/github-bot",
-        "integrations/zendesk-bot",
-        "integrations/jira-bot",
-        "integrations/confluence-bot"
+        {
+          "group": "Bots",
+          "pages": [
+            "integrations/bots/website-widget",
+            "integrations/bots/slack",
+            "integrations/bots/discord",
+            "integrations/bots/github"
+          ]
+        },
+        {
+          "group": "Ingestion",
+          "pages": [
+            "integrations/ingestion/zendesk",
+            "integrations/ingestion/jira",
+            "integrations/ingestion/confluence",
+            "integrations/ingestion/slack"
+          ]
+        }
       ]
     },
     {
