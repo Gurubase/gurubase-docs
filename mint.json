@@ -113,7 +113,7 @@
         "api-reference/endpoints/import-youtube-playlist",
         "api-reference/endpoints/analytics-export",
         "api-reference/endpoints/record-vote",
-        "api-reference/endpoints/suggested-content"
+        "api-reference/endpoints/semantic-search"
       ]
     }
   ],
