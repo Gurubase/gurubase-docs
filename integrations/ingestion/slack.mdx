@@ -1,0 +1,116 @@
+---
+title: 'Slack'
+description: 'Connect Gurubase with Slack to index your chat history as a data source'
+---
+
+## Introduction
+
+Integrate Gurubase with Slack to index your messages as data sources.
+
+<Note>
+To use this feature, you first need to setup a Slack App manually to get a bot token.
+</Note>
+
+## Steps to Integrate
+
+1. Go to https://api.slack.com/apps and click “Create New App”.
+2. Select "From scratch" to create a new app:
+   - Enter a name for your app (e.g., "Gurubase Backfill")
+   - Choose your Slack workspace from the dropdown
+   - Click "Create App" to proceed
+3. Go to "OAuth & Permissions" page on Slack app. Scroll to "Bot Token Scopes" under "Scopes" section and add the following permissions:
+    - `channels:history`: To read public channels
+    - `groups:history`: To read private channels
+    - `channels:join`: To join public channels
+    - `channels:read`: To get the name of a public channel
+    - `groups:read`: To get the name of a private channel
+
+4. Go to "Install App" page. Then click "Install to [your_workspace_name]".
+5. Go through the OAuth flow.
+6. After installation, you will be redirected to the same page.
+7. Copy "Bot User OAuth Token".
+
+8. Navigate to Integrations
+   - Go to the Gurubase dashboard.
+   - Click on "My Gurus" under the profile
+   - Click on the Guru you want to integrate with Slack
+
+9. Select Slack Bot
+   - Under the "Data Ingestion" section, click on the "Slack" option.
+
+<Frame>
+  <img src="/images/integrations.png" alt="Gurubase integrations page"/>
+</Frame>
+
+10. Connect to Slack
+   - Type in the Bot Token you have copied.
+   - Click connect.
+
+<Frame>
+  <img src="/images/slack-ingestion-before.png" alt="Gurubase slack ingestion before installation" />
+</Frame>
+
+<Frame>
+  <img src="/images/slack-ingestion-after.png" alt="Gurubase slack ingestion after installation" />
+</Frame>
+
+11. Go back to your guru's Settings. Click the "Add" dropdown under "Sources", and select "Slack".
+
+12. Configure your backfill job
+
+<Frame>
+  <img src="/images/slack-backfill-sidebar.png" alt="Gurubase slack backfill sidebar" />
+</Frame>
+
+<Note>
+For more details on this, refer to [Configuring a Slack Backfill Job](#configuring-a-slack-backfill-job)
+</Note>
+
+
+13. Upon saving the job, click "Update Guru". Your messages will be indexed as a data source.
+
+
+## Configuring a Slack Backfill Job
+
+Here are the options in the configuration:
+
+- **Channel ID:** This can be retrieved by right clicking to a channel, and selecting "View channel details". Below the modal, you will see the "Channel ID".
+
+<Frame>
+  <img src="/images/slack-channel-id.png" alt="Slack Channel ID Modal" width="300"/>
+</Frame>
+
+- **Time Range:** The time range of the threads to be indexed. You can either set custom (with start and end dates), or pick a predefined option.
+
+- **Trusted User IDs (Optional):** The IDs of the users to mark as trusted users. To find the user ID, do the following:
+
+1. Open a DM with the user.
+2. Click their name, it will open a modal.
+3. Click "View full profile".
+4. This will open the user profile as a sidebar.
+5. In here, click the three dots.
+6. Click "Copy member ID".
+
+- **Only include threads with trusted user responses (Optional):** If you provide trusted users, enabling this will only index the threads that are answered by these users.
+
+- **Include Words (Optional):** Only the threads including these words will be indexed.
+- **Exclude Words (Optional):** The threads including these words will not be indexed.
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="API Reference"
+    icon="code"
+    href="/api-reference/introduction"
+  >
+    Explore our API documentation
+  </Card>
+  <Card
+    title="Add Discord Bot to Your Server"
+    icon="discord"
+    href="/integrations/discord-bot"
+  >
+    Learn how to add a Discord bot to your server
+  </Card>
+</CardGroup>

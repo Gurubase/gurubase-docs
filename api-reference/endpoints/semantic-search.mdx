@@ -1,0 +1,137 @@
+---
+title: 'Semantic Search'
+api: 'POST /{guru_slug}/semantic-search/'
+description: 'Fetch related sources for a question'
+---
+
+Retrieve sources that are most relevant to a given question. This endpoint fetches from all data source types.
+
+## Path Parameters
+
+<ParamField path="guru_slug" type="string" required>
+  The slug of the Guru to query sources from
+</ParamField>
+
+### Body Parameters
+
+<ParamField body="question" type="string" required>
+  The question to find related sources for
+</ParamField>
+
+### Response
+
+The response contains an array of source objects and total count.
+
+<ResponseField name="sources" type="object[]">
+  Array of source objects relevant to the question (maximum 10)
+  
+  Each source object contains:
+  - `title` (string): The title of the source document or page
+  - `link` (string): The URL link to the source
+  - `display_link` (boolean): Whether to display the link in the UI
+  - `icon_url` (string): URL of the icon representing the source
+</ResponseField>
+
+<ResponseField name="total_sources" type="number">
+  Total number of sources returned
+</ResponseField>
+
+<ResponseExample>
+```json 200
+{
+  "sources": [
+    {
+      "title": "Slack Bot Integration - Gurubase",
+      "link": "https://docs.gurubase.ai/integrations/slack-bot",
+      "display_link": true,
+      "icon_url": "https://mintlify.s3-us-west-1.amazonaws.com/gurubase/_generated/favicon/favicon-32x32.png?v=3"
+    },
+    {
+      "title": "GitHub Bot Integration - Gurubase",
+      "link": "https://docs.gurubase.ai/integrations/github-bot",
+      "display_link": true,
+      "icon_url": "https://mintlify.s3-us-west-1.amazonaws.com/gurubase/_generated/favicon/favicon-32x32.png?v=3"
+    },
+    {
+      "title": "Welcome to Gurubase - Gurubase",
+      "link": "https://docs.gurubase.ai/introduction",
+      "display_link": true,
+      "icon_url": "https://mintlify.s3-us-west-1.amazonaws.com/gurubase/_generated/favicon/favicon-32x32.png?v=3"
+    },
+    {
+      "title": "Quickstart - Gurubase",
+      "link": "https://docs.gurubase.ai/quickstart",
+      "display_link": true,
+      "icon_url": "https://mintlify.s3-us-west-1.amazonaws.com/gurubase/_generated/favicon/favicon-32x32.png?v=3"
+    },
+    {
+      "title": "Create Your First Guru - Gurubase",
+      "link": "https://docs.gurubase.ai/guides/create-guru",
+      "display_link": true,
+      "icon_url": "https://mintlify.s3-us-west-1.amazonaws.com/gurubase/_generated/favicon/favicon-32x32.png?v=3"
+    },
+    {
+      "title": "head.html",
+      "link": "https://github.com/gurubase/gurubase-widget/tree/master/examples/retype/_includes/head.html",
+      "display_link": true,
+      "icon_url": "https://github.com/favicon.ico"
+    },
+    {
+      "title": "widget.js",
+      "link": "https://github.com/gurubase/gurubase-widget/tree/master/src/widget.js",
+      "display_link": true,
+      "icon_url": "https://github.com/favicon.ico"
+    },
+    {
+      "title": "Website Widget Integration - Gurubase",
+      "link": "https://docs.gurubase.ai/integrations/website-widget",
+      "display_link": true,
+      "icon_url": "https://mintlify.s3-us-west-1.amazonaws.com/gurubase/_generated/favicon/favicon-32x32.png?v=3"
+    },
+    {
+      "title": "Jira Integration - Gurubase",
+      "link": "https://docs.gurubase.ai/integrations/jira-bot",
+      "display_link": true,
+      "icon_url": "https://mintlify.s3-us-west-1.amazonaws.com/gurubase/_generated/favicon/favicon-32x32.png?v=3"
+    },
+    {
+      "title": "API Reference - Gurubase",
+      "link": "https://docs.gurubase.ai/api-reference/introduction",
+      "display_link": true,
+      "icon_url": "https://mintlify.s3-us-west-1.amazonaws.com/gurubase/_generated/favicon/favicon-32x32.png?v=3"
+    }
+  ],
+  "total_sources": 10
+}
+```
+
+```json 400
+{
+  "error": "Question is required"
+}
+```
+
+```json 401
+{
+  "error": "Invalid API key"
+}
+```
+
+```json 404
+{
+  "error": "Guru not found"
+}
+```
+
+```json 429
+{
+  "error": "Rate limit exceeded"
+}
+```
+
+```json 500
+{
+  "error": "Error fetching sources: [error details]"
+}
+```
+</ResponseExample>
