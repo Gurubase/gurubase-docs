@@ -94,23 +94,43 @@ For self-hosted version, you need to mention the bot using `@<app_name_you_gave_
 ## Slack App Setup for Self-hosted version
 For self-hosted version, you need to create your own Slack app to create a bot to integrate with your Gurubase Self-hosted instance. Below are the steps to create the app and get the bot token.
 
+<Note>
+For self-hosted version, there are two approaches to use the Slack app:
+1. **HTTP:** To use HTTP, you need to open your self-hosted URL to public (step 3) .
+2. **Websocket:** This does not require you to open your self-hosted URL to public. To do this, you need to enable the websocket mode (step 3).
+</Note>
+
 1. Go to https://api.slack.com/apps and click "Create New App".
 2. Select "From scratch" to create a new app:
    - Enter a name for your app (e.g., "Gurubase")
    - Choose your Slack workspace from the dropdown
    - Click "Create App" to proceed
-3. Slack will send events to  `/api/slack/events/` endpoint of your Gurubase instance. If the Gurubase instance URL is not public, you need to open it to public. You can use [ngrok](https://ngrok.com/) to do this:
-   - If you haven't changed, the default port of Gurubase instance is 8029. You need to use this to make it publicly accessible.
-   - Make Gurubase instance URL public with `ngrok http http://localhost:8029`
-   - Copy the public URL from the ngrok terminal as shown below:
+3. Here, there are two choices:
 
-<Frame>
-  <img src="/images/slack-ngrok-url.png"/>
-</Frame>
+    - **If using HTTP:**
+
+    Slack will send events to  `/api/slack/events/` endpoint of your Gurubase instance. If the Gurubase instance URL is not public, you need to open it to public. You can use [ngrok](https://ngrok.com/) to do this:
+      - If you haven't changed, the default port of Gurubase instance is 8029. You need to use this to make it publicly accessible.
+      - Make Gurubase instance URL public with `ngrok http http://localhost:8029`
+      - Copy the public URL from the ngrok terminal as shown below:
+
+    <Frame>
+      <img src="/images/slack-ngrok-url.png"/>
+    </Frame>
+  
+    - **If using Websocket:**
+
+    - Go to "Socket Mode" under "Settings" in the sidebar. 
+    - Then click "Enable Socket Mode". 
+    - This will prompt you to create a token. Create your token, and make sure you copy it.
 
 4. Go to "Event Subscriptions" page on your Slack app and enable it.
 5. Set your public url along with the path `/api/slack/events/` as "Request URL", this is the url that Slack will send the events to. Be careful with the trailing slash at the end of the url. You should see the "Verified" green text if the url is correct.
     - `${your_public_gurubase_url}/api/slack/events/`
+
+<Note>
+You do not need to provide a URL here if you enabled websocket mode.
+</Note>
 
 <Frame>
   <img src="/images/slack-url-verified.png"/>
@@ -149,6 +169,10 @@ If you change the Gurubase instance URL, you need to update the "Request URL" wi
   <img src="/images/slack-interactivity.png" width="500"/>
 </Frame>
 
+<Note>
+You do not need to provide a URL here if you enabled websocket mode.
+</Note>
+
 10. Navigate to "App Home" under Features in the left sidebar. You can also access it directly at:
 
 `https://api.slack.com/apps/<app_id>/app-home` 
@@ -163,11 +187,21 @@ If you change the Gurubase instance URL, you need to update the "Request URL" wi
 13. Go through the OAuth flow.
 14. After installation, you will be redirected to the same page.
 15. Copy "Bot User OAuth Token".
-16. Go to your guru's Slack integration page in the Gurubase UI and paste the bot token you copied and click "Connect".
+16. Go to your guru's Slack integration page in the Gurubase UI. Here, depending on your desired settings, either select HTTP or Socket mode.
+
+HTTP Mode:
 
 <Frame>
-  <img src="/images/slack-bot-token-input.png"/>
+  <img src="/images/slack-http-mode.png"/>
 </Frame>
+
+Socket Mode:
+
+<Frame>
+  <img src="/images/slack-socket-mode.png"/>
+</Frame>
+
+Fill the fields with the keys you copied and click "Connect".
 
 17. You can now follow the [Steps to Integrate](/integrations/slack-bot#steps-to-integrate).
 
