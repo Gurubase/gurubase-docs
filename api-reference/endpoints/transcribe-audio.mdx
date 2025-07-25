@@ -1,0 +1,88 @@
+---
+title: 'Transcribe Audio'
+api: 'POST /{guru_type}/transcribe/'
+description: 'Transcribe audio file to text'
+---
+
+Transcribe an audio file to text. This endpoint supports various audio formats and handles mobile recordings.
+
+<RequestExample>
+```bash cURL
+curl --request POST \
+  --url https://api.gurubase.io/api/v1/gurubase/transcribe/ \
+  --header 'x-api-key: YOUR_API_KEY' \
+  --header 'Content-Type: multipart/form-data' \
+  --form 'audio=@/path/to/your/audio.mp3'
+```
+
+</RequestExample>
+
+## Path Parameters
+
+<ParamField path="guru_type" type="string" required>
+  The guru type identifier for the transcription request
+</ParamField>
+
+### Body Parameters
+
+<ParamField body="audio" type="file" required>
+  The audio file to transcribe. Supported formats: webm, mp3, wav, m4a, ogg. Maximum size: 25MB.
+</ParamField>
+
+### Response
+
+The response contains the transcribed text from the audio file.
+
+<ResponseField name="text" type="string">
+  The transcribed text from the audio file
+</ResponseField>
+
+<ResponseExample>
+```json 200
+{
+  "text": "Hello, this is a test transcription of the audio file."
+}
+```
+
+```json 400
+{
+  "msg": "No audio file provided"
+}
+```
+
+```json 400
+{
+  "msg": "Audio file too large. Maximum size is 25MB"
+}
+```
+
+```json 400
+{
+  "msg": "Invalid audio format. Supported formats: webm, mp3, wav, m4a, ogg"
+}
+```
+
+```json 401
+{
+  "error": "Invalid API key"
+}
+```
+
+```json 403
+{
+  "msg": "Voice recording is not enabled for this guru type"
+}
+```
+
+```json 429
+{
+  "error": "Rate limit exceeded"
+}
+```
+
+```json 500
+{
+  "msg": "Error transcribing audio"
+}
+```
+</ResponseExample>
