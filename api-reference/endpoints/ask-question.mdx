@@ -31,6 +31,10 @@ To ask follow-up questions, include the `session_id` from a previous response in
   Maintain conversation context for follow-up questions. When a question is asked, the response includes a session_id that can be used in subsequent requests. On the Gurubase platform, these conversation sessions are called "Binges".
 </ParamField>
 
+<ParamField body="fetch_existing" type="boolean" default={false}>
+  Fetch an existing answer. Do not ask a new question (generally used after streaming to fetch the answer fields like references etc.).
+</ParamField>
+
 
 ### Response
 
@@ -74,6 +78,10 @@ To ask follow-up questions, include the `session_id` from a previous response in
   Unique identifier for the conversation session
 </ResponseField>
 
+<Note>
+When `stream=true`, the response will be a text stream containing only the answer content in chunks, not the full JSON object. The JSON response format shown below applies only when `stream=false` (default).
+</Note>
+
 
 <ResponseExample>
 ```json 200
@@ -94,6 +102,12 @@ To ask follow-up questions, include the `session_id` from a previous response in
 } 
 ```
 
+```text 200 (stream=true)
+# Is Slack supported on Anteon?
+
+**Yes, Slack is supported on Anteon.** You can integrate Slack to receive notifications about anomalies in your Kubernetes cluster. This integration is available for Anteon Cloud and the Self-Hosted Enterprise Edition. For the Self-Hosted version, you need to create a Slack application and configure it with specific OAuth scopes. Once set up, you can receive alerts directly in your Slack channels. For detailed instructions, refer to the [Slack Integration Guide](https://getanteon.com/docs/self-hosted/self-hosted-slack-integration/).
+```
+
 ```json 400
 {
     "msg": "<error message>"
@@ -112,3 +126,78 @@ To ask follow-up questions, include the `session_id` from a previous response in
 }
 ```
 </ResponseExample>
+
+## Code Examples
+
+### Streaming and Fetching The Answer
+
+This example demonstrates how to stream a response and then fetch the complete answer with metadata.
+
+```javascript
+// Configuration
+const API_KEY = 'your-api-key-here';
+const BASE_URL = 'https://api.gurubase.com/api/v1';
+const GURU_SLUG = 'your-guru-slug';
+
+// Simple stream example
+async function askGurubase(question) {
+  console.log("Asking question:", question);
+  const response = await fetch(`${BASE_URL}/${GURU_SLUG}/answer/`, {
+    method: 'POST',
+    headers: {
+      'X-API-KEY': API_KEY,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      question: question,
+      stream: true
+    })
+  });
+
+  // Read stream chunks
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+
+  console.log("Answer below:\n");
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+
+    const chunk = decoder.decode(value);
+    process.stdout.write(chunk.replace(/\n/g, ' '));
+  }
+
+  console.log("\n");
+}
+
+// Fetch existing answer with metadata
+async function fetchExisting(question) {
+  const response = await fetch(`${BASE_URL}/${GURU_SLUG}/answer/`, {
+    method: 'POST',
+    headers: {
+      'X-API-KEY': API_KEY,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      question: question,
+      stream: false,
+      fetch_existing: true
+    })
+  });
+
+  const data = await response.json();
+  console.log('Answer JSON:');
+  console.log(data);
+  return data;
+}
+
+// Usage
+const question = "Does Gurubase support Slack?";
+
+// 1. Ask with stream
+await askGurubase(question);
+
+// 2. Then fetch the answer from the db (for the JSON fields)
+await fetchExisting(question);
+```
