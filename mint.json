@@ -115,7 +115,8 @@
         "api-reference/endpoints/analytics-export",
         "api-reference/endpoints/record-vote",
         "api-reference/endpoints/semantic-search",
-        "api-reference/endpoints/transcribe-audio"
+        "api-reference/endpoints/transcribe-audio",
+        "api-reference/endpoints/list-sessions",
       ]
     }
   ],
