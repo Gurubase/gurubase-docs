@@ -1,0 +1,74 @@
+---
+title: 'Delete Session'
+api: 'DELETE /sessions/{session_id}/delete/'
+description: 'Soft delete a conversation session'
+---
+
+Soft delete a conversation session (binge). This endpoint marks the session as deleted without actually removing it from the database.
+
+## Path Parameters
+
+<ParamField path="session_id" type="string" required>
+  The unique identifier of the session to delete
+</ParamField>
+
+### Response
+
+<ResponseField name="msg" type="string">
+  Success message indicating the session was deleted
+</ResponseField>
+
+<ResponseField name="session_id" type="string">
+  The ID of the deleted session
+</ResponseField>
+
+<ResponseExample>
+```json 200
+{
+    "msg": "Session deleted successfully",
+    "session_id": "1b9e86c9-87a8-472a-a6bf-6522e89b2de8"
+}
+```
+
+```json 400
+{
+    "msg": "Binge ID is required"
+}
+```
+
+```json 400
+{
+    "msg": "Session is already deleted"
+}
+```
+
+```json 401
+{
+    "msg": "Invalid API key"
+}
+```
+
+```json 403
+{
+    "msg": "Forbidden"
+}
+```
+
+```json 404
+{
+    "msg": "Session not found"
+}
+```
+
+```json 404
+{
+    "msg": "Guru type not found"
+}
+```
+
+```json 429
+{
+    "msg": "Request was throttled. Expected available in 56 seconds."
+}
+```
+</ResponseExample>
