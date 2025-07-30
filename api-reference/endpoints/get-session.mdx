@@ -1,0 +1,224 @@
+---
+title: 'Get Session'
+api: 'POST /sessions/{session_id}/conversation/'
+description: 'Retrieve a complete conversation session'
+---
+
+Retrieve a complete conversation session (binge) including all questions and answers in the conversation chain, ordered chronologically.
+
+## Path Parameters
+
+<ParamField path="session_id" type="string" required>
+  The unique identifier of the session to retrieve
+</ParamField>
+
+### Response
+
+<ResponseField name="binge_id" type="string">
+  Unique identifier for the session. This has the same meaning as `session_id`.
+</ResponseField>
+
+<ResponseField name="root_question_slug" type="string">
+  Slug of the initial question that started this conversation session
+</ResponseField>
+
+<ResponseField name="date_created" type="string">
+  Timestamp when the session was created (ISO format)
+</ResponseField>
+
+<ResponseField name="last_used" type="string">
+  Timestamp when the session was last used (ISO format)
+</ResponseField>
+
+<ResponseField name="conversation" type="array">
+  Array of messages in the conversation, ordered chronologically
+
+  <Expandable title="Message Object">
+    <ResponseField name="id" type="string">
+      Unique identifier for the message
+    </ResponseField>
+    <ResponseField name="slug" type="string">
+      Human-readable slug for the message
+    </ResponseField>
+    <ResponseField name="user_question" type="string">
+      The original question asked by the user
+    </ResponseField>
+    <ResponseField name="question" type="string">
+      The enhanced/processed question used by the AI
+    </ResponseField>
+    <ResponseField name="answer" type="string">
+      The AI's response in Markdown format
+    </ResponseField>
+    <ResponseField name="date_created" type="string">
+      Timestamp when the message was created (ISO format)
+    </ResponseField>
+    <ResponseField name="date_updated" type="string">
+      Timestamp when the message was last updated (ISO format)
+    </ResponseField>
+    <ResponseField name="references" type="array">
+      Array of reference sources used to generate the answer
+
+      <Expandable title="Reference Object">
+        <ResponseField name="link" type="string">
+          URL of the reference
+        </ResponseField>
+        <ResponseField name="icon" type="string">
+          Icon URL for the reference source
+        </ResponseField>
+        <ResponseField name="title" type="string">
+          Title of the reference
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+    <ResponseField name="trust_score" type="number">
+      Confidence score of the answer (0-100)
+    </ResponseField>
+    <ResponseField name="parent_slug" type="string">
+      Slug of the parent message (for follow-up questions)
+    </ResponseField>
+    <ResponseField name="source" type="string">
+      Source of the question (e.g., "USER", "api", "web", "slack")
+    </ResponseField>
+    <ResponseField name="user_vote" type="string">
+      User's vote on the answer (if any). Can be "upvote", "downvote", or null
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseExample>
+```json 200
+{
+    "binge_id": "1b9e86c9-87a8-472a-a6bf-6522e89b2de8",
+    "root_question_slug": "what-is-gurubase-e2dd49bd-45da-4915-8ee0-3a1c09ee97a1",
+    "date_created": "2025-07-30T14:11:45.421172+00:00",
+    "last_used": "2025-07-30T14:13:09.459496+00:00",
+    "conversation": [
+        {
+            "id": "2183",
+            "slug": "what-is-gurubase-e2dd49bd-45da-4915-8ee0-3a1c09ee97a1",
+            "user_question": "what is gurubase",
+            "question": "What is Gurubase?",
+            "answer": "# What is Gurubase?\n\nGurubase is a platform that transforms your existing content into intelligent, topic-specific AI assistants known as \"Gurus.\" These AI-powered assistants are designed to answer questions, provide support, and guide users through your documentation, code, and knowledge base. Gurubase supports a wide range of data sources, including websites, PDF documents, Excel files, GitHub repositories, Confluence documents, Zendesk tickets, Jira issues, and YouTube videos, among others. \n\nThe platform allows for seamless integration into existing workflows through website widgets, chatbots, and APIs. It offers flexible deployment options, including a hosted platform at Gurubase.io and an enterprise self-hosted solution. Key features of Gurubase include advanced AI Q&A capabilities, multi-source integration, real-time synchronization, and codebase intelligence. These features ensure that the knowledge base remains current and accurate, providing reliable responses to user queries. For more detailed information, you can visit the [Gurubase Introduction](https://docs.gurubase.ai/introduction) page.",
+            "date_created": "2025-07-30T14:11:45.426114+00:00",
+            "date_updated": "2025-07-30T14:14:37.789405+00:00",
+            "references": [
+                {
+                    "link": "https://docs.gurubase.ai/introduction",
+                    "icon": "https://mintlify.s3-us-west-1.amazonaws.com/gurubase/_generated/favicon/favicon-32x32.png?v=3",
+                    "title": "Welcome to Gurubase - Gurubase"
+                },
+                {
+                    "link": "https://docs.gurubase.ai/guides/create-guru",
+                    "icon": "https://mintlify.s3-us-west-1.amazonaws.com/gurubase/_generated/favicon/favicon-32x32.png?v=3",
+                    "title": "Create Your First Guru - Gurubase"
+                }
+            ],
+            "trust_score": 90,
+            "parent_slug": null,
+            "source": "USER",
+            "user_vote": "downvote"
+        },
+        {
+            "id": "2184",
+            "slug": "add-website-to-guru-knowledge-base-0ad07b24-1c30-4245-a1d9-9ea26d7c039e",
+            "user_question": "How can I add a website to my Guru's knowledge base?",
+            "question": "How to add a website to my Guru's knowledge base?",
+            "answer": "# How to add a website to my Guru's knowledge base?\n\nTo add a website to your Guru's knowledge base in Gurubase, follow these steps:\n\n1. **Access the Dashboard**: Navigate to your Gurubase dashboard. If you are using a self-hosted version, you can access it at your local instance URL.\n\n2. **Create or Select a Guru**: If you haven't created a Guru yet, you will need to do so. Click on the \"Create New Guru\" button to start the setup process. If you already have a Guru, select it from your list.\n\n3. **Configure Basic Settings**: During the creation process, you will need to configure basic settings such as the Guru's name, logo, and topics. These settings help define the scope and expertise of your Guru.\n\n4. **Add Knowledge Sources**: \n   - Go to the section where you can add knowledge sources.\n   - **Websites**: Enter the URLs of the websites you want to include. Gurubase allows you to index website content by importing sitemaps or crawling the website. This feature enables the Guru to answer questions based on the indexed content of the website.\n\n5. **Publish Your Guru**: Once you have added the website URLs and any other knowledge sources, click \"Publish Guru.\" This action will initiate the indexing process, where Gurubase will process and embed the content from the provided sources into your Guru's knowledge base.\n\n6. **Manage and Update**: After publishing, you can manage your website sources by editing, deleting, or reindexing them to ensure the information remains current and accurate.\n\nFor more detailed guidance, you can refer to the [Create Your First Guru](https://docs.gurubase.ai/guides/create-guru) page on the Gurubase documentation site.",
+            "date_created": "2025-07-30T14:12:29.647988+00:00",
+            "date_updated": "2025-07-30T14:12:33.309291+00:00",
+            "references": [
+                {
+                    "link": "https://docs.gurubase.ai/integrations/website-widget",
+                    "icon": "https://mintlify.s3-us-west-1.amazonaws.com/gurubase/_generated/favicon/favicon-32x32.png?v=3",
+                    "title": "Website Widget Integration - Gurubase"
+                },
+                {
+                    "link": "https://docs.gurubase.ai/guides/create-guru",
+                    "icon": "https://mintlify.s3-us-west-1.amazonaws.com/gurubase/_generated/favicon/favicon-32x32.png?v=3",
+                    "title": "Create Your First Guru - Gurubase"
+                },
+                {
+                    "link": "https://github.com/gurubase/gurubase-widget/tree/master/README.md",
+                    "icon": "https://github.com/favicon.ico",
+                    "title": "README.md"
+                },
+                {
+                    "link": "https://github.com/gurubase/gurubase-widget/tree/master/examples/pure_js/README.md",
+                    "icon": "https://github.com/favicon.ico",
+                    "title": "README.md"
+                },
+                {
+                    "link": "https://github.com/gurubase/gurubase-widget/tree/master/examples/remix/README.md",
+                    "icon": "https://github.com/favicon.ico",
+                    "title": "README.md"
+                },
+                {
+                    "link": "https://github.com/gurubase/gurubase-widget/tree/master/examples/mintlify/README.md",
+                    "icon": "https://github.com/favicon.ico",
+                    "title": "README.md"
+                },
+                {
+                    "link": "https://github.com/gurubase/gurubase-widget/tree/master/examples/mintlify/gurubase.js",
+                    "icon": "https://github.com/favicon.ico",
+                    "title": "gurubase.js"
+                }
+            ],
+            "trust_score": 90,
+            "parent_slug": "what-is-gurubase-e2dd49bd-45da-4915-8ee0-3a1c09ee97a1",
+            "source": "USER",
+            "user_vote": null
+        },
+        {
+            "id": "2185",
+            "slug": "control-pdf-visibility-guru-knowledge-base-1b3689ca-5445-409b-81e7-8bcfdaf00df9",
+            "user_question": "How can I control the visibility of my PDF documents within my Guru's knowledge base?",
+            "question": "How to control PDF visibility in my Guru's knowledge base?",
+            "answer": "# How to control PDF visibility in my Guru's knowledge base?\n\nTo control the visibility of PDF documents within your Guru's knowledge base in Gurubase, follow these steps:\n\n1. **Access the Dashboard**: Navigate to your Gurubase dashboard where you manage your Guru.\n\n2. **Locate the PDF Source**: Find the PDF document you wish to manage. This can be done by accessing the list of knowledge sources associated with your Guru.\n\n3. **Open the PDF Management Interface**: Click the menu icon (⋮) next to the PDF source you want to manage. This will open the management options for that specific document.\n\n4. **Toggle Visibility Settings**: \n   - You will see options to toggle between \"Public\" and \"Private\" visibility settings.\n   - **Private PDFs**: These are accessible only to you and your team members. They will not be visible in answer references or citations provided by the Guru.\n   - **Public PDFs**: These are visible in answer references and citations, allowing users to access the content when the Guru provides answers.\n\n5. **Save Changes**: Ensure that you save any changes you make to the visibility settings to apply them effectively.\n\nBy managing the visibility settings, you can control who has access to the content of your PDF documents, ensuring that sensitive information remains protected while still allowing public access to non-sensitive documents. For more detailed guidance, you can refer to the [Create Your First Guru](https://docs.gurubase.ai/guides/create-guru) page on the Gurubase documentation site.",
+            "date_created": "2025-07-30T14:13:09.444277+00:00",
+            "date_updated": "2025-07-30T14:14:17.257488+00:00",
+            "references": [
+                {
+                    "link": "https://docs.gurubase.ai/guides/create-guru",
+                    "icon": "https://mintlify.s3-us-west-1.amazonaws.com/gurubase/_generated/favicon/favicon-32x32.png?v=3",
+                    "title": "Create Your First Guru - Gurubase"
+                }
+            ],
+            "trust_score": 100,
+            "parent_slug": "add-website-to-guru-knowledge-base-0ad07b24-1c30-4245-a1d9-9ea26d7c039e",
+            "source": "USER",
+            "user_vote": "upvote"
+        }
+    ]
+}
+```
+
+```json 400
+{
+    "msg": "Binge ID is required"
+}
+```
+
+```json 401
+{
+    "msg": "Invalid API key"
+}
+```
+
+```json 403
+{
+    "msg": "You don't have access to this binge"
+}
+```
+
+```json 404
+{
+    "msg": "Binge not found"
+}
+```
+
+```json 429
+{
+    "msg": "Request was throttled. Expected available in 56 seconds."
+}
+```
+</ResponseExample>
