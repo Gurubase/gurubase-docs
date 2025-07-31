@@ -1,0 +1,130 @@
+---
+title: 'List Sessions'
+api: 'POST /{guru_slug}/sessions/'
+description: 'Retrieve conversation sessions for a Guru'
+---
+
+Retrieve conversation sessions for a specific Guru. This endpoint supports pagination and search functionality, returning sessions grouped by time periods.
+
+## Path Parameters
+
+<ParamField path="guru_slug" type="string" required>
+  The slug of the Guru to retrieve sessions for
+</ParamField>
+
+### Body Parameters
+
+<ParamField body="page_num" type="integer" default={1}>
+  The page number for pagination. Must be a positive integer.
+</ParamField>
+
+<ParamField body="search_query" type="string" default="">
+  Search query to filter sessions. Searches across question text, user questions, and session slugs.
+</ParamField>
+
+<ParamField body="external_user_id" type="string">
+  Filter sessions by external user ID. When provided, only returns sessions associated with this external user ID.
+</ParamField>
+
+### Response
+
+<ResponseField name="today" type="array">
+  Sessions from today
+
+  <Expandable title="Session Object">
+    <ResponseField name="id" type="string">
+      Unique identifier for the session
+    </ResponseField>
+    <ResponseField name="last_used" type="string">
+      Timestamp when the session was last used
+    </ResponseField>
+    <ResponseField name="guru_type_slug" type="string">
+      The slug of the guru type
+    </ResponseField>
+    <ResponseField name="guru_type_name" type="string">
+      The name of the guru type
+    </ResponseField>
+    <ResponseField name="root_question_name" type="string">
+      The name/title of the root question that started this session
+    </ResponseField>
+    <ResponseField name="root_question_slug" type="string">
+      The slug of the root question
+    </ResponseField>
+    <ResponseField name="root_question_link" type="string">
+      Link to the root question
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="last_week" type="array">
+  Sessions from the last 7 days (excluding today)
+</ResponseField>
+
+<ResponseField name="older" type="array">
+  Sessions older than 7 days
+</ResponseField>
+
+<ResponseField name="has_more" type="boolean">
+  Whether there are more sessions available beyond the current page
+</ResponseField>
+
+<ResponseExample>
+```json 200
+{
+    "today": [
+      {
+        "last_used": "2025-07-29T10:23:27.535170Z",
+        "id": "0389210e-720d-442c-8fd4-2c6ecda89627",
+        "guru_type_slug": "gurubase",
+        "guru_type_name": "Gurubase",
+        "root_question_name": "What is Gurubase?",
+        "root_question_slug": "what-is-gurubase-73d46ea7-12b5-49c7-ab5e-1dffdb8b71de-69e06b42-d549-4624-8400-768f7388361a",
+        "root_question_link": "<link_to_the_question>"
+      }
+    ],
+    "last_week": [
+      {
+        "last_used": "2025-07-28T16:05:10.579616Z",
+        "id": "25dffa55-b947-41af-9bca-a2361afca8be",
+        "guru_type_slug": "gurubase",
+        "guru_type_name": "Gurubase",
+        "root_question_name": "Does Gurubase support Slack ?",
+        "root_question_slug": "does-gurubase-support-slack-64911f4a-03c7-4105-a477-80d68f030dfe",
+        "root_question_link": "<link_to_the_question>"
+      }
+    ],
+    "older": [],
+    "has_more": false
+}
+```
+
+```json 400
+{
+    "msg": "Page number must be an integer"
+}
+```
+
+```json 401
+{
+    "msg": "Invalid API key"
+}
+```
+
+```json 403
+{
+    "msg": "Forbidden"
+}
+```
+
+```json 404
+{
+    "msg": "Guru type {guru_slug} not found"
+}
+```
+
+```json 429
+{
+    "msg": "Request was throttled. Expected available in 56 seconds."
+}
+```
+</ResponseExample>

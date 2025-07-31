@@ -18,6 +18,10 @@ Retrieve sources that are most relevant to a given question. This endpoint fetch
   The question to find related sources for
 </ParamField>
 
+<ParamField body="labels" type="array" default={[]}>
+  Array of labels to filter sources by. If provided, only sources with matching labels will be returned. If multiple labels are provided, they are OR'ed. Meaning data sources belonging to any of those labels are returned.
+</ParamField>
+
 ### Response
 
 The response contains an array of source objects and total count.
@@ -27,9 +31,10 @@ The response contains an array of source objects and total count.
   
   Each source object contains:
   - `title` (string): The title of the source document or page
-  - `link` (string): The URL link to the source
+  - `link` (string): The URL link to the source (can be null for internal sources)
   - `display_link` (boolean): Whether to display the link in the UI
   - `icon_url` (string): URL of the icon representing the source
+  - `labels` (array): Array of labels associated with this source
 </ResponseField>
 
 <ResponseField name="total_sources" type="number">
@@ -44,60 +49,111 @@ The response contains an array of source objects and total count.
       "title": "Slack Bot Integration - Gurubase",
       "link": "https://docs.gurubase.ai/integrations/slack-bot",
       "display_link": true,
+      "labels": [
+        "integrations",
+        "slack",
+        "bots"
+      ],
       "icon_url": "https://mintlify.s3-us-west-1.amazonaws.com/gurubase/_generated/favicon/favicon-32x32.png?v=3"
     },
     {
       "title": "GitHub Bot Integration - Gurubase",
       "link": "https://docs.gurubase.ai/integrations/github-bot",
       "display_link": true,
+      "labels": [
+        "integrations",
+        "github",
+        "bots"
+      ],
       "icon_url": "https://mintlify.s3-us-west-1.amazonaws.com/gurubase/_generated/favicon/favicon-32x32.png?v=3"
     },
     {
       "title": "Welcome to Gurubase - Gurubase",
       "link": "https://docs.gurubase.ai/introduction",
       "display_link": true,
+      "labels": [
+        "documentation",
+        "getting-started"
+      ],
       "icon_url": "https://mintlify.s3-us-west-1.amazonaws.com/gurubase/_generated/favicon/favicon-32x32.png?v=3"
     },
     {
       "title": "Quickstart - Gurubase",
       "link": "https://docs.gurubase.ai/quickstart",
       "display_link": true,
+      "labels": [
+        "documentation",
+        "getting-started",
+        "tutorial"
+      ],
       "icon_url": "https://mintlify.s3-us-west-1.amazonaws.com/gurubase/_generated/favicon/favicon-32x32.png?v=3"
     },
     {
       "title": "Create Your First Guru - Gurubase",
       "link": "https://docs.gurubase.ai/guides/create-guru",
       "display_link": true,
+      "labels": [
+        "documentation",
+        "guides",
+        "tutorial"
+      ],
       "icon_url": "https://mintlify.s3-us-west-1.amazonaws.com/gurubase/_generated/favicon/favicon-32x32.png?v=3"
     },
     {
       "title": "head.html",
       "link": "https://github.com/gurubase/gurubase-widget/tree/master/examples/retype/_includes/head.html",
       "display_link": true,
+      "labels": [
+        "code",
+        "github",
+        "widget",
+        "examples"
+      ],
       "icon_url": "https://github.com/favicon.ico"
     },
     {
       "title": "widget.js",
       "link": "https://github.com/gurubase/gurubase-widget/tree/master/src/widget.js",
       "display_link": true,
+      "labels": [
+        "code",
+        "github",
+        "widget",
+        "javascript"
+      ],
       "icon_url": "https://github.com/favicon.ico"
     },
     {
       "title": "Website Widget Integration - Gurubase",
       "link": "https://docs.gurubase.ai/integrations/website-widget",
       "display_link": true,
+      "labels": [
+        "integrations",
+        "widget",
+        "website"
+      ],
       "icon_url": "https://mintlify.s3-us-west-1.amazonaws.com/gurubase/_generated/favicon/favicon-32x32.png?v=3"
     },
     {
       "title": "Jira Integration - Gurubase",
       "link": "https://docs.gurubase.ai/integrations/jira-bot",
       "display_link": true,
+      "labels": [
+        "integrations",
+        "jira",
+        "bots"
+      ],
       "icon_url": "https://mintlify.s3-us-west-1.amazonaws.com/gurubase/_generated/favicon/favicon-32x32.png?v=3"
     },
     {
       "title": "API Reference - Gurubase",
       "link": "https://docs.gurubase.ai/api-reference/introduction",
       "display_link": true,
+      "labels": [
+        "documentation",
+        "api",
+        "reference"
+      ],
       "icon_url": "https://mintlify.s3-us-west-1.amazonaws.com/gurubase/_generated/favicon/favicon-32x32.png?v=3"
     }
   ],
