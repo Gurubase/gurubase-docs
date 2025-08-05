@@ -1,0 +1,88 @@
+---
+title: 'Text-to-Speech Stream'
+api: 'POST /{guru_type}/text-to-speech/stream/'
+description: 'Convert text to speech and stream audio response'
+---
+
+Convert text to speech and stream the audio response. This endpoint processes text by replacing code blocks with "Code block" and inline code with "Inline code" before generating speech.
+
+<RequestExample>
+```bash cURL
+curl --request POST \
+  --url https://api.gurubase.io/api/v1/gurubase/text-to-speech/stream/ \
+  --header 'x-api-key: YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "text": "Hello, this is a test message with some code: `console.log(\"hello\")` and a code block:\n```python\ndef hello():\n    print(\"hello\")\n```"
+  }'
+```
+
+</RequestExample>
+
+## Path Parameters
+
+<ParamField path="guru_type" type="string" required>
+  The guru type identifier for the text-to-speech request
+</ParamField>
+
+### Body Parameters
+
+<ParamField body="text" type="string" required>
+  The text to convert to speech. Code blocks and inline code will be processed and replaced with "Code block" and "Inline code" respectively.
+</ParamField>
+
+### Response
+
+The response is a streaming audio file in MP3 format.
+
+<ResponseField name="audio_stream" type="audio/mpeg">
+  Streaming audio response in MP3 format
+</ResponseField>
+
+<ResponseExample>
+```json 400
+{
+  "msg": "No text provided"
+}
+```
+
+```json 401
+{
+  "error": "Invalid API key"
+}
+```
+
+```json 403
+{
+  "msg": "Text-to-speech is not enabled for this guru type"
+}
+```
+
+```json 429
+{
+  "error": "Rate limit exceeded"
+}
+```
+
+```json 500
+{
+  "msg": "Error generating speech stream"
+}
+```
+</ResponseExample>
+
+## Text Processing
+
+The endpoint automatically processes text before converting to speech:
+
+- **Code blocks**: Any text wrapped in triple backticks (```) is replaced with "Code block"
+- **Inline code**: Any text wrapped in single backticks (`) is replaced with "Inline code"
+
+This ensures that code syntax doesn't interfere with speech generation and provides a better listening experience.
+
+## Streaming Response
+
+The endpoint returns a streaming audio response with the following headers:
+- `Content-Type: audio/mpeg`
+- `Cache-Control: no-cache`
+- `X-Accel-Buffering: no` (disables nginx buffering for real-time streaming)
