@@ -1,0 +1,121 @@
+---
+title: 'Follow-up Examples'
+api: 'POST /{guru_type}/follow-up/examples/'
+description: 'Generate follow-up question examples for a given question.'
+---
+
+This endpoint generates a list of suggested follow-up questions based on a previous question. You can identify the previous question by its slug or by providing the question text directly.
+
+Upon first hit, the endpoint generates them. The consecutive hits retrieve the generated follow-up examples.
+
+<RequestExample>
+```bash cURL
+curl --request POST \
+  --url https://api.gurubase.io/api/v1/gurubase/follow-up/examples/ \
+  --header 'x-api-key: YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "question_slug": "what-is-gurubase-151e2d23-4316-4d85-936c-d806d431a014"
+  }'
+```
+
+```python Python
+import requests
+
+url = "https://api.gurubase.io/api/v1/gurubase/follow-up/examples/"
+payload = {
+    "question_slug": "what-is-gurubase-151e2d23-4316-4d85-936c-d806d431a014"
+}
+headers = {
+    "x-api-key": "YOUR_API_KEY",
+    "Content-Type": "application/json"
+}
+
+response = requests.post(url, json=payload, headers=headers)
+print(response.json())
+```
+</RequestExample>
+
+## Path Parameters
+
+<ParamField path="guru_type" type="string" required>
+  The guru type identifier for the request.
+</ParamField>
+
+### Body Parameters
+
+<ParamField body="question_slug" type="string">
+  The slug of the question to get follow-up examples for. Either `question_slug` or `question` is required.
+</ParamField>
+
+<ParamField body="question" type="string">
+  The text of the question to get follow-up examples for. Either `question_slug` or `question` is required.
+</ParamField>
+
+<ParamField body="binge_id" type="string">
+  The ID of the binge session (if exists) associated with the question.
+</ParamField>
+
+### Response
+
+<ResponseField name="follow_up_examples" type="array<string>">
+  A list of suggested follow-up questions.
+</ResponseField>
+
+<ResponseField name="question_slug" type="string">
+  The slug of the question for which the examples were generated.
+</ResponseField>
+
+<ResponseField name="cached" type="boolean">
+  Indicates whether the follow-up examples were retrieved from cache.
+</ResponseField>
+
+<ResponseExample>
+```json 200
+{
+    "follow_up_examples": [
+        "How can Gurubase be integrated with platforms like Slack or Discord?",
+        "What are the benefits of using Gurubase's real-time updates feature?",
+        "How does Gurubase handle multiple data sources for creating a Guru?"
+    ],
+    "question_slug": "what-is-gurubase-151e2d23-4316-4d85-936c-d806d431a014",
+    "cached": true
+}
+```
+
+```json 400
+{
+  "error": "Question slug or question text is required"
+}
+```
+
+```json 400
+{
+  "error": "Binge does not exist"
+}
+```
+
+```json 401
+{
+  "error": "Invalid API key"
+}
+```
+
+```json 404
+{
+  "error": "Question does not exist"
+}
+```
+
+```json 429
+{
+  "error": "Rate limit exceeded"
+}
+```
+
+```json 500
+{
+  "error": "An error occurred while generating follow-up examples"
+}
+```
+</ResponseExample>

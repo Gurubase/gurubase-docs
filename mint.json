@@ -119,7 +119,8 @@
         "api-reference/endpoints/text-to-speech",
         "api-reference/endpoints/list-sessions",
         "api-reference/endpoints/get-session",
-        "api-reference/endpoints/delete-session"
+        "api-reference/endpoints/delete-session",
+        "api-reference/endpoints/follow-up-examples"
       ]
     }
   ],
