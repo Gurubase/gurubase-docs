@@ -120,7 +120,8 @@
         "api-reference/endpoints/list-sessions",
         "api-reference/endpoints/get-session",
         "api-reference/endpoints/delete-session",
-        "api-reference/endpoints/follow-up-examples"
+        "api-reference/endpoints/follow-up-examples",
+        "api-reference/endpoints/upsert-profiles"
       ]
     }
   ],
