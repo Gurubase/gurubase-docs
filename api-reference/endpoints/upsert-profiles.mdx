@@ -1,0 +1,162 @@
+---
+title: 'Upsert User Profiles'
+api: 'POST /{guru_slug}/profiles/'
+description: 'Upsert one or more user profiles with their memory data.'
+---
+
+This endpoint allows you to create or update user profiles in bulk. It is an idempotent operation, meaning you can safely retry requests without creating duplicate profiles.
+
+## Path Parameters
+
+<ParamField path="guru_slug" type="string" required>
+  The slug of the Guru to which the profiles belong.
+</ParamField>
+
+### Body Parameters
+
+<ParamField body="users" type="object[]" required>
+  An array of user profile objects to upsert.
+  <Expandable title="User Object Properties">
+    <ParamField body="external_user_id" type="string" required>
+      A `uuid` for the user from your system. If you want to use this with "Ask Question" endpoint, you need to provide the same `external_user_id` there.
+    </ParamField>
+    <ParamField body="memory" type="object" required>
+      A JSON object containing the user's profile data or "memory". The structure of this object is up to you.
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+
+### Example Request
+
+```json
+{
+    "users": [
+        {
+            "external_user_id": "user1-id",
+            "memory": {
+                "name": "John Doe",
+                "email": "john.doe@example.com"
+            }
+        },
+        {
+            "external_user_id": "user2-id", 
+            "memory": {
+                "name": "Jane Doe",
+                "plan": "premium"
+            }
+        }
+    ]
+}
+```
+
+### Response
+
+The response provides a detailed breakdown of the upsert operation.
+
+<ResponseField name="status" type="string">
+  Indicates the overall status of the request. Will be "success" if the request was accepted and partially or fully processed.
+</ResponseField>
+
+<ResponseField name="total_users" type="number">
+  The total number of users in the request payload.
+</ResponseField>
+
+<ResponseField name="processed_users" type="number">
+  The number of users successfully processed.
+</ResponseField>
+
+<ResponseField name="users_results" type="array">
+  An array of result objects, one for each user in the request, in the same order.
+    <Expandable title="User Result Object">
+        <ResponseField name="user_index" type="number">
+            The index of the user in the original request array.
+        </ResponseField>
+        <ResponseField name="external_user_id" type="string">
+            The external user ID provided.
+        </ResponseField>
+        <ResponseField name="success" type="boolean">
+            Whether the upsert was successful for this user.
+        </ResponseField>
+        <ResponseField name="errors" type="array">
+            A list of errors if the upsert failed for this user.
+        </ResponseField>
+    </Expandable>
+</ResponseField>
+
+<ResponseExample>
+```json 200
+{
+    "status": "success",
+    "total_users": 2,
+    "processed_users": 2,
+    "users_results": [
+        {
+            "user_index": 0,
+            "external_user_id": "user1-id",
+            "success": true,
+            "errors": []
+        },
+        {
+            "user_index": 1,
+            "external_user_id": "user2-id",
+            "success": true,
+            "errors": []
+        }
+    ]
+}
+```
+
+```json 400
+{
+    "error": "Failed to process some users",
+    "details": [],
+    "users_results": [
+        {
+            "user_index": 0,
+            "external_user_id": "user1-id",
+            "success": false,
+            "errors": [
+                "Missing memory data"
+            ]
+        },
+        {
+            "user_index": 1,
+            "external_user_id": "user2-id",
+            "success": true,
+            "errors": []
+        }
+    ]
+}
+```
+
+```json 401
+{
+    "msg": "Invalid API key"
+}
+```
+
+```json 403
+{
+    "msg": "Forbidden"
+}
+```
+
+```json 404
+{
+    "msg": "Guru type my-guru not found"
+}
+```
+
+```json 429
+{
+    "msg": "Request was throttled. Expected available in 56 seconds."
+}
+```
+
+```json 500
+{
+    "error": "Internal server error while saving profiles"
+}
+```
+</ResponseExample>
