@@ -12,6 +12,12 @@ Retrieve conversation sessions for a specific Guru. This endpoint supports pagin
   The slug of the Guru to retrieve sessions for
 </ParamField>
 
+## Headers
+
+<ParamField header="x-api-key" type="string" required>
+  Your API key for authentication. You can obtain your API key from the [Gurubase.io](https://gurubase.io/api-keys) dashboard.
+</ParamField>
+
 ### Body Parameters
 
 <ParamField body="page_num" type="integer" default={1}>

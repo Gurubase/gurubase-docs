@@ -10,6 +10,12 @@ This endpoint allows you to fetch the list of videos from a YouTube playlist. Th
 To be able to use this feature on self-hosted, you need to specify your YouTube API Key in the settings page. You can create one by following the instructions [here](https://developers.google.com/youtube/registering_an_application). After this, you also need to enable the "Youtube Data API v3" API in your Google Cloud project.
 </Note>
 
+## Headers
+
+<ParamField header="x-api-key" type="string" required>
+  Your API key for authentication. You can obtain your API key from the [Gurubase.io](https://gurubase.io/api-keys) dashboard.
+</ParamField>
+
 ### Body Parameters
 
 <ParamField body="url" type="string" required>

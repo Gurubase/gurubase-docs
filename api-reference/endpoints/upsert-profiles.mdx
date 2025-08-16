@@ -12,6 +12,12 @@ This endpoint allows you to create or update user profiles in bulk. It is an ide
   The slug of the Guru to which the profiles belong.
 </ParamField>
 
+## Headers
+
+<ParamField header="x-api-key" type="string" required>
+  Your API key for authentication. You can obtain your API key from the [Gurubase.io](https://gurubase.io/api-keys) dashboard.
+</ParamField>
+
 ### Body Parameters
 
 <ParamField body="users" type="object[]" required>
