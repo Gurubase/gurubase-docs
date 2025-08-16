@@ -22,12 +22,7 @@
       "name": "x-api-key"
     }
   },
-  "topbarLinks": [
-    {
-      "name": "Discord",
-      "url": "https://discord.gg/9CMRSQPqx6"
-    }
-  ],
+  "topbarLinks": [],
   "topbarCtaButton": {
     "name": "Gurubase.io",
     "url": "https://gurubase.io"
@@ -43,11 +38,6 @@
       "name": "Try Gurubase.io",
       "icon": "robot",
       "url": "https://gurubase.io"
-    },
-    {
-      "name": "Discord",
-      "icon": "discord",
-      "url": "https://discord.gg/9CMRSQPqx6"
     }
   ],
   "navigation": [
@@ -126,8 +116,7 @@
     }
   ],
   "footerSocials": {
-    "twitter": "https://x.com/gurubaseio",
-    "discord": "https://discord.gg/9CMRSQPqx6"
+    "twitter": "https://x.com/gurubaseio"
   },
   "scripts": [
     {
