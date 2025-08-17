@@ -141,13 +141,11 @@ Use this if you prefer to keep your Gurubase instance private (no public URL req
 - Then click "Enable Socket Mode". 
 - This will prompt you to create a token. Create your token, and make sure you copy it.
 
-4. Continue with the common setup steps below.
-
 <Note>
 You do not need to provide a URL here if you enabled websocket mode.
 </Note>
 
-6. Expand the "Subscribe to bot events" section on "Event Subscriptions" page and add the following events:
+4. Go to "Event Subscriptions" page on your Slack app and enable it. Expand the "Subscribe to bot events" section and add the following events:
     - `message.channels`
     - `message.groups`
     - `message.im`
@@ -156,42 +154,43 @@ You do not need to provide a URL here if you enabled websocket mode.
   <img src="/images/slack-event-subscriptions.png" width="500"/>
 </Frame>
 
-7. Save changes.
-8. Go to "OAuth & Permissions" page on Slack app. Scroll to "Bot Token Scopes" under "Scopes" section and add the following permissions:
+5. Save changes.
+6. Go to "OAuth & Permissions" page on Slack app. Scroll to "Bot Token Scopes" under "Scopes" section and add the following permissions:
     - `channels:join`
     - `channels:read`
     - `chat:write`
     - `groups:read`
+    - `users:read`
     - `channels:history`
     - `groups:history`
     - `im:history`
-    - `users:read`
 
-9. Go to "Interactivity & Shortcuts" page on Slack App. Enable it and set the Request URL as `${your_public_gurubase_url}/api/slack/interactive/`
-
-<Frame>
-  <img src="/images/slack-interactivity.png" width="500"/>
-</Frame>
+7. Go to "Interactivity & Shortcuts" page on Slack App. Enable it and set the Request URL as `${your_public_gurubase_url}/api/slack/interactive/`
 
 <Note>
 You do not need to provide a URL here if you enabled websocket mode.
 </Note>
 
-10. Navigate to "App Home" under Features in the left sidebar. You can also access it directly at:
+<Frame>
+  <img src="/images/slack-interactivity.png" width="500"/>
+</Frame>
+
+
+8. Navigate to "App Home" under Features in the left sidebar. You can also access it directly at:
 
 `https://api.slack.com/apps/<app_id>/app-home` 
 
-11. Under "Show Tabs", enable "Messages Tab" and tick "Allow users to send Slash commands and messages from the messages tab".
+9. Under "Show Tabs", enable "Messages Tab" and tick "Allow users to send Slash commands and messages from the messages tab".
 
 <Frame>
   <img src="/images/slack-show-tabs.png"/>
 </Frame>
 
-12. Go to "Install App" page. Then click "Install to [your_workspace_name]".
-13. Go through the OAuth flow.
-14. After installation, you will be redirected to the same page.
-15. Copy "Bot User OAuth Token".
-16. Go to your guru's Slack integration page in the Gurubase UI. Here, depending on your desired settings, either select HTTP or Socket mode.
+10. Go to "Install App" page. Then click "Install to [your_workspace_name]".
+11. Go through the OAuth flow.
+12. After installation, you will be redirected to the same page.
+13. Copy "Bot User OAuth Token".
+14. Go to your Guru's Slack integration page in the Gurubase UI. Here, depending on your desired settings, either select HTTP or Socket mode.
 
 HTTP Mode:
 
