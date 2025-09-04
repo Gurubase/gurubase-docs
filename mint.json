@@ -68,7 +68,8 @@
             "integrations/bots/website-widget",
             "integrations/bots/slack",
             "integrations/bots/discord",
-            "integrations/bots/github"
+            "integrations/bots/github",
+            "integrations/bots/jira"
           ]
         },
         {
