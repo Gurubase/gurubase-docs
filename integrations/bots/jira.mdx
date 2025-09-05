@@ -1,5 +1,5 @@
 ---
-title: 'Jira Bot'
+title: 'Jira'
 description: 'Connect your Jira to deploy your Guru as a bot that can respond to your tickets.'
 ---
 
@@ -51,6 +51,10 @@ After a successful connection, you can configure the bot's behavior.
   - **Manual**: Responds only to mentions.
 
 - **JQL Query**: Define which tickets the bot should monitor and respond to using Jira Query Language (JQL). Click **Validate** to ensure your query is correct.
+
+<Note>
+  **Important:** The Jira Bot integration only processes tickets created after the initial setup. Any updates to the JQL query will only apply to new tickets created after the changes are saved. The bot does not process historical tickets.
+</Note>
 
 ## Using the Bot
 
