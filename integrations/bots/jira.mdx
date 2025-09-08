@@ -1,0 +1,80 @@
+---
+title: 'Jira'
+description: 'Connect your Jira to deploy your Guru as a bot that can respond to your tickets.'
+---
+
+## Introduction
+
+Integrate Gurubase with Jira to deploy a bot that can answer questions within your Jira tickets. The bot scans through tickets specified by a JQL query and provides answers based on its configuration. It can operate in two modes:
+
+- **Auto Mode**: Responds to all new tickets and mentions (by tagging @gurubase).
+- **Manual Mode**: Responds only when Gurubase is mentioned.
+
+<Note>
+  For Gurubase Self-hosted version, this integration is currently in beta and available to selected users.
+  For Gurubase Cloud version, this integration is available to all users.
+</Note>
+
+## Steps to Integrate
+
+1. **Create your Atlassian API token**
+    - Go to your [Atlassian API Token settings](https://id.atlassian.com/manage-profile/security/api-tokens)
+    - Click "Create API token"
+    - Copy it
+
+2. **Navigate to Integrations**
+   - Go to the Gurubase dashboard
+   - Click on "My Gurus" under the profile
+   - Click on the Guru you want to integrate with Jira
+   - Click on the "Integrations" tab
+   - Click on the "Jira Bot" option below "Deployments"
+
+3. **Fill in the fields**
+    - **Domain** - Your Atlassian domain (e.g. `your-domain.atlassian.net`)
+    - **User Email** - Your Atlassian user email
+    - **API Token** - The API token you created in Step 1
+
+<Frame>
+  <img src="/images/jira-bot/before.png" alt="Jira Integration Fields" />
+</Frame>
+
+## Bot Settings
+
+After a successful connection, you can configure the bot's behavior.
+
+<Frame>
+  <img src="/images/jira-bot/after.png" alt="Jira Bot Settings" />
+</Frame>
+
+- **Bot Mode**: Choose between `Auto` and `Manual` modes.
+  - **Auto**: Responds to all new tickets and mentions.
+  - **Manual**: Responds only to mentions.
+
+- **JQL Query**: Define which tickets the bot should monitor and respond to using Jira Query Language (JQL). Click **Validate** to ensure your query is correct.
+
+<Note>
+  **Important:** The Jira Bot integration only processes tickets created after the initial setup. Any updates to the JQL query will only apply to new tickets created after the changes are saved. The bot does not process historical tickets.
+</Note>
+
+## Using the Bot
+
+Once configured, the bot will start answering the Jira tickets that match your JQL query.
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="API Reference"
+    icon="code"
+    href="/api-reference/introduction"
+  >
+    Explore our API documentation
+  </Card>
+  <Card
+    title="Add Slack Bot to Your Workspace"
+    icon="slack"
+    href="/integrations/bots/slack"
+  >
+    Learn how to add a Slack bot to your workspace
+  </Card>
+</CardGroup>
