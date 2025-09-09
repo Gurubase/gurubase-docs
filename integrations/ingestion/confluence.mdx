@@ -32,12 +32,56 @@ Integrate Gurubase with Confluence to use your pages as data sources for Gurubas
     - **API Token** - The API token you created in Step 1
 
 <Frame>
-  <img src="/images/confluence-fields.png" alt="Confluence Integration Fields" />
+  <img src="/images/ingestion/confluence/confluence-fields.png" alt="Confluence Integration Fields" />
 </Frame>
 
-## Using the Bot
+## Using the Integration
 
-In the Guru edit page, you can now use the "Confluence Pages" button to add them as data sources.
+After integrating with Confluence, you can add Confluence pages as data sources to your Guru in two ways:
+
+<Frame>
+  <img src="/images/ingestion/confluence/modal.png" alt="Add Confluence Content Modal" />
+</Frame>
+
+### Option 1: Add Individual Pages
+
+Choose this option when you want to add specific Confluence pages by entering their URLs. This is best for targeted content where you know exactly which pages you want to include.
+
+<Frame>
+  <img src="/images/ingestion/confluence/individual.png" alt="Add Individual Confluence Pages" />
+</Frame>
+
+When adding individual pages, you can:
+- **Set Date Range**: Define start and end dates to filter pages by creation date
+- **Add Multiple Pages**: Enter Confluence page URLs, with each page on a new line
+- **Apply CQL Filters**: Use optional CQL (Confluence Query Language) criteria to refine your selection
+- **Fetch Pages**: Click the "Fetch Pages" button to retrieve and add the pages
+
+### Option 2: Create Backfill Job
+
+Choose this option to automatically import multiple pages based on CQL (Confluence Query Language) criteria. This is best for bulk imports and ongoing synchronization. You can also manually trigger the indexing process by clicking on the "Sync Now" option.
+
+<Frame>
+  <img src="/images/ingestion/confluence/backfill.png" alt="Create Confluence Backfill Job" />
+</Frame>
+
+When creating a backfill job, you can configure:
+- **Sync Interval**: How often to check for new content (minimum 1 hour)
+- **CQL Query**: Enter a CQL query to fetch Confluence pages that match your criteria
+  - Example: `space = "DOCS" AND type = "page", title ~ "project"`
+  - The query will be validated before creating the job
+- **Automatic Updates**: The job will periodically sync new pages that match your query
+
+<Note>
+Use CQL queries to create powerful filters for Confluence content. For example:
+- `space = "DOCS" AND type = "page"` - Get all pages from the DOCS space
+- `title ~ "API" AND lastModified >= "2024-01-01"` - Get pages with "API" in title modified since 2024
+- `creator = "john.doe" AND space in ("DEV", "QA")` - Get pages created by john.doe in DEV or QA spaces
+</Note>
+
+<Note>
+The indexed pages are also shown in the Guru edit page as individual sources. This way, you can view the content that is actually indexed.
+</Note>
 
 ## Next Steps
 
