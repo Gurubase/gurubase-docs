@@ -4,7 +4,7 @@ description: 'Connect Gurubase with GitHub to enhance your workflow'
 ---
 
 <Frame>
-  <img src="/images/gurubase-github-bot-demo.png" alt="GitHub Bot Example" />
+  <img src="/images/bots/github/gurubase-github-bot-demo.png" alt="GitHub Bot Example" />
 </Frame>
 
 ## Introduction
@@ -32,7 +32,7 @@ If you are using a self-hosted version, you will see different options on this p
 </Note>
 
 <Frame>
-  <img src="/images/gurubase-github-integrations-1.png" alt="Gurubase github integration page" />
+  <img src="/images/bots/github/gurubase-github-integrations-1.png" alt="Gurubase github integration page" />
 </Frame>
 
 
@@ -78,7 +78,7 @@ For self-hosted version, you need to create your own GitHub app to create a bot 
 
 
 <Frame>
-  <img src="/images/github-bot/gurubase-github-empty.png" alt="Gurubase Github Empty" width="600px" />
+  <img src="/images/bots/github/gurubase-github-empty.png" alt="Gurubase Github Empty" width="600px" />
 </Frame>
 
 Below are the steps to create the app and get these values.
@@ -89,7 +89,7 @@ Below are the steps to create the app and get these values.
    - Copy the public URL from the ngrok terminal as shown below:
 
 <Frame>
-  <img src="/images/slack-ngrok-url.png"/>
+  <img src="/images/bots/slack/slack-ngrok-url.png"/>
 </Frame>
 
 2. Go to https://github.com/settings/apps and click "New GitHub App".
@@ -97,13 +97,13 @@ Below are the steps to create the app and get these values.
 4. Leave the "Callback URL" empty and untick all of the checkboxes below it.
 
 <Frame>
-  <img src="/images/github-bot/github-callback.png" alt="GitHub Callback" />
+  <img src="/images/bots/github/github-callback.png" alt="GitHub Callback" />
 </Frame>
 
 5. Under "Post installation", keep the "Setup URL" empty and untick "Redirect on update".
 
 <Frame>
-  <img src="/images/github-bot/github-post-installation.png" alt="GitHub Post Installation" />
+  <img src="/images/bots/github/github-post-installation.png" alt="GitHub Post Installation" />
 </Frame>
 
 6. Under "Webhook", make it active.
@@ -119,7 +119,7 @@ Make sure you keep the `/` at the end.
 9. Keep SSL verification enabled.
 
 <Frame>
-  <img src="/images/github-bot/github-webhook.png" alt="GitHub Webhook" />
+  <img src="/images/bots/github/github-webhook.png" alt="GitHub Webhook" />
 </Frame>
 
 10. Under "Permissions", click "Repository permissions"
@@ -135,7 +135,7 @@ This will also add Read-only permission to Metadata. Keep it.
 </Note>
 
 <Frame>
-  <img src="/images/github-bot/github-permissions.png" alt="GitHub Permissions" />
+  <img src="/images/bots/github/github-permissions.png" alt="GitHub Permissions" />
 </Frame>
 
 12. Under "Subscribe to events", tick these:
@@ -150,7 +150,7 @@ This will also add Read-only permission to Metadata. Keep it.
 - Pull request review thread
 
 <Frame>
-  <img src="/images/github-bot/github-events.png" alt="GitHub Events" />
+  <img src="/images/bots/github/github-events.png" alt="GitHub Events" />
 </Frame>
 
 13. In the final section "Where can this GitHub App be installed?
@@ -179,7 +179,7 @@ If you do not provide a webhook secret, it will not be checked even if it is con
 20. If everything is done correctly, you will see the repositories you have connected to Gurubase as shown below.
 
 <Frame>
-  <img src="/images/github-bot/gurubase-github-full.png" alt="Gurubase Github Full" />
+  <img src="/images/bots/github/gurubase-github-full.png" alt="Gurubase Github Full" />
 </Frame>
 
 21. You can follow the [Steps to Integrate](#steps-to-integrate) section to learn more about the usage of the bot.
