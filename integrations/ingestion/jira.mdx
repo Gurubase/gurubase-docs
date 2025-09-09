@@ -35,9 +35,49 @@ Integrate Gurubase with Jira to use your Jira issues as data sources for Gurubas
   <img src="/images/ingestion/jira/jira-fields.png" alt="Jira Integration Fields" />
 </Frame>
 
-## Using the Bot
+## Using the Integration
 
-In the Guru edit page, you can now use the "Jira Issues" button to add them as data sources.
+After integrating with Jira, you can add Jira tickets as data sources to your Guru in two ways:
+
+<Frame>
+  <img src="/images/ingestion/jira/modal.png" alt="Add Jira Content Modal" />
+</Frame>
+
+### Option 1: Add Individual Tickets
+
+Choose this option when you want to add specific Jira tickets by entering their URLs. This is best for targeted content where you know exactly which tickets you want to include.
+
+<Frame>
+  <img src="/images/ingestion/jira/individual.png" alt="Add Individual Jira Issues" />
+</Frame>
+
+When adding individual tickets, you can:
+- **Set Date Range**: Define start and end dates to filter tickets by creation date
+- **Add Multiple Issues**: Enter Jira ticket URLs, with each ticket on a new line
+- **Apply JQL Filters**: Use additional JQL criteria to refine your selection (e.g., `status in ("Done", "Closed")`)
+- **Fetch Issues**: Click the "Fetch Issues" button to retrieve and add the tickets
+
+### Option 2: Create Backfill Job
+
+Choose this option to automatically import multiple tickets based on JQL (Jira Query Language) criteria. This is best for bulk imports and ongoing synchronization. You can also manually trigger the indexing process by clicking on the "Sync Now" option.
+
+<Frame>
+  <img src="/images/ingestion/jira/backfill.png" alt="Create Jira Backfill Job" />
+</Frame>
+
+When creating a backfill job, you can configure:
+- **Sync Interval**: How often to check for new issues (minimum 1 hour)
+- **JQL Query**: Enter a JQL query to fetch Jira issues that match your criteria
+  - Example: `project = MYPROJECT AND created >= -30d ORDER BY created DESC`
+  - The query will be validated before creating the job
+- **Automatic Updates**: The job will periodically sync new tickets that match your query
+
+<Note>
+Use JQL queries to create powerful filters. For example:
+- `project = "PROJ" AND status = "Done"` - Get all completed tickets from project PROJ
+- `assignee = currentUser() AND created >= -7d` - Get tickets assigned to you from the last 7 days
+- `priority = "High" AND resolution = "Fixed"` - Get high-priority fixed tickets
+</Note>
 
 ## Next Steps
 
