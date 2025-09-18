@@ -1,0 +1,137 @@
+---
+title: 'Salesforce'
+description: 'Connect Gurubase with Salesforce to use Knowledge Base articles as data sources'
+---
+
+## Introduction
+
+Integrate Gurubase with Salesforce to use your Knowledge Base articles as data sources for Gurubase. All images embedded in the article content and images attached to the articles are indexed as well.
+
+<Note>
+  For Gurubase Self-hosted version, this integration is currently in beta and available to selected users.
+  For Gurubase Cloud version, this integration is available to all users.
+</Note>
+
+## Steps to Integrate
+
+1. **Get your Salesforce credentials**
+    - Go to your Salesforce API token settings at:
+    
+    `https://{subdomain}.lightning.force.com/lightning/settings/personal/ResetApiToken/home`
+    
+    Replace `{subdomain}` with your Salesforce subdomain.
+    - Click "Reset Security Token" to generate a new security token
+    - An email from Salesforce will be sent to you. Copy the security token and note the username associated with it
+
+2. **Navigate to Integrations**
+   - Go to the Gurubase dashboard
+   - Click on "My Gurus" under the profile
+   - Click on the Guru you want to integrate with Salesforce
+   - Click on the "Integrations" tab
+   - Underneath the "Ingestion" section, click on the "Salesforce" option
+
+3. **Fill in the fields**
+    - **Username** - Your Salesforce username
+    - **Password** - Your Salesforce password
+    - **Security Token** - The security token you generated in Step 1
+
+<Frame>
+  <img src="/images/ingestion/salesforce/before.png" alt="Salesforce Integration Fields" />
+</Frame>
+
+After successful connection, you'll see the integration status:
+
+<Frame>
+  <img src="/images/ingestion/salesforce/after.png" alt="Salesforce Integration Success" />
+</Frame>
+
+## Using the Integration
+
+After integrating with Salesforce, you can add Knowledge Base articles as data sources to your Guru in two ways:
+
+<Frame>
+  <img src="/images/ingestion/salesforce/modal.png" alt="Add Salesforce Content Modal" />
+</Frame>
+
+### Option 1: Add Individual Articles
+
+Choose this option when you want to add specific Knowledge Base articles by entering their URLs. This is best for targeted content where you know exactly which articles you want to include.
+
+<Frame>
+  <img src="/images/ingestion/salesforce/individual.png" alt="Add Individual Salesforce Articles" />
+</Frame>
+
+When adding individual articles, you can:
+- **Add Multiple Articles**: Enter Salesforce Knowledge Base article URLs, with each article on a new line
+- **SOQL WHERE Clause**: Specify a WHERE clause for an SOQL query to filter articles based on your criteria
+- **Fetch Articles**: Click the "Fetch Articles" button to retrieve and add the articles
+
+### Option 2: Create Backfill Job
+
+Choose this option to automatically import multiple Knowledge Base articles based on your criteria. This is best for bulk imports and ongoing synchronization. You can also manually trigger the indexing process by clicking on the "Sync Now" option.
+
+<Frame>
+  <img src="/images/ingestion/salesforce/backfill.png" alt="Create Salesforce Backfill Job" />
+</Frame>
+
+When creating a backfill job, you can configure:
+- **Sync Interval**: How often to check for new content (minimum 1 hour)
+- **SOQL WHERE Clause**: Specify a WHERE clause for an SOQL query to filter articles based on your criteria
+- **Automatic Updates**: The job will periodically sync new articles that match your SOQL query
+
+<Note>
+Use SOQL WHERE clauses to create powerful filters for Salesforce Knowledge Base articles. For example:
+- `PublishStatus = 'Online'` - Get only published articles
+- `Language = 'en_US'` - Get articles in English
+- `LastModifiedDate >= 2024-01-01T00:00:00Z` - Get articles modified since January 1, 2024
+- `Title LIKE '%API%'` - Get articles with "API" in the title
+- `PublishStatus = 'Online' AND Language = 'en_US'` - Get published English articles
+</Note>
+
+## Knowledge Base Requirements
+
+<Note type="warning">
+Gurubase queries the Salesforce Knowledge Base using the `Knowledge__kav` table with the following fields:
+
+- **Id** - Unique identifier for the article
+- **Title** - Article title
+- **Summary** - Article summary
+- **LastModifiedDate** - Last modification date
+- **UrlName** - URL-friendly name
+- **PublishStatus** - Publication status
+- **Language** - Article language
+- **ArticleBody__c** - Main article content
+
+If your Knowledge Base articles do not match these field requirements, please contact us at **contact@gurubase.io** for assistance with custom field mapping.
+</Note>
+
+## Content Indexing
+
+The Salesforce integration indexes:
+
+- **Article Content**: Full text content from the `ArticleBody__c` field
+- **Embedded Images**: Images embedded within the article content
+- **Attached Images and Text Files**: Images/text files attached to the Knowledge Base articles
+
+<Note>
+The indexed articles are also shown in the Guru edit page as individual sources. This way, you can view the content that is actually indexed.
+</Note>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="API Reference"
+    icon="code"
+    href="/api-reference/introduction"
+  >
+    Explore our API documentation
+  </Card>
+  <Card
+    title="Add Discord Bot to Your Server"
+    icon="discord"
+    href="/integrations/bots/discord"
+  >
+    Learn how to add a Discord bot to your server
+  </Card>
+</CardGroup>
