@@ -78,7 +78,8 @@
             "integrations/ingestion/zendesk",
             "integrations/ingestion/jira",
             "integrations/ingestion/confluence",
-            "integrations/ingestion/slack"
+            "integrations/ingestion/slack",
+            "integrations/ingestion/salesforce"
           ]
         }
       ]
