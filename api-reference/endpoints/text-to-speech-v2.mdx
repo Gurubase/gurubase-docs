@@ -96,3 +96,100 @@ The endpoint returns a streaming audio response with the following headers:
 - `Content-Type: audio/mpeg`
 - `Cache-Control: no-cache`
 - `X-Accel-Buffering: no` (disables nginx buffering for real-time streaming)
+
+## Code Examples
+
+### Completing the Chunks and Playing the Audio
+
+This example demonstrates how to send a request and start playing once all of the chunks are complete.
+
+```javascript
+// Configuration variables
+let API_KEY = "your-api-key-here";
+let BASE_URL = "https://api.gurubase.com/api/v1";
+let GURU_SLUG = "your-guru-slug";
+
+// TTS stream function
+async function streamTTS(text) {
+  console.log("Converting text to speech: " + text.substring(0, 50) + "...");
+
+  try {
+    const response = await fetch(
+      `${BASE_URL}/${GURU_SLUG}/text-to-speech-v2/stream/`,
+      {
+        method: "POST",
+        headers: {
+          "X-API-KEY": API_KEY,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          text: text
+        })
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    // Read stream chunks
+    const reader = response.body.getReader();
+    const chunks = [];
+    let chunkCount = 0;
+    let totalBytes = 0;
+
+    console.log("Starting TTS stream...");
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      chunkCount++;
+      totalBytes += value.length;
+      console.log(`Chunk ${chunkCount}: ${value.length} bytes received`);
+
+      chunks.push(value);
+    }
+
+    console.log(
+      `Stream completed: ${chunkCount} chunks, ${totalBytes} total bytes`
+    );
+
+    // Combine all chunks into a single Uint8Array
+    const audioData = new Uint8Array(totalBytes);
+    let offset = 0;
+    for (const chunk of chunks) {
+      audioData.set(chunk, offset);
+      offset += chunk.length;
+    }
+
+    // Create audio blob and return URL
+    const audioBlob = new Blob([audioData], { type: "audio/mpeg" });
+    const audioUrl = URL.createObjectURL(audioBlob);
+
+    return audioUrl;
+  } catch (error) {
+    console.log("TTS stream failed: " + error.message);
+    throw error;
+  }
+}
+
+// Example usage
+async function playTTS() {
+  const text = "Hello. This is a test message.";
+  
+  try {
+    const audioUrl = await streamTTS(text);
+    const audio = new Audio(audioUrl);
+    
+    audio.onended = () => {
+      console.log("Audio playback completed");
+      URL.revokeObjectURL(audioUrl);
+    };
+    
+    await audio.play();
+  } catch (error) {
+    console.log("Failed to play TTS: " + error.message);
+  }
+}
+```
