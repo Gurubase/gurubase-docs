@@ -109,6 +109,7 @@
         "api-reference/endpoints/semantic-search",
         "api-reference/endpoints/transcribe-audio",
         "api-reference/endpoints/text-to-speech",
+        "api-reference/endpoints/text-to-speech-v2",
         "api-reference/endpoints/list-sessions",
         "api-reference/endpoints/get-session",
         "api-reference/endpoints/delete-session",
