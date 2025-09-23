@@ -11,7 +11,7 @@ Upon first hit, the endpoint generates them. The consecutive hits retrieve the g
 <RequestExample>
 ```bash cURL
 curl --request POST \
-  --url https://api.gurubase.io/api/v1/gurubase/follow-up/examples/ \
+  --url https://api.gurubase.io/api/v1/{guru_slug}/follow-up/examples/ \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -22,7 +22,7 @@ curl --request POST \
 ```python Python
 import requests
 
-url = "https://api.gurubase.io/api/v1/gurubase/follow-up/examples/"
+url = "https://api.gurubase.io/api/v1/{guru_slug}/follow-up/examples/"
 payload = {
     "question_slug": "what-is-gurubase-151e2d23-4316-4d85-936c-d806d431a014"
 }
