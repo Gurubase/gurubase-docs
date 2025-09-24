@@ -90,13 +90,23 @@ The endpoint returns a streaming audio response with the following headers:
 
 ## Code Examples
 
+The following examples show how to implement streaming TTS in your web application. These are complete, working examples that you can use immediately.
+
 ### Streaming the TTS
 
-This example demonstrates how to send a request and start streaming without waiting for the whole response to finish. It is a full HTML + JS example, so you can paste it into an HTML and JS file, change your constants, and immediately test it out.
+This example demonstrates how to send a request and start streaming without waiting for the whole response to finish. It is a full HTML + JS example that you can run immediately.
 
-#### HTML File:
+**Setup Instructions:**
+1. Save the HTML code below as `index.html`
+2. Save the JavaScript code as `tts.js` in the same directory
+3. Update the constants in `tts.js` with your API key and guru slug
+4. Open `index.html` in your browser to test
 
-```html
+<Note>
+Make sure both files are in the same directory so the script can load properly. The HTML file references `./tts.js` - update this path if you place the JavaScript file elsewhere.
+</Note>
+
+```html index.html
 <!doctype html>
 <html lang="en">
   <head>
@@ -138,17 +148,16 @@ Hello, this is an example for streaming TTS using Gurubase API.</textarea
 
     <audio id="tts" controls></audio>
 
-    <script src="the/path/to/below/js/file"></script>
+    <script src="./tts.js"></script>
   </body>
 </html>
 ```
 
-#### JS File:
-```javascript
-// ====== Constants ======
-const API_KEY = 'your-api-key-here';
-const BASE_URL = 'https://api.gurubase.com/api/v1';
-const GURU_SLUG = 'your-guru-slug';
+```javascript tts.js
+// ====== Constants - UPDATE THESE VALUES ======
+const API_KEY = 'your-api-key-here';  // Get from https://gurubase.io/api-keys
+const BASE_URL = 'https://api.gurubase.io/api/v1';
+const GURU_SLUG = 'your-guru-slug';   // Replace with your actual guru slug
 
 const API_URL = `${BASE_URL}/${GURU_SLUG}/text-to-speech-v2/stream/`;
 
@@ -336,3 +345,11 @@ async function toggleHandler() {
 toggleBtn.addEventListener("click", toggleHandler);
 // If you ever need a full reset programmatically, call resetAudio();
 ```
+
+<Tip>
+**Testing Tips:**
+- Ensure your browser supports the MediaSource Extensions API (most modern browsers do)
+- If you encounter CORS issues, make sure you're testing from a proper web server, not just opening the HTML file directly
+- The audio will start playing as soon as data begins streaming from the server
+- Check the browser console for any error messages if the audio doesn't play
+</Tip>
