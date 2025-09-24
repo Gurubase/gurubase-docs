@@ -17,7 +17,7 @@ curl --request POST \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
-    "text": "Hello, this is a test message with some code: `console.log(\"hello\")` and a code block:\n```python\ndef hello():\n    print(\"hello\")\n```"
+    "text": "Hello, this is a test message using Gurubase text to speech"
   }'
 ```
 
@@ -111,42 +111,190 @@ Make sure both files are in the same directory so the script can load properly. 
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>TTS Stream (Single Button)</title>
+    <title>Gurubase TTS Demo</title>
     <style>
-      body {
-        font-family:
-          system-ui,
-          -apple-system,
-          Segoe UI,
-          Roboto,
-          sans-serif;
-        max-width: 720px;
-        margin: 40px auto;
-        padding: 0 16px;
+      * {
+        box-sizing: border-box;
       }
+      
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        color: #333;
+      }
+
+      .container {
+        background: white;
+        border-radius: 16px;
+        padding: 32px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      }
+
+      h1 {
+        text-align: center;
+        margin: 0 0 32px 0;
+        color: #2d3748;
+        font-weight: 600;
+        font-size: 28px;
+      }
+
+      .input-group {
+        margin-bottom: 24px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #4a5568;
+      }
+
       textarea {
         width: 100%;
-        height: 100px;
+        padding: 12px 16px;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        font-size: 16px;
+        font-family: inherit;
+        resize: vertical;
+        min-height: 120px;
+        transition: all 0.2s ease;
       }
-      button {
-        padding: 10px 14px;
-        min-width: 120px;
+
+      textarea:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      }
+
+      .controls {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 24px;
+      }
+
+      .btn {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      .btn-primary:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+      }
+
+      .btn-secondary {
+        background: #f7fafc;
+        color: #4a5568;
+        border: 2px solid #e2e8f0;
+      }
+
+      .btn-secondary:hover:not(:disabled) {
+        background: #edf2f7;
+        border-color: #cbd5e0;
+      }
+
+      .btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        color: #718096;
+        font-weight: 500;
+      }
+
+      .status.loading {
+        color: #667eea;
+      }
+
+      .status.error {
+        color: #e53e3e;
+      }
+
+      .spinner {
+        width: 16px;
+        height: 16px;
+        border: 2px solid #e2e8f0;
+        border-top: 2px solid #667eea;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      .audio-container {
+        background: #f7fafc;
+        border-radius: 12px;
+        padding: 16px;
+        margin-top: 16px;
+      }
+
+      audio {
+        width: 100%;
+      }
+
+      .error-message {
+        background: #fed7d7;
+        color: #c53030;
+        padding: 12px 16px;
+        border-radius: 8px;
+        margin-bottom: 16px;
+        font-size: 14px;
+        display: none;
       }
     </style>
   </head>
   <body>
-    <h2>TTS Stream (Single Button)</h2>
+    <div class="container">
+      <h1>Text to Speech Demo - Gurubase</h1>
+      
+      <div id="errorMessage" class="error-message"></div>
 
-    <label for="text">Text:</label>
-    <textarea id="text">
-Hello, this is an example for streaming TTS using Gurubase API.</textarea
-    >
+      <div class="input-group">
+        <label for="text">Enter text to convert to speech:</label>
+        <textarea id="text" placeholder="Type your text here...">Hello, this is an example for streaming TTS using Gurubase API.</textarea>
+      </div>
 
-    <div style="margin: 12px 0">
-      <button id="toggleBtn">Start</button>
+      <div class="controls">
+        <button id="generateBtn" class="btn btn-primary">
+          🎵 Generate Speech
+        </button>
+        <button id="stopBtn" class="btn btn-secondary" style="display: none;">
+          ⏹️ Stop
+        </button>
+        <div id="status" class="status"></div>
+      </div>
+
+      <div class="audio-container" id="audioContainer" style="display: none;">
+        <audio id="tts" controls></audio>
+      </div>
     </div>
-
-    <audio id="tts" controls></audio>
 
     <script src="./tts.js"></script>
   </body>
@@ -161,54 +309,84 @@ const GURU_SLUG = 'your-guru-slug';   // Replace with your actual guru slug
 
 const API_URL = `${BASE_URL}/${GURU_SLUG}/text-to-speech-v2/stream/`;
 
-// ====== DOM ======
+// ====== DOM Elements ======
 const audioEl = document.getElementById("tts");
-const toggleBtn = document.getElementById("toggleBtn");
+const generateBtn = document.getElementById("generateBtn");
+const stopBtn = document.getElementById("stopBtn");
 const textEl = document.getElementById("text");
+const statusEl = document.getElementById("status");
+const errorMessageEl = document.getElementById("errorMessage");
+const audioContainer = document.getElementById("audioContainer");
 
 // ====== State ======
 let abortCtrl = null;
 let mediaSource = null;
 let sourceBuffer = null;
-let reader = null; // ReadableStreamDefaultReader
+let reader = null;
 let queue = [];
-let streaming = false; // network stream active
-let ended = false; // server finished
-let startedOnce = false; // did we start a stream in this session?
+let isGenerating = false;
 
-// ====== Helpers ======
-function setButton(label) {
-  toggleBtn.textContent = label;
+// ====== UI Helper Functions ======
+function showError(message) {
+  errorMessageEl.textContent = message;
+  errorMessageEl.style.display = 'block';
+  setStatus('error', 'Error occurred');
+}
+
+function hideError() {
+  errorMessageEl.style.display = 'none';
+}
+
+function setStatus(type = '', message = '') {
+  statusEl.className = `status ${type}`;
+  if (type === 'loading') {
+    statusEl.innerHTML = `<div class="spinner"></div> ${message}`;
+  } else {
+    statusEl.textContent = message;
+  }
+}
+
+function updateButtons(generating) {
+  isGenerating = generating;
+  generateBtn.disabled = generating;
+  generateBtn.innerHTML = generating ? '⏳ Generating...' : '🎵 Generate Speech';
+  stopBtn.style.display = generating ? 'inline-flex' : 'none';
 }
 
 function resetAudio() {
   try {
     audioEl.pause();
   } catch {}
+  
   if (abortCtrl) {
     try {
       abortCtrl.abort();
     } catch {}
   }
+  
   if (mediaSource && mediaSource.readyState === "open") {
     try {
       mediaSource.endOfStream();
     } catch {}
   }
+  
   audioEl.removeAttribute("src");
   audioEl.load();
 
+  // Reset state
   abortCtrl = null;
   mediaSource = null;
   sourceBuffer = null;
   reader = null;
   queue = [];
-  streaming = false;
-  ended = false;
-  startedOnce = false;
-  setButton("Start");
+  
+  // Update UI
+  updateButtons(false);
+  setStatus('', '');
+  audioContainer.style.display = 'none';
 }
 
+// ====== Media Source & Streaming Functions ======
 function ensureMediaSource() {
   return new Promise((resolve, reject) => {
     mediaSource = new MediaSource();
@@ -234,39 +412,55 @@ function onUpdateEnd() {
   if (queue.length && !sourceBuffer.updating) {
     sourceBuffer.appendBuffer(queue.shift());
   } else if (
-    ended &&
+    !isGenerating &&
     !sourceBuffer.updating &&
     mediaSource?.readyState === "open"
   ) {
     try {
       mediaSource.endOfStream();
+      setStatus('', 'Ready to play');
     } catch {}
   }
 }
 
 async function startNetworkStream(text) {
-  streaming = true;
-  ended = false;
   abortCtrl = new AbortController();
+  
+  try {
+    const resp = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-Key": API_KEY
+      },
+      body: JSON.stringify({ text: text || " " }),
+      signal: abortCtrl.signal
+    });
 
-  const resp = await fetch(API_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-API-Key": API_KEY
-    },
-    body: JSON.stringify({ text: text || " " }),
-    signal: abortCtrl.signal
-  });
+    if (!resp.ok) {
+      const errorText = await resp.text().catch(() => 'Unknown error');
+      throw new Error(`API Error (${resp.status}): ${errorText}`);
+    }
 
-  if (!resp.ok || !resp.body) {
-    streaming = false;
-    throw new Error("TTS API error: " + resp.status);
+    if (!resp.body) {
+      throw new Error('No response body received from API');
+    }
+
+    reader = resp.body.getReader();
+    setStatus('loading', 'Streaming audio...');
+    
+    // Start pumping data (keep UI responsive)
+    pump().catch((err) => {
+      if (err.name !== "AbortError") {
+        showError(`Streaming error: ${err.message}`);
+      }
+    });
+    
+  } catch (error) {
+    if (error.name !== "AbortError") {
+      throw error;
+    }
   }
-
-  reader = resp.body.getReader();
-  // run without awaiting (keep UI responsive)
-  pump().catch((err) => console.warn("pump error:", err));
 }
 
 async function pump() {
@@ -275,6 +469,7 @@ async function pump() {
       const { done, value } = await reader.read();
 
       if (done) break;
+      
       if (value && value.byteLength) {
         if (!sourceBuffer || sourceBuffer.updating || queue.length) {
           queue.push(value.buffer);
@@ -288,10 +483,11 @@ async function pump() {
       }
     }
   } catch (e) {
-    if (e.name !== "AbortError") console.warn("Stream reader error:", e);
+    if (e.name !== "AbortError") {
+      throw e;
+    }
   } finally {
-    streaming = false;
-    ended = true;
+    updateButtons(false);
     if (
       sourceBuffer &&
       !sourceBuffer.updating &&
@@ -299,51 +495,69 @@ async function pump() {
     ) {
       try {
         mediaSource.endOfStream();
+        setStatus('', 'Audio ready');
       } catch {}
     }
   }
 }
 
-async function startStreamSession() {
-  // clean any previous session
-  resetAudio();
-
-  // create MSE & SourceBuffer
-  await ensureMediaSource();
-
-  // start network stream and playback
-  await startNetworkStream(textEl.value);
-  startedOnce = true;
-
-  // user-gesture started, so play should succeed
-  await audioEl.play().catch(() => {});
-}
-
-async function toggleHandler() {
-  // If no stream yet or previous one ended → start a new session
-  if (!startedOnce || ended) {
-    try {
-      await startStreamSession();
-    } catch (e) {
-      console.error(e);
-    }
-
+// ====== Main Functions ======
+async function generateSpeech() {
+  if (isGenerating) return;
+  
+  const text = textEl.value.trim();
+  if (!text) {
+    showError('Please enter some text to convert to speech');
     return;
   }
 
-  // If stream already started: toggle play/pause
-  if (audioEl.paused) {
-    await audioEl.play().catch(() => {});
-    setButton("Pause");
-  } else {
-    audioEl.pause();
-    setButton("Play");
+  hideError();
+  updateButtons(true);
+  setStatus('loading', 'Preparing audio...');
+
+  try {
+    // Reset any previous audio
+    resetAudio();
+    updateButtons(true); // Reset might have changed button state
+    
+    // Create MediaSource & SourceBuffer
+    await ensureMediaSource();
+    
+    // Start network stream
+    await startNetworkStream(text);
+    
+    // Show audio player and start playback
+    audioContainer.style.display = 'block';
+    await audioEl.play().catch(() => {
+      setStatus('', 'Click play to listen');
+    });
+    
+  } catch (error) {
+    console.error('Generation error:', error);
+    showError(error.message);
+    updateButtons(false);
   }
 }
 
-// ====== Wire up ======
-toggleBtn.addEventListener("click", toggleHandler);
-// If you ever need a full reset programmatically, call resetAudio();
+function stopGeneration() {
+  if (!isGenerating) return;
+  
+  try {
+    if (abortCtrl) {
+      abortCtrl.abort();
+    }
+  } catch {}
+  
+  updateButtons(false);
+  setStatus('', 'Stopped');
+}
+
+// ====== Event Listeners ======
+generateBtn.addEventListener("click", generateSpeech);
+stopBtn.addEventListener("click", stopGeneration);
+
+// Auto-focus text area on load
+textEl.focus();
 ```
 
 <Tip>
