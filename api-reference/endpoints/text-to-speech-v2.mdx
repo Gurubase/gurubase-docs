@@ -1,13 +1,13 @@
 ---
 title: 'Text-to-Speech Stream V2'
 api: 'POST /{guru_type}/text-to-speech-v2/stream/'
-description: 'Convert text to speech using ElevenLabs TTS with OpenAI fallback and stream audio response'
+description: 'Convert text to speech using Gurubase TTS stream audio response'
 ---
 
-Convert text to speech using ElevenLabs TTS API with OpenAI fallback and stream the audio response. Code blocks and inline code are automatically processed for better speech generation.
+Convert text to speech using advanced TTS providers and stream the audio response. Code blocks and inline code are automatically processed for better speech generation.
 
 <Note>
-This feature requires special activation. Please contact our support team to enable ElevenLabs TTS for your account.
+This feature requires special activation. Please contact our support team to enable TTS for your account.
 </Note>
 
 <RequestExample>
@@ -81,15 +81,6 @@ The response is a streaming audio file in MP3 format.
 ```
 </ResponseExample>
 
-## TTS Provider Fallback
-
-This endpoint uses a sophisticated fallback system:
-
-1. **Primary**: ElevenLabs TTS API (if configured and available)
-2. **Fallback**: OpenAI TTS API (if ElevenLabs fails or is not configured)
-
-The system automatically handles provider failures and seamlessly switches between providers to ensure reliable audio generation.
-
 ## Streaming Response
 
 The endpoint returns a streaming audio response with the following headers:
@@ -138,7 +129,7 @@ This example demonstrates how to send a request and start streaming without wait
 
     <label for="text">Text:</label>
     <textarea id="text">
-Hello, this is an example for streaming ElevenLabs TTS using Gurubase API.</textarea
+Hello, this is an example for streaming TTS using Gurubase API.</textarea
     >
 
     <div style="margin: 12px 0">
