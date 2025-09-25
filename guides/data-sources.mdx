@@ -1,0 +1,192 @@
+---
+title: 'Data Sources'
+description: 'Learn about all the different types of data sources you can use with Gurubase'
+---
+
+## Overview
+
+Gurubase supports a wide variety of data sources to help you build comprehensive knowledge bases. You can index content from websites, documents, platforms, and even custom text to create powerful AI assistants that understand your specific domain.
+
+## Supported Data Source Types
+
+### PDF Documents
+
+Upload PDF files directly to Gurubase to index their content. This is perfect for documentation, research papers, manuals, and any text-based PDF content.
+
+**Features:**
+- **Text extraction** from PDF content
+- **Image indexing** - Gurubase can also index images within PDF files
+- **Multiple file support** - Upload multiple PDFs at once
+
+**How to add:**
+- Go to your Guru's settings
+- Click "Add" under Sources
+- Select "PDF" and upload your files
+- Gurubase will automatically extract and index the text content and images
+
+### Website Indexing
+
+Index entire websites or specific web pages by providing URLs. Gurubase will crawl and extract content from web pages, including text, headings, and structured content.
+
+**Features:**
+- **Sitemap import** - Import URLs from a website's sitemap using the "Import from Sitemap" button
+- **Website crawling** - Automatically discover and crawl all internal URLs belonging to a given domain using the "Crawl Website" button
+- **Image indexing** - Index images from websites (requires plan feature)
+- **Content extraction** - Extract text, headings, and structured content from web pages
+
+**How to add:**
+- Use the website URL option in your Guru's sources
+- **Option 1**: Import from sitemap - provide the sitemap URL
+- **Option 2**: Crawl website - provide the base URL to discover all internal pages
+- **Option 3**: Manual URLs - provide specific page URLs
+- Gurubase will crawl and index the content automatically
+
+### YouTube Content
+
+Import YouTube channels or playlists to index video transcripts and metadata. This is ideal for educational content, tutorials, and video-based knowledge.
+
+**Features:**
+- **Channel import** - Import all videos from a YouTube channel using the "Import Channel" button
+- **Playlist import** - Import all videos from a specific playlist using the "Import Playlist" button
+- **Transcript extraction** - Automatically extract video transcripts and metadata
+- **Video metadata** - Index titles, descriptions, and other video information
+
+**How to add:**
+- Use the YouTube integration in your Guru's sources
+- **Option 1**: Import channel - provide YouTube channel URL
+- **Option 2**: Import playlist - provide YouTube playlist URL
+- **Option 3**: Manual URLs - provide specific video URLs
+- Gurubase will extract transcripts and video information automatically
+
+### GitHub Repositories
+
+Index GitHub repositories to make your code documentation, README files, and project information searchable. Perfect for technical documentation and developer resources.
+
+**Features:**
+- **Flexible file filtering** - Use glob patterns to control which files are indexed
+- **Include/exclude patterns** - Specify exactly which files to include or exclude
+- **Code documentation** - Index README files, documentation, and other text-based content
+
+**How to add:**
+- Provide GitHub repository URL
+- Configure glob patterns to control file indexing:
+  - **Include pattern**: `**/*.py` (index all Python files)
+  - **Exclude pattern**: `test_*.py` (skip test files)
+- Gurubase will index files matching your specified pattern
+
+**Glob Pattern Examples:**
+- `**/*.py` - All Python files (recursive)
+- `*.py` - Only top-level Python files  
+- `**/*.{js,ts}` - All JavaScript and TypeScript files
+- `test_*.py` - Exclude test files
+- `packages/**` - Everything inside the packages folder
+
+<Note>
+For detailed glob pattern syntax and examples, test your patterns with tools like [globster.xyz](https://globster.xyz/) or Python's `glob.glob()` locally.
+</Note>
+
+### Excel Files
+
+Upload Excel files (.xls, .xlsx) to index spreadsheet data. Gurubase can extract text content alongside header relationships from cells, making your data searchable and queryable.
+
+**Features:**
+- **Text extraction** from spreadsheet cells
+- **Multiple file support** - Upload multiple Excel files at once
+- **Structured data** - Maintains table structure and relationships
+
+**How to add:**
+- Upload Excel files directly through the file upload option
+- Gurubase will extract and index the text content from your spreadsheets
+
+<Card title="Excel Extraction Best Practices" href="/guides/excel-extraction">
+  Learn how to prepare Excel files for optimal extraction and analysis
+</Card>
+
+### Custom Text
+
+Add custom text content directly to your Guru. This is useful for specific instructions, context, or any text-based information that doesn't fit other categories.
+
+**How to add:**
+- Use the text input option in your Guru's sources
+- Paste or type your custom content
+- This content will be indexed alongside your other sources
+
+## Platform Integrations
+
+For more advanced integrations with specific platforms, Gurubase offers dedicated connectors that provide deeper integration and automated syncing capabilities.
+
+### Confluence
+
+Connect with Atlassian Confluence to index your team's documentation and knowledge base articles. Supports both individual page imports and automated backfill jobs using CQL queries.
+
+<Card title="Learn More" href="/integrations/ingestion/confluence">
+  Set up Confluence integration with automated syncing
+</Card>
+
+### Jira
+
+Integrate with Jira to index your project issues, tickets, and related documentation. Perfect for technical support and project management knowledge.
+
+<Card title="Learn More" href="/integrations/ingestion/jira">
+  Connect Jira and index your project issues
+</Card>
+
+### Salesforce Knowledge Base
+
+Connect with Salesforce to index your Knowledge Base articles and customer support documentation. Supports SOQL queries for advanced filtering.
+
+<Card title="Learn More" href="/integrations/ingestion/salesforce">
+  Set up Salesforce Knowledge Base integration
+</Card>
+
+### Slack Threads
+
+Index your Slack conversations and threads to capture team knowledge and discussions. Configure trusted users and filtering options for targeted content.
+
+<Card title="Learn More" href="/integrations/ingestion/slack">
+  Index Slack conversations and team knowledge
+</Card>
+
+### Zendesk
+
+Connect with Zendesk to index your support tickets and help center articles. Supports both individual imports and automated backfill jobs.
+
+<Card title="Learn More" href="/integrations/ingestion/zendesk">
+  Integrate Zendesk tickets and articles
+</Card>
+
+## Best Practices
+
+### Content Organization
+- **Mix different source types** to create comprehensive knowledge bases
+- **Use platform integrations** for ongoing content that changes frequently
+- **Upload static documents** for reference materials and documentation
+
+### Data Quality
+- **Review indexed content** regularly to ensure accuracy
+- **Use filtering options** in platform integrations to focus on relevant content
+- **Test your Guru** with sample questions to verify content quality
+
+### Maintenance
+- **Set up automated syncing** for dynamic content sources
+- **Monitor integration status** to ensure continuous data flow
+- **Update sources** as your knowledge base evolves
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="Create Your First Guru"
+    icon="robot"
+    href="/guides/create-guru"
+  >
+    Learn how to create and configure your first Guru
+  </Card>
+  <Card
+    title="API Reference"
+    icon="code"
+    href="/api-reference/introduction"
+  >
+    Explore our API documentation for advanced integrations
+  </Card>
+</CardGroup>
