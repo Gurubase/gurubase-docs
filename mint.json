@@ -56,7 +56,9 @@
         "guides/analyze-usage",
         "guides/prompting-your-guru",
         "guides/pii-masking",
-        "guides/excel-extraction"
+        "guides/data-sources",
+        "guides/excel-extraction",
+        "guides/audit-logs"
       ]
     },
     {

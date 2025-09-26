@@ -1,0 +1,197 @@
+---
+title: 'Audit Logs'
+description: 'Track and monitor all actions performed on Gurubase with detailed audit logging'
+---
+
+## Overview
+
+Gurubase provides comprehensive audit logging to track all actions performed within the platform. This feature helps you monitor user activities, troubleshoot issues, and maintain security compliance by recording detailed information about every operation.
+
+## What Audit Logs Store
+
+Audit logs capture comprehensive information about all platform activities, including:
+
+- **User Actions**: All actions performed by users (identified by email)
+- **System Actions**: Automated operations triggered in the background
+- **Timestamps**: Exact date and time of each action
+- **IP Addresses**: Source location of actions
+- **Action Types**: The specific operation performed
+- **Objects Affected**: What resources were modified
+- **Field Changes**: Before and after values for updates
+
+## Accessing Audit Logs
+
+Audit logs can be accessed by all maintainers through the Gurubase dashboard:
+
+1. Navigate to the **Audit Logs** section in the sidebar
+2. View the comprehensive activity log table
+3. Use filtering options to narrow down results
+4. Click on "Details" for individual entries to view detailed information
+
+<Frame>
+  <img src="/images/audit-logs/audit-logs.png" alt="Audit Logs Interface" />
+</Frame>
+
+## Filtering Options
+
+### Filter by User
+- Filter logs by specific users using their email addresses
+- View actions performed by individual team members
+- Track user-specific activity patterns
+
+### Filter by Action Type
+- Filter by the four main action types:
+  - **Access** - Viewing or accessing resources
+  - **Created** - Creating new resources
+  - **Deleted** - Removing resources
+  - **Updated** - Modifying existing resources
+
+## Recorded Operation Types
+
+Gurubase tracks a comprehensive range of operations across the platform:
+
+### Guru Management
+- **UPDATE_GURU** - Modifications to Guru settings and configuration
+
+### Analytics and Reporting
+- **EXPORT_ANALYTICS** - Exporting analytics data and reports
+
+### Data Source Operations
+- **ADD_DATASOURCE** - Adding new data sources to Gurus
+- **DELETE_DATASOURCE** - Removing data sources
+- **REINDEX_DATASOURCE** - Reindexing existing data sources
+
+### Integration Management
+- **CREATE_INTEGRATION** - Setting up new platform integrations
+- **DELETE_INTEGRATION** - Removing integrations
+- **EDIT_INTEGRATION** - Modifying integration settings (channels, etc.)
+
+### Backfill Job Operations
+- **CREATE_BACKFILL_JOB** - Creating automated data sync jobs
+- **DELETE_BACKFILL_JOB** - Removing backfill jobs
+- **UPDATE_BACKFILL_JOB** - Modifying backfill job settings
+- **REINDEX_BACKFILL_JOB** - Triggering backfill job reindexing
+
+### Widget Management
+- **CREATE_WIDGET_ID** - Creating website widgets
+- **DELETE_WIDGET_ID** - Removing widgets
+
+### Team Management
+- **ADD_MAINTAINER** - Adding new maintainers to the account
+- **REMOVE_MAINTAINER** - Removing maintainer access
+
+## Action Types
+
+All operations are categorized into four main action types, each with distinct visual indicators:
+
+### Access (Grey Badge)
+- Viewing resources or data
+- Accessing analytics
+- Opening configuration pages
+
+### Created (Green Badge)
+- Creating new resources
+- Adding data sources
+- Setting up integrations
+
+### Updated (Blue Badge)
+- Modifying existing settings
+- Updating configurations
+- Changing resource properties
+
+### Deleted (Red Badge)
+- Removing resources
+- Deleting data sources
+- Cleaning up integrations
+
+## Detailed Log Information
+
+### Basic Information
+Each audit log entry includes:
+- **Timestamp**: Exact date and time of the action
+- **User**: Email address of the user who performed the action
+- **IP Address**: Source IP address for the operation
+- **Action**: The type of operation performed
+- **Object**: The specific resource that was affected
+
+### Field Change Tracking
+For update operations, audit logs show detailed before/after comparisons:
+
+<Frame>
+  <img src="/images/audit-logs/before-after.png" alt="Before/After Field Comparison" />
+</Frame>
+
+This includes:
+- **Previous Value**: The state before the change
+- **New Value**: The state after the change
+- **Field Names**: Specific fields that were modified
+
+### Operation Details
+Additional context is provided for complex operations:
+
+<Frame>
+  <img src="/images/audit-logs/info.png" alt="Operation Details" />
+</Frame>
+
+This includes:
+- **Filters Applied**: Parameters used in operations
+- **Success Status**: Whether the operation completed successfully
+- **Additional Context**: Extra information relevant to the operation
+
+## System vs User Actions
+
+### User Actions
+- Performed by specific users (identified by email)
+- Include IP address information
+- Show user-initiated operations
+
+### System Actions
+- Automated operations triggered in the background
+- Marked as "System" in the user field
+- No IP address recorded (shown as "-")
+- Include automated sync jobs, scheduled tasks, and background processes
+
+## Maintainer Access
+
+All maintainers have full access to audit logs, allowing them to:
+- Monitor team activities
+- Troubleshoot issues
+- Ensure compliance
+- Track system health
+- Review security events
+
+## Best Practices
+
+### Regular Monitoring
+- Review audit logs regularly to identify patterns
+- Monitor for unusual activity or unauthorized access
+- Track integration health and sync status
+
+### Filtering and Search
+- Use user filters to focus on specific team members
+- Filter by action type to narrow down results
+- Look for failed operations or errors
+
+### Security Compliance
+- Audit logs help meet compliance requirements
+- Track data access and modifications
+- Monitor maintainer access changes
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="Analytics Guide"
+    icon="bar-chart"
+    href="/guides/analyze-usage"
+  >
+    Learn how to analyze your Guru's usage patterns
+  </Card>
+  <Card
+    title="Create Your First Guru"
+    icon="users"
+    href="/guides/create-guru"
+  >
+    Understand how to manage maintainers and permissions
+  </Card>
+</CardGroup>
