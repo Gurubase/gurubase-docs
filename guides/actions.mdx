@@ -1,0 +1,213 @@
+---
+title: 'Actions'
+description: "Extend your Guru's capabilities with external API calls and tool integrations"
+---
+
+## Overview
+
+Actions extend your Guru's capabilities by connecting it to external APIs and services. When users ask questions that require real-time data, your Guru can automatically trigger these actions to fetch information and provide up-to-date responses.
+
+### What Actions Enable
+
+Actions transform your Guru into a dynamic assistant that can:
+- **Fetch real-time data** from external APIs
+- **Retrieve current information** like weather, stock prices, or user details
+- **Integrate with third-party tools** and platforms
+
+### Action Limits
+
+Each Guru has a limit on the number of actions (e.g., "1 of 10 actions used").
+
+## How Actions Work
+
+Actions use an intelligent trigger system:
+
+1. **Condition Prompt Evaluation**: The Guru checks if the user's question matches your defined conditions (based on **Condition Prompt**)
+2. **Parameter Extraction**: Parameters are extracted from the user's question based on your descriptions
+3. **Execution Decision**: The action runs only if all required parameters can be extracted (or have default values)
+4. **API Call and Response**: The configured API call is made, and the **Usage Prompt** instructs the AI how to use the response
+
+## Creating an Action
+
+<Frame>
+  <img src="/images/guides/actions/empty.png" alt="Empty Actions" />
+</Frame>
+
+The action creation process consists of two main steps: General Configuration and API Configuration.
+
+### Step 1: General Configuration
+
+<Frame>
+  <img src="/images/guides/actions/stage1-1.png" alt="Action General Configuration" />
+</Frame>
+
+#### Action Name
+Provide a descriptive name that appears in your actions list.
+
+#### Description
+Explain what this action does and when it should be used.
+
+#### Condition Prompt
+Describe when this action should be triggered. Be specific to ensure it only runs when appropriate.
+
+**Example**: "When a question about a Github user is asked."
+
+<Frame>
+  <img src="/images/guides/actions/stage1-2.png" alt="Action Parameters Configuration" />
+</Frame>
+
+#### Parameters Configuration
+
+Each parameter includes:
+
+- **Parameter Name**: Use only letters and underscores (e.g., `username`, `user_id`)
+- **Type**: Choose from String (text), Number (numeric), or Boolean (true/false)
+- **Description**: Clear description for parameter extraction from user questions
+- **Required**: Check if essential for the action to work
+- **Default Value**: Optional fallback when parameter can't be extracted
+
+### Step 2: API Configuration
+
+<Frame>
+  <img src="/images/guides/actions/stage2-1.png" alt="API Configuration Setup" />
+</Frame>
+
+#### HTTP Method
+Select from `GET`, `POST`, `PUT`, `PATCH`, `DELETE`.
+
+#### Endpoint URL
+Enter the API endpoint. It supports parameters like `{param_name}`
+
+**Example**: `https://api.github.com/users/{username}`
+
+#### Headers
+Configure authentication or content type headers. It supports parameters like `{param_name}`
+
+**Example**: `Authorization: Bearer {token}`
+
+#### Request Body (JSON)
+For `POST`, `PUT`, and `PATCH` methods, include JSON payload. It supports parameters like `{param_name}`
+
+```json
+{
+  "query": "{search_term}",
+  "user_id": "{user_id}"
+}
+```
+
+<Frame>
+  <img src="/images/guides/actions/stage2-2.png" alt="Usage Prompt Configuration" />
+</Frame>
+
+#### Usage Prompt
+Provide instructions for how the AI should interpret and use the API response data.
+
+**Example**: "Analyze the JSON of the given user and provide a summary of their GitHub profile information."
+
+#### Testing Your Action
+
+<Frame>
+  <img src="/images/guides/actions/stage2-3.png" alt="Action Testing Results" />
+</Frame>
+
+Use the "Test Action" button to verify your configuration. If required parameters exist, you'll be prompted to provide test values.
+
+Test results show success status, response data, and HTTP status code.
+
+## Managing Actions
+
+<Frame>
+  <img src="/images/guides/actions/created.png" alt="Actions Management Dashboard" />
+</Frame>
+
+Once created, you can manage all your actions from the Actions dashboard:
+
+### Actions List
+View all configured actions with their name, description, type ("API Call"), and status (Enabled/Disabled).
+
+<Note>
+For now, only the "API Call" type is implemented. We are planning to add new types of actions in the future.
+</Note>
+
+### Action Management Options
+
+<Frame style={{ width: 400, height: 300 }}>
+  <img src="/images/guides/actions/options.png" alt="Action Management Options" />
+</Frame>
+
+Click the menu icon (⋮) next to any action to:
+- **Edit**: Modify the action's configuration
+- **Disable**: Temporarily disable without deleting
+- **Delete**: Permanently remove the action
+
+### Enabling and Disabling Actions
+Enable or disable actions at any time. Disabled actions won't be triggered by user questions.
+
+## Usage in the Answer
+
+Actions used in the answer are shown as below with the action name:
+
+<Frame >
+  <img src="/images/guides/actions/reference.png" alt="Action Reference" />
+</Frame>
+
+## Common Mistakes to Avoid
+
+### 1. Vague Condition Prompts
+❌ **Poor**: "When asking about data"
+
+✅ **Good**: "When asking about current weather conditions for a specific location"
+
+### 2. Inadequate Parameter Descriptions
+❌ **Poor**: Parameter name: `id`, Description: "The ID"
+
+✅ **Good**: Parameter name: `user_id`, Description: "The unique identifier for the GitHub user whose profile information is being requested"
+
+### 3. Incomplete Usage Prompts
+❌ **Poor**: "Use the response data"
+
+✅ **Good**: "Extract the user's name, bio, and public repository count from the JSON response and present this information in a clear, formatted summary"
+
+### 4. Not Testing Actions
+❌ **Poor**: Enabling actions without testing them first
+
+✅ **Good**: Always test actions with various parameter combinations before enabling
+
+### 5. Overly Complex Actions
+❌ **Poor**: Creating actions that try to do too many things at once
+
+✅ **Good**: Keep actions focused on a single, specific task
+
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="API Reference"
+    icon="code"
+    href="/api-reference/introduction"
+  >
+    Explore our API documentation for advanced integrations
+  </Card>
+  <Card
+    title="Create Your First Guru"
+    icon="robot"
+    href="/guides/create-guru"
+  >
+    Learn how to create and configure your first Guru
+  </Card>
+  <Card
+    title="Data Sources Guide"
+    icon="database"
+    href="/guides/data-sources"
+  >
+    Understand how to add and manage knowledge sources
+  </Card>
+  <Card
+    title="Prompting Your Guru"
+    icon="message"
+    href="/guides/prompting-your-guru"
+  >
+    Learn how to customize your Guru's responses and behavior
+  </Card>
+</CardGroup>
