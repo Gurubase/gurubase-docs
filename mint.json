@@ -58,7 +58,9 @@
         "guides/pii-masking",
         "guides/data-sources",
         "guides/excel-extraction",
-        "guides/audit-logs"
+        "guides/audit-logs",
+        "guides/actions"
+
       ]
     },
     {
