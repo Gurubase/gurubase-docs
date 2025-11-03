@@ -60,15 +60,31 @@ Import YouTube channels or playlists to index video transcripts and metadata. Th
 
 ### GitHub Repositories
 
-Index GitHub repositories to make your code documentation, README files, and project information searchable. Perfect for technical documentation and developer resources.
+Index GitHub repositories to make your code documentation, README files, and project information searchable. Perfect for technical documentation and developer resources. Gurubase supports both public and private repositories.
 
 **Features:**
 - **Flexible file filtering** - Use glob patterns to control which files are indexed
 - **Include/exclude patterns** - Specify exactly which files to include or exclude
 - **Code documentation** - Index README files, documentation, and other text-based content
+- **Private repository support** - Index private repositories with a GitHub token
 
 **How to add:**
 - Provide GitHub repository URL
+- **GitHub Token (optional)** - For private repositories, provide a GitHub personal access token:
+  - **Classic tokens**: Require the `repo` scope for full control of private repositories
+  - **Fine-grained tokens**: Require "Contents" read-only permission and "Metadata" read-only permission
+  - **Public repositories**: No token required
+
+**Classic Token Setup:**
+<Frame>
+  <img src="/images/guides/data-sources/classic.png" alt="GitHub classic token scopes configuration" />
+</Frame>
+
+**Fine-grained Token Setup:**
+<Frame>
+  <img src="/images/guides/data-sources/fine-grained.png" alt="GitHub fine-grained token permissions configuration" />
+</Frame>
+
 - Configure glob patterns to control file indexing:
   - **Include pattern**: `**/*.py` (index all Python files)
   - **Exclude pattern**: `test_*.py` (skip test files)
