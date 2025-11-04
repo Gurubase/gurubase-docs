@@ -1,0 +1,205 @@
+---
+title: 'Multi-Answer Jobs'
+description: 'Upload Excel files to generate AI answers for multiple questions'
+---
+
+## Overview
+
+Multi-Answer Jobs allow you to upload an Excel file containing multiple questions and automatically generate AI answers for them. Perfect for bulk question processing, testing answer quality, and managing large-scale Q&A generation.
+
+### What Multi-Answer Jobs Enable
+
+Multi-Answer Jobs enable you to:
+- **Process multiple questions at once** from Excel spreadsheets
+- **Generate answers in multiple columns** with different instructions per column
+- **Track job progress** in real-time as answers are generated
+- **Export results** for further use or analysis
+
+## Getting Started
+
+<Frame>
+  <img src="/images/guides/multi-answer/empty.png" alt="Empty Multi-Answer Jobs State" />
+</Frame>
+
+When you first access Multi-Answer Jobs, you'll see an empty state. Click "Create a Job" to begin.
+
+## Creating a Multi-Answer Job
+
+The job creation process consists of five configuration steps, followed by validation and job creation.
+
+### Step 1: Upload Excel File
+
+<Frame>
+  <img src="/images/guides/multi-answer/create-0.png" alt="Upload Excel File" />
+</Frame>
+
+Upload your Excel file (`.xlsx` format). Click "Select File" to choose your document containing the questions you want to process.
+
+### Step 2: Select Sheet
+
+<Frame>
+  <img src="/images/guides/multi-answer/create-1.png" alt="Select Sheet" />
+</Frame>
+
+If your Excel file contains multiple sheets, select which sheet contains the questions you want to process.
+
+### Step 3: Select Header Row
+
+<Frame>
+  <img src="/images/guides/multi-answer/create-1.png" alt="Select Header Row" />
+</Frame>
+
+Click on the row that contains your column headers. Typically row 1, but you can select any row with column labels.
+
+### Step 4: Select Question Column
+
+<Frame>
+  <img src="/images/guides/multi-answer/create-2.png" alt="Select Question Column" />
+</Frame>
+
+Click on the column header (e.g., column A) to designate it as the question column. All rows below the header row will be processed as questions.
+
+### Step 5: Select Answer Columns
+
+<Frame>
+  <img src="/images/guides/multi-answer/create-3.png" alt="Select Answer Columns" />
+</Frame>
+
+Select one or more columns where generated answers should be placed. You can select multiple columns to generate different answer variations for each question.
+
+<Frame>
+  <img src="/images/guides/multi-answer/create-4.png" alt="Ignore Rows Configuration" />
+</Frame>
+
+### Step 6: Configure Answer Instructions
+
+<Frame>
+  <img src="/images/guides/multi-answer/config.png" alt="Answer Configuration" />
+</Frame>
+
+#### Column-Specific Instructions (Optional)
+
+Each answer column can have custom instructions.
+
+#### General Instruction (Optional)
+
+Provide general instructions that apply to all answers across all columns for consistent tone, style, or context.
+
+#### Filter by Sources/Labels (Optional)
+
+Configure filters to limit which data sources or labels should be used when generating answers.
+
+### Step 7: Ignore Rows
+
+Mark specific rows to be ignored during processing. Useful for skipping test questions, examples, or invalid entries.
+
+**Instructions:** Click or drag on ROWS to mark them as ignored.
+
+<Frame>
+  <img src="/images/guides/multi-answer/ignore-1.png" alt="Ignore Rows Step 1" />
+</Frame>
+
+<Frame>
+  <img src="/images/guides/multi-answer/ignore-2.png" alt="Ignore Rows Step 2" />
+</Frame>
+
+The job summary shows how many rows have been ignored, and these rows will be excluded from processing.
+
+## Validation
+
+<Frame>
+  <img src="/images/guides/multi-answer/ignore-3.png" alt="Ignore Rows Step 3" />
+</Frame>
+
+Before creating the job, Gurubase automatically validates your configuration. You can also manually trigger it by clicking "Validate". The validation shows:
+
+- **Total Questions:** Number of questions that will be processed (excluding ignored rows)
+- **Answers to Generate:** Total number of answers (questions × answer columns)
+- **Answers to Skip:** If answer columns are filled for some rows, they will be skipped. 
+- **Answer Column Breakdown:** Shows how many answers will be generated per column
+
+Green progress bars indicate all planned answers are ready. Once validation is successful, click "Create Job" to start processing.
+
+## Managing Ongoing Jobs
+
+Jobs that are currently processing appear in the jobs table.
+
+### List
+
+<Frame>
+  <img src="/images/guides/multi-answer/ongoing-list.png" alt="Ongoing Jobs List" />
+</Frame>
+
+View all processing jobs with their status, progress percentage, total rows, and creation details. Click "View Details" to see more information.
+
+### Details
+
+<Frame>
+  <img src="/images/guides/multi-answer/ongoing-details.png" alt="Ongoing Job Details" />
+</Frame>
+
+Monitor job progress with:
+- **Progress Bar:** Visual indicator showing completion percentage
+- **Summary Cards:** Total questions, processed count, failed count, and remaining count
+- **Configuration:** Sheet, header row, question column, answer columns, and instructions
+- **Rows Table:** Status, question preview, trust score, and links to view full details
+
+Use the search field to find specific questions within the job.
+
+## Managing Finished Jobs
+
+Completed jobs show "COMPLETED" status and allow you to review results and download them.
+
+### List
+
+<Frame>
+  <img src="/images/guides/multi-answer/finished-list.png" alt="Finished Jobs List" />
+</Frame>
+
+View all completed jobs with their status, 100% progress, and completion details. Use the download icon to export results.
+
+### Details
+
+<Frame>
+  <img src="/images/guides/multi-answer/finished-details.png" alt="Finished Job Details" />
+</Frame>
+
+Review completed jobs with:
+- **Download Result:** Export the Excel file with generated answers
+- **Summary Cards:** Total questions, processed count, failed count (if any)
+- **Results Table:** Complete list of processed questions with status, trust scores, and links to view full answers
+
+Use the search functionality to find specific questions within completed jobs.
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="Create Your First Guru"
+    icon="robot"
+    href="/guides/create-guru"
+  >
+    Learn how to create and configure your first Guru
+  </Card>
+  <Card
+    title="Excel Extraction Guide"
+    icon="file-excel"
+    href="/guides/excel-extraction"
+  >
+    Learn how to prepare Excel files for optimal extraction
+  </Card>
+  <Card
+    title="Data Sources Guide"
+    icon="database"
+    href="/guides/data-sources"
+  >
+    Understand how to add and manage knowledge sources
+  </Card>
+  <Card
+    title="API Reference"
+    icon="code"
+    href="/api-reference/introduction"
+  >
+    Explore our API documentation for advanced integrations
+  </Card>
+</CardGroup>
