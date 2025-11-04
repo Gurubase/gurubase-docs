@@ -1,0 +1,66 @@
+---
+title: 'Team Management'
+description: 'Manage team members and user access for your Guru'
+---
+
+## Overview
+
+Team Management allows you to control who can access and modify your Guru. Add existing Gurubase users as team members (maintainers) to your Guru.
+
+## Team Members
+
+<Frame>
+  <img src="/images/guides/team/team.png" alt="Team Management" />
+</Frame>
+
+View all team members with their names, emails, and status (Owner or Member). Owners have full control, while Members can access and modify the Guru.
+
+## Adding a Team Member
+
+<Frame>
+  <img src="/images/guides/team/add-member.png" alt="Add Team Member" />
+</Frame>
+
+Click "+ Add Team Member" and enter the email address of an existing Gurubase user. The user must already have a Gurubase account to be added.
+
+## Self-hosted: User Management
+
+In Self-hosted deployments, you have additional user management capabilities accessible from the Settings page.
+
+### User Management
+
+<Frame>
+  <img src="/images/guides/team/sh-team-0.png" alt="User Management" />
+</Frame>
+
+The User Management interface shows:
+- **User Management:** List of all platform users with their roles (Super Admin, Guru Admin, Guru Viewer)
+- **Guru User Assignments:** Manage which users have access to which Gurus and their roles
+
+### Creating a User
+
+<Frame>
+  <img src="/images/guides/team/sh-create-user.png" alt="Create User" />
+</Frame>
+
+Click "+ Create User" to add a new user. Enter the email address and full name. A random password is auto-generated. The user will be prompted to set their own password on first login.
+
+### Assigning Users to Gurus
+
+<Frame>
+  <img src="/images/guides/team/sh-assign-user.png" alt="Assign User to Guru" />
+</Frame>
+
+Click "+ Assign User" to grant a user access to a Guru. Select:
+- **User:** The user to assign
+- **Guru:** The Guru to grant access to
+- **Role:** 
+  - **Guru Viewer:** Can only ask questions
+  - **Guru Admin:** Can modify Guru configuration and settings
+
+### User Actions
+
+From the User Management table, you can:
+- **Reset Password:** Generate a new random password. The user must set their own password on next login
+- **Delete User:** Remove the user from the platform
+

@@ -59,7 +59,9 @@
         "guides/data-sources",
         "guides/excel-extraction",
         "guides/audit-logs",
-        "guides/actions"
+        "guides/actions",
+        "guides/multi-answer",
+        "guides/team"
 
       ]
     },
