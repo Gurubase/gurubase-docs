@@ -60,7 +60,8 @@
         "guides/excel-extraction",
         "guides/audit-logs",
         "guides/actions",
-        "guides/multi-answer"
+        "guides/multi-answer",
+        "guides/team"
 
       ]
     },
