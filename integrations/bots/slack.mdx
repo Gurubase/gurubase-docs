@@ -15,18 +15,18 @@ For self-hosted version, you first need to setup a Slack App manually to get a b
 
 1. **Navigate to Integrations**
    - Go to the Gurubase dashboard.
-   - Click on "My Gurus" under the profile
+   - Click on **"My Gurus"** under the profile
    - Click on the Guru you want to integrate with Slack
 
 2. **Select Slack Bot**
-   - Click on the "Slack" option under "Deployments".
+   - Click on the **"Slack"** option under **"Deployments"**.
 
 <Frame>
   <img src="/images/integrations.png" alt="Gurubase integrations page"/>
 </Frame>
 
 3. **Connect to Slack**
-   - Click the "Connect" button.
+   - Click the **"Connect"** button.
    - Authorize Gurubase to access your Slack workspace.
 
 <Frame>
@@ -35,10 +35,10 @@ For self-hosted version, you first need to setup a Slack App manually to get a b
 
 
 4. **Select Channels**
-   - Click "Add Channel"
+   - Click **"Add Channel"**
    - Type in the ID of the channel you want to integrate with Gurubase.
-   - Select "Auto" or "Manual" mode for usage. Auto mode responds to every message sent in the channel while Manual mode requires mentioning the bot for responses.
-   - Click "Save".
+   - Select **"Auto"** or **"Manual"** mode for usage. Auto mode responds to every message sent in the channel while Manual mode requires mentioning the bot for responses.
+   - Click **"Save"**.
 
 
 <Frame>
@@ -68,11 +68,11 @@ To subscribe to a private channel and send test messages to it, you need to invi
 
 
 5. **Test the Connection**
-   - Use the "Send Test Message" button to ensure the integration is working.
+   - Use the **"Send Test Message"** button to ensure the integration is working.
 
 
 6. **Enable Direct Message Mode (Optional)**
-   - Tick the "Enable Direct Messages" checkbox to allow the bot to respond to your direct messages. In this mode, the bot will respond to all of your messages without mentions whether in thread or not. 
+   - Tick the **"Enable Direct Messages"** checkbox to allow the bot to respond to your direct messages. In this mode, the bot will respond to all of your messages without mentions whether in thread or not. 
 
 <Frame>
   <img src="/images/bots/slack/gurubase-slack-integrations-4.png" alt="Gurubase slack integration page" />
@@ -96,15 +96,15 @@ For self-hosted version, you need to create your own Slack app to create a bot t
 
 <Note>
 For self-hosted version, there are two approaches to use the Slack app:
-1. **HTTP:** To use HTTP, you need to open your self-hosted URL to public (step 3) .
-2. **Websocket:** This does not require you to open your self-hosted URL to public. To do this, you need to enable the websocket mode (step 3).
+1. **HTTP Mode:** To use HTTP, you need to open your self-hosted URL to public (step 3) .
+2. **Websocket Mode:** This does not require you to open your self-hosted URL to public. To do this, you need to enable the websocket mode (step 3).
 </Note>
 
-1. Go to https://api.slack.com/apps and click "Create New App".
-2. Select "From scratch" to create a new app:
-   - Enter a name for your app (e.g., "Gurubase")
+1. Go to https://api.slack.com/apps and click **"Create New App"**.
+2. Select **"From scratch"** to create a new app:
+   - Enter a name for your app (e.g., **"Gurubase"**)
    - Choose your Slack workspace from the dropdown
-   - Click "Create App" to proceed
+   - Click **"Create App"** to proceed
 3. Choose your connection method:
 
 ### Option A: HTTP Mode
@@ -121,8 +121,8 @@ Slack will send events to  `/api/slack/events/` endpoint of your Gurubase instan
 </Frame>
 
 After setting up your public URL:
-- Go to "Event Subscriptions" page on your Slack app and enable it.
-- Set your public url along with the path `/api/slack/events/` as "Request URL", this is the url that Slack will send the events to. Be careful with the trailing slash at the end of the url. You should see the "Verified" green text if the url is correct.
+- Go to **"Event Subscriptions"** page on your Slack app and enable it.
+- Set your public url along with the path `/api/slack/events/` as **"Request URL"**, this is the url that Slack will send the events to. Be careful with the trailing slash at the end of the url. You should see the **"Verified"** green text if the url is correct.
   - `${your_public_gurubase_url}/api/slack/events/`
 
 <Frame>
@@ -130,22 +130,23 @@ After setting up your public URL:
 </Frame>
 
 <Note type="warning">
-If you change the Gurubase instance URL, you need to update the "Request URL" with the new URL.
+If you change the Gurubase instance URL, you need to update the **"Request URL"** with the new URL.
 </Note>
 
 ### Option B: Websocket Mode
 
 Use this if you prefer to keep your Gurubase instance private (no public URL required).
 
-- Go to "Socket Mode" under "Settings" in the sidebar. 
-- Then click "Enable Socket Mode". 
-- This will prompt you to create a token. Create your token, and make sure you copy it.
+- Go to **"Socket Mode"** under **"Settings"** in the sidebar. 
+- Then click **"Enable Socket Mode"**. 
+- This will prompt you to create a token. **Create your token, and make sure you copy it**.
 
-<Note>
-You do not need to provide a URL here if you enabled websocket mode.
-</Note>
 
-4. Go to "Event Subscriptions" page on your Slack app and enable it. Expand the "Subscribe to bot events" section and add the following events:
+<Frame>
+  <img src="/images/bots/slack/slack-app-socket-mode.jpg" width="500"/>
+</Frame>
+
+4. Go to **"Event Subscriptions"** page on your Slack app and enable it. Expand the **"Subscribe to bot events"** section and add the following events:
     - `message.channels`
     - `message.groups`
     - `message.im`
@@ -154,8 +155,13 @@ You do not need to provide a URL here if you enabled websocket mode.
   <img src="/images/bots/slack/slack-event-subscriptions.png" width="500"/>
 </Frame>
 
+
+<Note>
+You do not need to provide a URL here if you enabled websocket mode.
+</Note>
+
 5. Save changes.
-6. Go to "OAuth & Permissions" page on Slack app. Scroll to "Bot Token Scopes" under "Scopes" section and add the following permissions:
+6. Go to **"OAuth & Permissions"** page on Slack app. Scroll to **"Bot Token Scopes"** under **"Scopes"** section and add the following permissions:
     - `channels:join`
     - `channels:read`
     - `chat:write`
@@ -166,7 +172,7 @@ You do not need to provide a URL here if you enabled websocket mode.
     - `im:history`
     - `files:read`
 
-7. Go to "Interactivity & Shortcuts" page on Slack App. Enable it and set the Request URL as `${your_public_gurubase_url}/api/slack/interactive/`
+7. Go to **"Interactivity & Shortcuts"** page on Slack App. Enable it and set the **Request URL** as `${your_public_gurubase_url}/api/slack/interactive/`
 
 <Note>
 You do not need to provide a URL here if you enabled websocket mode.
@@ -177,21 +183,21 @@ You do not need to provide a URL here if you enabled websocket mode.
 </Frame>
 
 
-8. Navigate to "App Home" under Features in the left sidebar. You can also access it directly at:
+8. Navigate to **"App Home"** under **Features** in the left sidebar. You can also access it directly at:
 
 `https://api.slack.com/apps/<app_id>/app-home` 
 
-9. Under "Show Tabs", enable "Messages Tab" and tick "Allow users to send Slash commands and messages from the messages tab".
+9. Under **"Show Tabs"**, enable **"Messages Tab"** and tick **"Allow users to send Slash commands and messages from the messages tab"**.
 
 <Frame>
   <img src="/images/bots/slack/slack-show-tabs.png"/>
 </Frame>
 
-10. Go to "Install App" page. Then click "Install to [your_workspace_name]".
+10. Go to **"Install App"** page. Then click **"Install to [your_workspace_name]"**.
 11. Go through the OAuth flow.
 12. After installation, you will be redirected to the same page.
-13. Copy "Bot User OAuth Token".
-14. Go to your Guru's Slack integration page in the Gurubase UI. Here, depending on your desired settings, either select HTTP or Socket mode.
+13. Copy **"Bot User OAuth Token"**.
+14. Go to your Guru's Slack integration page in the Gurubase UI. Here, depending on your desired settings, either select **HTTP** or **Socket** mode.
 
 HTTP Mode:
 
@@ -205,7 +211,7 @@ Socket Mode:
   <img src="/images/bots/slack/slack-socket-mode.png"/>
 </Frame>
 
-Fill the fields with the keys you copied and click "Connect".
+Fill the fields with the keys you copied and click **"Connect"**.
 
 
 ## Next Steps
