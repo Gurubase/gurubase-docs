@@ -53,7 +53,7 @@
       "group": "Guides",
       "pages": [
         "guides/create-guru",
-        "guides/analyze-usage",
+        "guides/analytics",
         "guides/prompting-your-guru",
         "guides/pii-masking",
         "guides/data-sources",
