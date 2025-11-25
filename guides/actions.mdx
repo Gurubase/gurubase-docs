@@ -5,27 +5,34 @@ description: "Extend your Guru's capabilities with external API calls and tool i
 
 ## Overview
 
-Actions extend your Guru's capabilities by connecting it to external APIs and services. When users ask questions that require real-time data, your Guru can automatically trigger these actions to fetch information and provide up-to-date responses.
+Actions extend your Guru's capabilities by executing custom Python code or making external API calls. When users ask questions that require real-time data or custom processing, your Guru can automatically trigger these actions to fetch information and provide up-to-date responses.
 
-### What Actions Enable
+<Frame>
+  <img src="/images/guides/actions/actions-page.png" alt="Actions" />
+</Frame>
 
-Actions transform your Guru into a dynamic assistant that can:
-- **Fetch real-time data** from external APIs
-- **Retrieve current information** like weather, stock prices, or user details
-- **Integrate with third-party tools** and platforms
+Actions support two types: 
+- **Python Code:** Execute custom Python scripts in isolated containers for data processing, API integrations, and custom logic.
+- **API Call:** Make HTTP requests to external APIs and services. 
 
-### Action Limits
+Actions transform your Guru into a dynamic assistant that can
 
-Each Guru has a limit on the number of actions (e.g., "1 of 10 actions used").
+- fetch real-time data
+- process data with custom scripts
+- retrieve current information
+- integrate with third-party tools
+
+Each Guru has a limit on the number of actions (e.g., "5 of 10 actions used").
 
 ## How Actions Work
 
 Actions use an intelligent trigger system:
 
-1. **Condition Prompt Evaluation**: The Guru checks if the user's question matches your defined conditions (based on **Condition Prompt**)
+1. **Condition Prompt Evaluation**: The Guru checks if the user's question matches your defined conditions (based on **When to Trigger This Action**)
 2. **Parameter Extraction**: Parameters are extracted from the user's question based on your descriptions
 3. **Execution Decision**: The action runs only if all required parameters can be extracted (or have default values)
-4. **API Call and Response**: The configured API call is made, and the **Usage Prompt** instructs the AI how to use the response
+4. **Execution**: Python code runs in an isolated container, or an API call is made to the configured endpoint
+5. **Response Handling**: The **Usage Instructions** guide the AI on how to interpret and present the results
 
 ## Creating an Action
 
@@ -33,86 +40,111 @@ Actions use an intelligent trigger system:
   <img src="/images/guides/actions/empty.png" alt="Empty Actions" />
 </Frame>
 
-The action creation process consists of two main steps: General Configuration and API Configuration.
+The action creation process consists of three main steps:
 
-### Step 1: General Configuration
+1. Basic Information and Parameters
+2. Action Type Configuration (Python Code or API Call)
+3. Usage Instructions and Testing
 
-<Frame>
-  <img src="/images/guides/actions/stage1-1.png" alt="Action General Configuration" />
-</Frame>
-
-#### Action Name
-Provide a descriptive name that appears in your actions list.
-
-#### Description
-Explain what this action does and when it should be used.
-
-#### Condition Prompt
-Describe when this action should be triggered. Be specific to ensure it only runs when appropriate.
-
-**Example**: "When a question about a Github user is asked."
+### Basic Information and Parameters
 
 <Frame>
-  <img src="/images/guides/actions/stage1-2.png" alt="Action Parameters Configuration" />
+  <img src="/images/guides/actions/basic-action-fields.png" alt="Action Basic Configuration" />
 </Frame>
 
-#### Parameters Configuration
+- **Action Name**: Provide a descriptive name that appears in your actions list
+- **When to Trigger This Action**: Be specific about keywords, patterns, or user intents to ensure it only runs when appropriate (e.g., "When the user wants to guess the secret number")
 
+<Frame>
+  <img src="/images/guides/actions/parameters.png" alt="Action Parameters Configuration" />
+</Frame>
+
+Define what information to extract from user questions. Parameters can be used like below:
+
+- **API Call**: Use them in your API endpoint, headers, body using `{parameter_name}` syntax
+- **Python Code**: Use them as environment variables via `os.environ.get()`
+ 
 Each parameter includes:
 
-- **Parameter Name**: Use only letters and underscores (e.g., `username`, `user_id`)
+- **Name**: Use only letters and underscores (e.g., `username`, `user_id`). Cannot conflict with secret names.
 - **Type**: Choose from String (text), Number (numeric), or Boolean (true/false)
-- **Description**: Clear description for parameter extraction from user questions
+- **What to Extract**: Clear description for parameter extraction from user questions
 - **Required**: Check if essential for the action to work
 - **Default Value**: Optional fallback when parameter can't be extracted
 
-### Step 2: API Configuration
+### Usage Instructions and Testing
 
 <Frame>
-  <img src="/images/guides/actions/stage2-1.png" alt="API Configuration Setup" />
+  <img src="/images/guides/actions/usage-instructions-with-test.png" alt="Usage Instructions Configuration" />
 </Frame>
 
-#### HTTP Method
-Select from `GET`, `POST`, `PUT`, `PATCH`, `DELETE`.
+- **Usage Instructions**: Provide instructions for how the AI should interpret and use the response data (API response or Python stdout)
+  - Example: "Use stdout to decide if the guess was correct"
+  - Example: "Extract the user's name and bio from the JSON response and present this information in a clear summary"
+- **Testing**: Use the "Test Action" button to verify your configuration
+  - If required parameters exist, you'll be prompted to provide test values
+  - Test results show success status, response data, and execution details
 
-#### Endpoint URL
-Enter the API endpoint. It supports parameters like `{param_name}`
+## Action Types
 
-**Example**: `https://api.github.com/users/{username}`
+When creating an action, choose between:
 
-#### Headers
-Configure authentication or content type headers. It supports parameters like `{param_name}`
+- **Python Code**: Execute custom Python scripts in isolated containers
+- **API Call**: Make HTTP requests to external APIs and services
 
-**Example**: `Authorization: Bearer {token}`
+### Python Code Actions
 
-#### Request Body (JSON)
-For `POST`, `PUT`, and `PATCH` methods, include JSON payload. It supports parameters like `{param_name}`
+<Frame>
+  <img src="/images/guides/actions/python.png" alt="Python Code Configuration" />
+</Frame>
+
+Execute custom Python code in isolated Docker containers. Secrets and parameters are injected as environment variables accessible via `os.environ.get()`.
+
+**Key Features:**
+- Isolated execution (containers destroyed after use)
+- Whitelisted libraries (requests, pandas, numpy, json, datetime, re, hashlib, base64, etc.)
+- Results via stdout (automatically captured)
+- 30-second timeout
+- 128MB RAM limit
+
+**Example:**
+```python
+import os
+import requests
+
+guess = int(os.environ.get('GUESS'))
+secret_n = int(os.environ.get('TEST'))  # Secret from Settings
+
+print(f'Guess == secret: {guess == secret_n}')
+```
+
+**Available Libraries:**
+- requests, pandas, numpy, json, datetime, re, hashlib, base64, uuid, secrets, and more
+- **Restricted**: `os` only allows `os.getenv()` and `os.environ` access
+
+### API Call Actions
+
+<Frame>
+  <img src="/images/guides/actions/api-call-settings-1.png" alt="API Call Configuration" />
+</Frame>
+
+<Frame>
+  <img src="/images/guides/actions/api-call-settings-2.png" alt="API Call Request Body" />
+</Frame>
+
+- **HTTP Method**: Select from `GET`, `POST`, `PUT`, `PATCH`, `DELETE`
+- **Endpoint URL**: Enter the API endpoint. Use `{parameter_name}` or `{SECRET_NAME}` to insert parameter/secret values
+  - Example: `https://api.github.com/users/{username}`
+- **Headers**: Configure authentication or content type using `{parameter_name}` or `{SECRET_NAME}` syntax
+  - Example: `Authorization: Bearer {API_KEY}`
+- **Request Body**: For `POST`, `PUT`, and `PATCH` methods, include JSON payload supporting `{parameter_name}` or `{SECRET_NAME}` syntax:
 
 ```json
 {
-  "query": "{search_term}",
-  "user_id": "{user_id}"
+  "test": "{TEST}",
+  "new_address": "{new_address}"
 }
 ```
-
-<Frame>
-  <img src="/images/guides/actions/stage2-2.png" alt="Usage Prompt Configuration" />
-</Frame>
-
-#### Usage Prompt
-Provide instructions for how the AI should interpret and use the API response data.
-
-**Example**: "Analyze the JSON of the given user and provide a summary of their GitHub profile information."
-
-#### Testing Your Action
-
-<Frame>
-  <img src="/images/guides/actions/stage2-3.png" alt="Action Testing Results" />
-</Frame>
-
-Use the "Test Action" button to verify your configuration. If required parameters exist, you'll be prompted to provide test values.
-
-Test results show success status, response data, and HTTP status code.
 
 ## Managing Actions
 
@@ -120,63 +152,58 @@ Test results show success status, response data, and HTTP status code.
   <img src="/images/guides/actions/created.png" alt="Actions Management Dashboard" />
 </Frame>
 
-Once created, you can manage all your actions from the Actions dashboard:
-
-### Actions List
-View all configured actions with their name, description, type ("API Call"), and status (Enabled/Disabled).
-
-<Note>
-For now, only the "API Call" type is implemented. We are planning to add new types of actions in the future.
-</Note>
-
-### Action Management Options
+- View all configured actions with their name, type ("Python Code" or "API Call"), and status (Enabled/Disabled)
+- Click the menu icon (⋮) next to any action to:
+  - **Edit**: Modify the action's configuration
+  - **Disable**: Temporarily disable without deleting
+  - **Delete**: Permanently remove the action
 
 <Frame style={{ width: 400, height: 300 }}>
   <img src="/images/guides/actions/options.png" alt="Action Management Options" />
 </Frame>
 
-Click the menu icon (⋮) next to any action to:
-- **Edit**: Modify the action's configuration
-- **Disable**: Temporarily disable without deleting
-- **Delete**: Permanently remove the action
-
-### Enabling and Disabling Actions
-Enable or disable actions at any time. Disabled actions won't be triggered by user questions.
+- Enable or disable actions at any time
+- Disabled actions won't be triggered by user questions
+- **Note**: If a secret used by an action is deleted, that action will be automatically disabled
 
 ## Usage in the Answer
 
-Actions used in the answer are shown as below with the action name:
+Actions used in the answer are shown with the action name:
 
 <Frame >
   <img src="/images/guides/actions/reference.png" alt="Action Reference" />
 </Frame>
 
+## Secrets Management
+
+Secrets are encrypted credentials (API keys, tokens, passwords) configured in Guru Settings → Secrets. They can be used in both Python Code and API Call actions.
+
+<Frame>
+  <img src="/images/guides/actions/secrets.png" alt="Secrets" />
+</Frame>
+
+**Key Points:**
+- Secrets are encrypted at rest (AES-256) and masked in all output
+- Access secrets in Python via `os.environ.get('SECRET_NAME')`
+- Use secrets in API calls with `{SECRET_NAME}` syntax
+- Secret names cannot conflict with parameter names
+- Deleting a secret automatically disables all actions using it
+
+**Example Usage:**
+- **Python**: `api_key = os.environ.get('STRIPE_API_KEY')`
+- **API Call**: `Authorization: Bearer {STRIPE_API_KEY}`
+
 ## Common Mistakes to Avoid
 
-### 1. Vague Condition Prompts
-❌ **Poor**: "When asking about data"
+**Vague Condition Prompts**: ❌ "When asking about data" → ✅ "When asking about current weather conditions for a specific location"
 
-✅ **Good**: "When asking about current weather conditions for a specific location"
+**Inadequate Parameter Descriptions**: ❌ Parameter name: `id`, Description: "The ID" → ✅ Parameter name: `user_id`, Description: "The unique identifier for the GitHub user whose profile information is being requested"
 
-### 2. Inadequate Parameter Descriptions
-❌ **Poor**: Parameter name: `id`, Description: "The ID"
+**Incomplete Usage Instructions**: ❌ "Use the response data" → ✅ "Extract the user's name, bio, and public repository count from the JSON response and present this information in a clear, formatted summary"
 
-✅ **Good**: Parameter name: `user_id`, Description: "The unique identifier for the GitHub user whose profile information is being requested"
+**Not Testing Actions**: ❌ Enabling actions without testing them first → ✅ Always test actions with various parameter combinations before enabling
 
-### 3. Incomplete Usage Prompts
-❌ **Poor**: "Use the response data"
-
-✅ **Good**: "Extract the user's name, bio, and public repository count from the JSON response and present this information in a clear, formatted summary"
-
-### 4. Not Testing Actions
-❌ **Poor**: Enabling actions without testing them first
-
-✅ **Good**: Always test actions with various parameter combinations before enabling
-
-### 5. Overly Complex Actions
-❌ **Poor**: Creating actions that try to do too many things at once
-
-✅ **Good**: Keep actions focused on a single, specific task
+**Overly Complex Actions**: ❌ Creating actions that try to do too many things at once → ✅ Keep actions focused on a single, specific task
 
 
 ## Next Steps
