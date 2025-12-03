@@ -28,7 +28,7 @@ Each Guru has a limit on the number of actions (e.g., "5 of 10 actions used").
 
 Actions use an intelligent trigger system:
 
-1. **Condition Prompt Evaluation**: The Guru checks if the user's question matches your defined conditions (based on **When to Trigger This Action**)
+1. **When to Trigger This Action**: The Guru checks if the user's question matches your defined conditions
 2. **Parameter Extraction**: Parameters are extracted from the user's question based on your descriptions
 3. **Execution Decision**: The action runs only if all required parameters can be extracted (or have default values)
 4. **Execution**: Python code runs in an isolated container, or an API call is made to the configured endpoint
