@@ -28,6 +28,10 @@ Retrieve sources that are most relevant to a given question. This endpoint fetch
   Array of labels to filter sources by. If provided, only sources with matching labels will be returned. If multiple labels are provided, they are OR'ed. Meaning data sources belonging to any of those labels are returned.
 </ParamField>
 
+<ParamField body="external_user_id" type="string">
+  External user identifier. This allows you to track search queries per user in your analytics. It should be UUID.
+</ParamField>
+
 ### Response
 
 The response contains an array of source objects and total count.
