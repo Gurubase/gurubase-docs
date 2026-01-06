@@ -1,0 +1,492 @@
+---
+title: 'Preventing AI Hallucinations'
+description: 'Learn how Gurubase uses seven layers of protection to ensure accurate, trustworthy answers.'
+---
+
+AI hallucinations occur when an AI system generates information that sounds confident and plausible but is actually incorrect or made up. It's like when someone confidently tells you a "fact" that turns out to be false.
+
+**Common Examples:**
+- Inventing medication dosages or drug interactions that aren't documented
+- Creating fake statistics, policy terms, or research studies
+- Confidently stating incorrect coverage limits or eligibility criteria
+- Making up regulatory requirements or compliance procedures
+- Inventing function names in code that don't exist
+
+## Why This Matters
+
+Whether you're a healthcare provider checking treatment protocols, a financial advisor verifying compliance requirements, an insurance agent confirming policy details, or a developer building software, you need accurate information. A hallucinated answer isn't just unhelpful. It can lead to compliance violations, incorrect patient care, financial losses, or costly errors.
+
+## Gurubase's Approach: Seven Layers of Protection
+
+Gurubase is **hallucination-resistant** AI platform. LLMs have an inherent tendency to hallucinate, and no system can completely eliminate this. However, Gurubase significantly reduces the risk through a **"Trust, Then Verify"** approach with multiple layers of verification. Think of it like quality control in manufacturing: each layer catches different types of problems, and the system will refuse to answer when it cannot provide reliable information.
+
+---
+
+### Layer 1: Smart Retrieval - Finding the Right Information
+
+**What happens:** When you ask a question, Gurubase searches through your documentation, knowledge bases, policy documents, and other sources using multiple strategies simultaneously.
+
+**How it works:**
+- Your question is analyzed and rephrased in multiple ways
+- Each version searches for different relevant information
+- Results from different sources are combined and duplicates removed
+
+**Example:**
+
+```
+You ask: "What's the prior authorization process for MRI scans?"
+
+Gurubase searches for:
+- "What's the prior authorization process for MRI scans?" (your exact words)
+- "MRI pre-authorization requirements" (alternative phrasing)
+- "imaging prior auth workflow" (domain-specific rephrasing)
+
+This finds more relevant information than a single search would.
+```
+
+**Why it helps:** Different phrasings catch different relevant documents, giving a more complete picture.
+
+---
+
+### Layer 2: Relevance Scoring - Rating Each Source
+
+**What happens:** Before using any information to answer your question, Gurubase rates how relevant each piece is on a scale from 0 to 100%.
+
+**How it works:**
+- Each found document is evaluated by an AI specifically trained to judge relevance
+- Documents get scores: 0% (irrelevant) to 100% (perfect match)
+- The AI explains WHY it gave each score
+
+**Example:**
+
+```
+Question: "What's the deductible for out-of-network specialists?"
+
+Document A: "Out-of-network benefits include a $500 deductible..."
+Score: 95% - Directly answers the deductible question
+
+Document B: "In-network specialist visits require..."
+Score: 40% - Related to specialists but focuses on in-network
+
+Document C: "General plan overview..."
+Score: 10% - Barely relevant, only mentions deductibles in passing
+```
+
+**Why it helps:** Only high-quality, relevant information moves forward. Lower-scoring content is filtered out.
+
+---
+
+### Layer 3: Trust Score - Overall Answer Quality
+
+**What happens:** Gurubase calculates a "Trust Score" for your answer based on the quality of all sources used.
+
+**How it works:**
+- Combines all individual source scores into one overall score
+- Uses a configurable threshold to decide if the answer is trustworthy enough
+- Factors in how many sources were found and how well they agree
+
+**Adjustable Threshold:** The trust score threshold is customizable based on your Guru's domain. For high-stakes domains like finance, healthcare, or insurance, you can set a higher threshold (e.g., 70%) to ensure only well-supported answers are provided. For domains where some flexibility is acceptable, like general education or FAQs, a lower threshold (e.g., 50%) may be appropriate.
+
+**Example:**
+
+```
+Answer about "diabetes medication coverage":
+- Found 8 relevant sources
+- 6 scored above 80% (excellent)
+- 2 scored around 60% (good)
+- Overall Trust Score: 78%
+
+Answer about "coverage for experimental treatment XYZ":
+- Found 3 relevant sources
+- 1 scored 55% (okay)
+- 2 scored 35% (weak)
+- Overall Trust Score: 41% (warning)
+```
+
+**Why it helps:** You can see at a glance how confident Gurubase is in its answer. Low trust scores mean "be careful, limited information available."
+
+---
+
+### Layer 4: Explicit Failure - Saying "I Don't Know"
+
+**What happens:** If Gurubase can't find enough relevant information, it refuses to answer instead of making something up.
+
+**How it works:**
+- If no sources score high enough, the system stops
+- Instead of generating an answer, it tells you honestly: "I don't have enough information"
+- These "out of context" questions are logged to help improve the knowledge base
+
+**Example:**
+
+```
+Question: "What's the best restaurant near the hospital?"
+(For a healthcare policy Guru)
+
+Gurubase response:
+"This question appears to be outside my area of expertise. I'm specialized
+in healthcare policies and procedures. I don't have information about
+restaurants. Could you rephrase your question to relate to healthcare?"
+
+Instead of:
+Making up restaurant recommendations or trying to answer anyway (hallucination)
+```
+
+**Why it helps:** Honest "I don't know" is infinitely better than a confident wrong answer. This is the most important safety feature.
+
+---
+
+### Layer 5: Guided Answer Generation - Teaching the AI to Stay Grounded
+
+**What happens:** When generating an answer, Gurubase gives the AI strict instructions to only use the approved sources.
+
+**How it works:**
+- The AI is explicitly told: "Use ONLY information from the provided sources"
+- It's instructed to cite sources and admit limitations
+- Special rules prioritize manually-edited correct answers over generated ones
+
+**Example Instructions Given to AI:**
+
+```
+✓ DO: "According to the policy document, the annual maximum benefit
+      for orthodontics is $2,000 per member..."
+
+✗ DON'T: "The orthodontic coverage is probably around $1,500..."
+         (inventing coverage amounts)
+
+✓ DO: "The documentation covers standard claims processing but doesn't
+      mention expedited appeals. I can help with standard claims."
+
+✗ DON'T: "For expedited appeals, you would typically submit..."
+         (hallucinating about missing information)
+```
+
+**Why it helps:** Clear instructions reduce the AI's tendency to "fill in gaps" with plausible-sounding but incorrect information.
+
+---
+
+### Layer 6: Manual Override - Human Expertise Wins
+
+**What happens:** If experts have manually written or corrected an answer, that version always takes priority over AI-generated content.
+
+**How it works:**
+- Edited answers are marked as "highest priority"
+- When generating an answer, manually corrected information overrides everything else
+- Other sources can supplement but never contradict the edited version
+
+**Example:**
+
+```
+Situation: Policy document says Drug X requires prior authorization, but
+there's a recently approved exception for emergency situations that was
+manually documented by a compliance officer.
+
+Without manual override:
+AI might say: "Drug X requires prior authorization" (technically correct
+but misses critical exception)
+
+With manual override (edited answer):
+AI says: "Drug X requires prior authorization. Exception: In emergency
+situations, a 72-hour retroactive authorization is permitted." (accurate
+and complete)
+```
+
+**Why it helps:** Human experts can correct nuances, edge cases, and recent changes that automated systems might miss.
+
+---
+
+### Layer 7: Complete Audit Trail - Transparency in Every Answer
+
+**What happens:** Gurubase logs every decision it makes: which sources were used, which were rejected, and why.
+
+**How it works:**
+- Every source's relevance score is recorded
+- Sources used in the answer are shown to you
+- You can see exactly what information the answer is based on
+- Trust scores are displayed with color coding
+
+**Example - What You See:**
+
+```
+Question: "What's the claims appeal deadline for denied procedures?"
+
+Trust Score: 85%
+
+Sources Used:
+📄 Member Handbook - Appeals Process (relevance: 95%)
+   Section 7.2: Filing an Appeal
+
+📄 Compliance Guide - Deadline Requirements (relevance: 88%)
+   Chapter 4: Regulatory Timelines
+
+📄 FAQ - Common Claims Questions (relevance: 82%)
+   Appeals and Grievances section
+
+Sources Filtered Out:
+📄 General Plan Overview (relevance: 35% - too general)
+📄 Provider Network Directory (relevance: 28% - different topic)
+```
+
+**Why it helps:** You can verify the answer by checking the sources yourself. If something seems off, you can see exactly where it came from.
+
+---
+
+## Trust Score: Your Quality Indicator
+
+Every answer gets a visual trust indicator so you know how confident Gurubase is:
+
+| Score Range | What It Means |
+|-------------|---------------|
+| 90-100% | Excellent - Multiple high-quality sources |
+| 80-89% | Very Good - Strong source support |
+| 70-79% | Good - Solid information available |
+| 60-69% | Acceptable - Use with awareness |
+| 50-59% | Caution - Limited information |
+| Below 50% | Low Confidence - Verify carefully |
+
+## What Makes This Different?
+
+### Traditional AI Chatbots:
+
+```
+Question: "Is Wegovy covered under my plan for weight loss?"
+
+AI Response: "Yes, Wegovy is typically covered for weight loss treatment
+with a prior authorization. Most plans cover it with a $50 copay."
+
+Problem: The AI hallucinated coverage details based on "typical" plans,
+but your specific plan might exclude weight loss medications entirely.
+```
+
+### Gurubase Approach:
+
+```
+Question: "Is Wegovy covered under my plan for weight loss?"
+
+Gurubase searches policy documents...
+- Finds: "Prescription drug formulary, Tier 3 medications, exclusions list"
+- Doesn't find: Wegovy listed in covered medications
+
+Response: "According to the current formulary, Wegovy is not listed as a
+covered medication. Weight loss medications appear in the exclusions section.
+I recommend contacting member services for alternative options or to request
+an exception review."
+
+Trust Score: 91% (based on clear policy documentation)
+Sources: [Links to formulary and exclusions list]
+```
+
+**Key Differences:**
+- ✅ Based on actual documentation, not assumptions
+- ✅ Explicitly states what isn't found
+- ✅ Provides actionable next steps
+- ✅ Shows sources for verification
+- ✅ High trust score because information is clear
+
+---
+
+## When Gurubase Says "I Don't Know"
+
+This is a **feature, not a bug**. Here are scenarios where Gurubase will refuse to answer:
+
+### Example 1: Out of Scope
+
+```
+Question: "What's the best investment strategy for my retirement?"
+(Asked to a health insurance Guru)
+
+Response: "This question is outside my area of expertise. I'm specialized
+in health insurance policies and benefits. For investment advice, you
+might want to consult with a licensed financial advisor."
+```
+
+### Example 2: Insufficient Information
+
+```
+Question: "Is Dr. Smith in network?"
+(Provider not found in documentation)
+
+Response: "I couldn't find information about Dr. Smith in the current
+provider directory. This might be:
+- A recently added provider not yet in the system
+- A provider using a different name variation
+- An out-of-network provider
+
+I recommend:
+1. Calling member services with the provider's NPI number
+2. Checking the online provider search tool
+3. Asking the provider's office to verify network status"
+```
+
+### Example 3: Conflicting Information
+
+```
+Question: "What's the annual deductible for my plan?"
+
+Found: Two documents with different values ($500 vs $1,000)
+
+Response: "I found conflicting information about the annual deductible:
+- Summary of Benefits states: $500
+- Member Handbook states: $1,000
+
+This discrepancy should be clarified. I recommend:
+1. Checking your most recent plan documents
+2. Calling member services for confirmation
+3. Reviewing your Explanation of Benefits (EOB)"
+
+Trust Score: 45% (Low - due to conflicting sources)
+```
+
+**Why this is valuable:** An honest "I don't know" or "information conflicts" is far more valuable than a confident wrong answer.
+
+---
+
+## Continuous Improvement: The Feedback Loop
+
+Gurubase learns from its limitations:
+
+### Tracking Unanswerable Questions
+Every time Gurubase can't answer a question, it records:
+- What was asked
+- Why it couldn't answer
+- What information was missing
+
+**Example Log:**
+
+```
+Question: "What's the coverage for telehealth mental health visits?"
+Reason: NOT_ENOUGH_CONTEXT
+Missing: No documentation about telehealth mental health benefits found
+User Intent: Benefits inquiry
+Date: 2024-01-15
+```
+
+### Using This Data
+- Identify documentation gaps
+- Prioritize new content creation
+- Understand what users actually need
+- Improve knowledge base coverage
+
+**Real Impact:**
+
+```
+Week 1: 15 questions about "telehealth coverage" couldn't be answered
+Action: Team adds comprehensive telehealth benefits documentation
+Week 2: Telehealth questions now answered with 89% trust score
+Result: Members get answers, fewer calls to member services
+```
+
+---
+
+## Best Practices for Users
+
+### 1. Check the Trust Score
+- **80%+**: Highly reliable, well-documented
+- **60-79%**: Good information, verify if critical
+- **50-59%**: Limited info, double-check
+- **Below 50% or Rejected**: Find alternative sources
+
+### 2. Review the Sources
+Always available below each answer. Click to verify:
+- Is this from official documentation?
+- Is the information recent?
+- Does it match your use case?
+
+### 3. Ask Follow-up Questions
+If something is unclear or the trust score is low:
+
+```
+Initial: "What's covered for physical therapy?"
+Follow-up: "Can you provide more details about the visit limits and
+prior authorization requirements specifically?"
+```
+
+### 4. Report Issues
+If an answer seems wrong despite high trust score:
+- Use the feedback buttons
+- Helps improve the system
+- Benefits all users
+
+---
+
+## FAQ
+
+### "What is Gurubase Trust Score?"
+
+The Trust Score is a percentage (0-100%) that indicates how confident Gurubase is in its answer based on the quality and relevance of the sources used. A higher score means the answer is well-supported by multiple high-quality sources from your knowledge base. Scores above 80% indicate highly reliable answers, while lower scores suggest limited information is available. The threshold is configurable per Guru: you can set it higher (e.g., 70%) for high-stakes domains like finance or healthcare, or lower (e.g., 50%) for general education content. If the Trust Score falls below your configured threshold, Gurubase will refuse to answer rather than provide unreliable information.
+
+### "Why not just let the AI be creative and fill in gaps?"
+
+In regulated industries and critical decisions, creativity is dangerous. You need facts. A creative answer might:
+- State incorrect coverage amounts → Members make wrong financial decisions
+- Invent compliance requirements → Organizations face regulatory penalties
+- Suggest non-existent procedures → Patient care is compromised
+- Make up policy terms → Claims are processed incorrectly
+
+Better to say "I don't have that information" than to cause real problems.
+
+### "What if I need an answer that's not in the documentation?"
+
+Gurubase identifies this explicitly. You'll know:
+- Exactly what information exists in your knowledge base
+- What's missing or unclear
+- Where to look next (member services, compliance team, etc.)
+
+This helps you understand the limits of your documentation and improve it.
+
+### "Isn't refusing to answer sometimes frustrating?"
+
+Short-term frustration beats long-term problems:
+- Giving a member incorrect coverage information that leads to unexpected bills
+- Making compliance decisions based on hallucinated regulations
+- Training staff with incorrect procedures
+
+An honest "I don't know" points you in the right direction immediately.
+
+### "How is this different from just searching documentation manually?"
+
+Gurubase adds value through:
+- **Semantic understanding**: Finds relevant info even with different wording
+- **Synthesis**: Combines information from multiple sources
+- **Quality scoring**: Tells you how confident to be
+- **Context**: Understands follow-up questions in conversation
+- **Speed**: Instant answers vs. manual searching and reading
+
+But with all the safety checks of manual verification built in.
+
+---
+
+## Summary
+
+Gurubase is **hallucination-resistant**, significantly reducing the risk of incorrect information through seven layers of quality checks. While no AI system can completely eliminate hallucinations (they are inherent to how LLMs work), Gurubase would rather say "I don't know" than guess.
+
+<Note>
+The techniques described here represent just the core layers of our hallucination prevention system. Gurubase employs additional proprietary methods and safeguards that we continuously refine and improve based on real-world usage and the latest AI research.
+</Note>
+
+When you see an answer from Gurubase:
+- It's based on real sources from your documentation
+- You can verify every claim with provided links
+- The trust score tells you how confident to be
+- Any limitations or gaps are explicitly stated
+
+This approach means you can rely on Gurubase for critical decisions, whether in healthcare, finance, insurance, technology, or any domain where accuracy matters, without the constant worry: "Is this actually true, or did the AI just make it up?"
+
+**Because when the stakes are high, accuracy isn't optional. It's everything.**
+
+<CardGroup cols={2}>
+  <Card
+    title="Analytics Dashboard"
+    icon="chart-line"
+    href="/guides/analytics"
+  >
+    Track questions and identify documentation gaps
+  </Card>
+  <Card
+    title="Prompting Your Guru"
+    icon="wand-magic-sparkles"
+    href="/guides/prompting-your-guru"
+  >
+    Customize how your Guru responds
+  </Card>
+</CardGroup>
+

@@ -61,8 +61,8 @@
         "guides/audit-logs",
         "guides/actions",
         "guides/multi-answer",
-        "guides/team"
-
+        "guides/team",
+        "guides/preventing-hallucinations"
       ]
     },
     {
