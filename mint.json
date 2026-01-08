@@ -61,6 +61,7 @@
         "guides/excel-extraction",
         "guides/audit-logs",
         "guides/actions",
+        "guides/agents",
         "guides/multi-answer",
         "guides/team",
         "guides/preventing-hallucinations"

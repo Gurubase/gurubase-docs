@@ -75,13 +75,29 @@ Each parameter includes:
 ### Usage Instructions and Testing
 
 <Frame>
-  <img src="/images/guides/actions/usage-instructions-with-test.png" alt="Usage Instructions Configuration" />
+  <img src="/images/guides/actions/usage-instructions.png" alt="Usage Instructions Configuration" />
 </Frame>
 
 - **Usage Instructions**: Provide instructions for how the AI should interpret and use the response data (API response or Python stdout)
   - Example: "Use stdout to decide if the guess was correct"
   - Example: "Extract the user's name and bio from the JSON response and present this information in a clear summary"
-- **Testing**: Use the "Test Action" button to verify your configuration
+
+### Scheduling and Testing
+
+<Frame>
+  <img src="/images/guides/actions/scheduling.png" alt="Schedule Configuration" />
+</Frame>
+
+**Scheduling Actions:**
+- To schedule an action, all parameters must have default values
+- Enable scheduling using the toggle switch
+- Configure the execution schedule using a cron expression in standard format: `minute hour day month weekday`
+  - Example: `0 9 * * *` runs daily at 9 AM
+  - Example: `*/5 * * * *` runs every 5 minutes
+- Scheduled actions display their cron expression in the actions list
+
+**Testing:**
+- Use the "Test Action" button to verify your configuration
   - If required parameters exist, you'll be prompted to provide test values
   - Test results show success status, response data, and execution details
 
@@ -152,7 +168,7 @@ print(f'Guess == secret: {guess == secret_n}')
   <img src="/images/guides/actions/created.png" alt="Actions Management Dashboard" />
 </Frame>
 
-- View all configured actions with their name, type ("Python Code" or "API Call"), and status (Enabled/Disabled)
+- View all configured actions with their name, type ("Python Code" or "API Call"), status (Enabled/Disabled), and schedule (cron expression if scheduled)
 - Click the menu icon (⋮) next to any action to:
   - **Edit**: Modify the action's configuration
   - **Disable**: Temporarily disable without deleting
@@ -165,6 +181,37 @@ print(f'Guess == secret: {guess == secret_n}')
 - Enable or disable actions at any time
 - Disabled actions won't be triggered by user questions
 - **Note**: If a secret used by an action is deleted, that action will be automatically disabled
+
+## Actions History
+
+<Frame>
+  <img src="/images/guides/actions/actions-history.png" alt="Action History" />
+</Frame>
+
+View the execution history for all actions from the Actions page by clicking the "History" button. The history table displays:
+
+- **Status**: Execution outcome (Completed or Failed)
+- **Action Name**: Name of the executed action
+- **Type**: Action type (Python Code or API Call)
+- **Source**: How the action was triggered (scheduled, through the test action button, question answer flow etc.)
+- **Started At**: Date and time when execution began
+- **Duration**: Execution time in milliseconds
+- **Test**: Whether the execution was a test run
+
+Click the eye icon on any row to view detailed execution information.
+
+<Frame>
+  <img src="/images/guides/actions/actions-history-details.png" alt="Action Execution Details" />
+</Frame>
+
+**Execution Details Page:**
+- **Execution Info**: Unique execution ID, status, depth, action name and type, source, and test flag
+- **Timing**: Start time, duration, and completion time
+- **Input Data**: Parameters and values used during execution (collapsible)
+- **Output Data**: Response data or stdout from the execution (collapsible)
+- **Action Config Snapshot**: Configuration state at the time of execution (collapsible)
+
+This detailed view helps you debug failed executions, verify scheduled runs, and understand how actions performed with specific parameters.
 
 ## Usage in the Answer
 
