@@ -55,6 +55,7 @@
         "guides/create-guru",
         "guides/analytics",
         "guides/prompting-your-guru",
+        "guides/example-questions",
         "guides/pii-masking",
         "guides/data-sources",
         "guides/excel-extraction",
