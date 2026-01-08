@@ -1,0 +1,269 @@
+---
+title: "Changelog"
+description: "Gurubase Product updates and announcements"
+rss: true
+---
+
+# Changelog
+
+Stay up to date with the latest Gurubase features, improvements, and bug fixes.
+
+<Update label="January 2026" description="v0.10.2">
+**Improvements**
+
+Enhanced AI model configuration with reasoning effort support. Fixed temperature settings for model responses.
+
+</Update>
+
+<Update label="January 2026" description="v0.10.1">
+**New Features**
+
+**Cost Analytics Dashboard** — Track and visualize LLM usage costs with detailed breakdowns, histograms, and filtering options on Self-Hosted.
+
+**Image Compression** — Configurable image compression for attachments to optimize storage and processing.
+
+**Fuzzy Search** — Database-backed fuzzy search for semantic search with improved partial matching. [Learn more →](/api-reference/endpoints/semantic-search)
+
+**Temperature Control** — Configure AI model temperature for more predictable or creative responses.
+
+**Improvements**
+
+Improved analytics date range selection across all widgets. Enhanced prompt templates for better context understanding. Faster label selection in semantic search (from ~15s to ~1.3s). Better log chunk selection with stratified sampling.
+
+</Update>
+
+<Update label="December 2025" description="v0.10.0">
+**New Features**
+
+**Agent Actions** — Create custom Python actions that execute during answer generation, with secrets management, syntax highlighting, and scheduling support. [Learn more →](/guides/actions)
+
+**Semantic Search Analytics** — Track and analyze semantic search usage patterns. [Learn more →](/guides/analytics)
+
+**External User Filtering** — Filter analytics by external user for deeper insights.
+
+**Slack Bot Enhancements** — Configure trust score, references, and feedback buttons for Slack responses. [Learn more →](/integrations/bots/slack)
+
+**Login Header** — Quick access to login from the header navigation.
+
+**Improvements**
+
+Enhanced sub-agent handling with better result processing. Improved data source selection with better permissions. Syntax highlighting for JSON data sources. Better Zendesk, Jira, and Slack attachment handling.
+
+</Update>
+
+<Update label="November 2025" description="v0.9.3">
+**New Features**
+
+**Answer Editing** — Edit and improve AI-generated answers directly from the analytics dashboard. [Learn more →](/guides/analytics)
+
+**Topics & Sentiment Analysis** — Automatic topic categorization and sentiment detection for questions. [Learn more →](/guides/analytics)
+
+**Country Analytics** — Geographic distribution of questions with IP geolocation. [Learn more →](/guides/analytics)
+
+**Custom Time Selection** — Specify custom date ranges for analytics queries. [Learn more →](/guides/analytics)
+
+**Slack Binges** — Thread-based conversation memory in Slack with binge mapping. [Learn more →](/integrations/bots/slack)
+
+**Improvements**
+
+Enhanced analytics export with new metrics and filters. Better action clarification and selection logic. Improved bar chart grouping for custom time intervals. Performance optimizations for Milvus vector insertions.
+
+</Update>
+
+<Update label="November 2025" description="v0.9.2">
+**New Features**
+
+**Slack Attachments** — Send and receive images and files in Slack conversations. [Learn more →](/integrations/bots/slack)
+
+**GitHub Private Repos** — Index private GitHub repositories with token authentication. [Learn more →](/guides/data-sources)
+
+**Zendesk Article Labels** — Automatic label assignment to Zendesk data sources. [Learn more →](/integrations/ingestion/zendesk)
+
+**Improvements**
+
+Enhanced Actions with timeout configuration and cURL import. Better Excel job error handling and JSON serialization. Improved web widget UI and attachment handling.
+
+</Update>
+
+<Update label="October 2025" description="v0.9.1">
+**New Features**
+
+**Source Ordering** — Configure custom source ordering rules in Guru settings.
+
+**Log Filter Phrases** — Manage phrases for filtering log content.
+
+**Improvements**
+
+Enhanced Guru creation flow with new settings visibility.
+
+</Update>
+
+<Update label="October 2025" description="v0.9.0">
+**New Features**
+
+**Custom Actions** — Execute custom API calls during answer generation with parameter validation and SSRF protection. [Learn more →](/guides/actions)
+
+**Audit Logs** — Track all changes to your Guru with a dedicated audit log viewer. [Learn more →](/guides/audit-logs)
+
+**Multi-Answer Excel Jobs** — Process Excel files with multiple answers per row. [Learn more →](/guides/multi-answer)
+
+**Team Management** — Role-based access control for self-hosted deployments. [Learn more →](/guides/team)
+
+**TTS** — Text-to-speech API.[Learn more →](/api-reference/endpoints/text-to-speech-v2)
+
+**VTT Subtitle Support** — Import video subtitles in VTT format. [Learn more →](/guides/data-sources)
+
+**Zendesk Time-Based Sync** — Schedule Zendesk ingestion jobs with custom intervals. [Learn more →](/integrations/ingestion/zendesk)
+
+**Log Download** — Download application logs for self-hosted troubleshooting.
+
+**Improvements**
+
+Enhanced analytics with vote filtering and trust score ordering. Better YouTube title extraction via oEmbed/yt-dlp. Improved Excel job UI with pagination and search. Automatic orphaned vector cleanup in the background.
+
+</Update>
+
+<Update label="September 2025" description="v0.8.3">
+**New Features**
+
+**API Rate Limiting** — Configurable rate limits with per-end-user throttling support. [Learn more →](/api-reference/authentication)
+
+**Jira Bot Signature** — Custom bot signatures for Jira message filtering. [Learn more →](/integrations/bots/jira)
+
+**Improvements**
+
+Optimized analytics queries for better performance. Enhanced merge logic for adjacent search results. Lazy loading for attachment processing.
+
+</Update>
+
+<Update label="September 2025" description="v0.8.2">
+**New Features**
+
+**Zendesk Diff View** — Review changes before applying in the Zendesk ticket editor.
+
+**Improvements**
+
+Enhanced subscription page UI with clearer plan presentation. Improved Jira integration with Atlassian terminology and subdomain support. Better Zendesk KB editor with increased app size.
+
+</Update>
+
+<Update label="September 2025" description="v0.8.0">
+**New Features**
+
+**Jira Bot Integration** — Automatic question answering directly in Jira tickets. [Learn more →](/integrations/bots/jira)
+
+**Follow-up Question Permissions** — Customizable follow-up question limits per plan.
+
+**Manual Reindex** — Trigger ingestion job reindexes manually from the UI. [Learn more →](/api-reference/endpoints/reindex-datasources)
+
+**Improvements**
+
+Better Jira attachment handling in prompts. Improved log extraction without errors on empty matches. Increased timeout for self-hosted deployments.
+
+</Update>
+
+<Update label="September 2025" description="v0.7.1">
+**New Features**
+
+**Reranker** — Alternative reranker option for improved search relevance.
+
+**Zendesk Ticket Editor** — AI-powered ticket editing and rewriting.
+
+**Improvements**
+
+Unsaved changes confirmation in source dialogs. Better job handling across Slack, Jira, and file sources. Default embedding model now configurable via admin.
+
+</Update>
+
+<Update label="August 2025" description="v0.7.0">
+**New Features**
+
+**Follow-up Question API** — Generate follow-up suggestions via API. [Learn more →](/api-reference/endpoints/follow-up-examples)
+
+**Text Rewrite API** — Dedicated endpoint for article rewriting.
+
+**Memory** — Personalized memory for API requests with external user IDs. [Learn more →](/api-reference/endpoints/upsert-profiles)
+
+**Text-to-Speech** — Listen to answers with audio playback support. [Learn more →](/api-reference/endpoints/text-to-speech)
+
+**Zendesk KB Editor** — AI-powered Knowledge Base article improvement.
+
+**Clarification Questions** — AI can ask clarifying questions before answering.
+
+**Multiple Backfill Jobs** — Multiple jobs from the same integration per Guru.
+
+**User Profiles** — Store user context for personalized responses. [Learn more →](/api-reference/endpoints/upsert-profiles)
+
+**Improvements**
+
+Unified backfill job model across all integrations. Better YouTube Shorts URL support. Enhanced semantic search with label filtering. Improved JQL/CQL validation in UI.
+
+</Update>
+
+<Update label="July 2025" description="v0.6.1">
+**New Features**
+
+**Session Management API** — External user ID support with session retrieval and deletion. [Learn more →](/api-reference/endpoints/list-sessions)
+
+**Language Analytics** — Visualize question language distribution over time. [Learn more →](/guides/analytics)
+
+**Excel Extraction** — Initial Excel file processing for data ingestion. [Learn more →](/guides/excel-extraction)
+
+**Enforce Language** — Keep Guru responses in a configured language. [Learn more →](/guides/prompting-your-guru)
+
+**Voice Recording Timer** — Visual feedback with recording duration display.
+
+**Improvements**
+
+Multi-language support for follow-up questions. Better Discord error handling. Improved Slack streaming without duplicate questions.
+
+</Update>
+
+<Update label="July 2025" description="v0.6.0">
+**New Features**
+
+**Voice Typing** — Ask questions using voice with audio transcription. [Learn more →](/api-reference/endpoints/transcribe-audio)
+
+**Vote Recording API** — Track upvotes and downvotes for answers. [Learn more →](/api-reference/endpoints/record-vote)
+
+**Simple Interactions** — Quick responses without full RAG processing.
+
+**API Access Limits** — Plan-gated API access with usage limits. [Learn more →](/api-reference/authentication)
+
+**Downvote Reasons** — Modal for capturing feedback on negative votes. [Learn more →](/guides/analytics)
+
+**Improvements**
+
+Enhanced analytics with user names instead of IDs. Dynamic language detection and response. Better Confluence ingestion with pagination fixes.
+
+</Update>
+
+<Update label="June 2025" description="v0.5.9">
+**New Features**
+
+**Label Selection** — Filter semantic search results by data source labels. [Learn more →](/api-reference/endpoints/semantic-search)
+
+**Attachment Support** — Send images and files in widget conversations. [Learn more →](/integrations/bots/website-widget)
+
+**Improvements**
+
+Better PDF processing with improved chunking. Enhanced GitHub codebase indexing.
+
+</Update>
+
+<Update label="June 2025" description="v0.5.8">
+**New Features**
+
+**Image Answers** — Ask questions with image attachments. [Learn more →](/api-reference/endpoints/ask-question)
+
+**O3 Model Support** — Support for OpenAI o3 models.
+
+**Dynamic LLMs** — Configure different LLM models per Guru. [Learn more →](/guides/prompting-your-guru)
+
+**Source Content Viewer** — Preview data source content in the UI. [Learn more →](/guides/data-sources)
+
+**Improvements**
+
+Separate prompts and trust score handling. Better data source UX with improved selection. Jira image support in ingestion.
+
+</Update>
