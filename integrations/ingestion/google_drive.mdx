@@ -1,0 +1,186 @@
+---
+title: 'Google Drive'
+description: 'Connect Gurubase with Google Drive to use your files as data sources'
+---
+
+## Introduction
+
+Integrate Gurubase with Google Drive to use your Google Drive files as data sources for Gurubase. Files shared with the service account will be automatically indexed and kept in sync.
+
+<Note>
+Files indexed through Google Drive integration are automatically labeled with `google_drive`. This label cannot be manually deleted.
+</Note>
+
+<Frame>
+  <img src="/images/ingestion/google_drive/integration_page.png" alt="Gurubase Google Drive integration page" />
+</Frame>
+
+## Steps to Integrate
+
+### Create Google Drive Service Account
+
+1. **Navigate to Google Cloud Console Service Accounts**
+   - Go to [Google Cloud Console](https://console.cloud.google.com/)
+   - Navigate to "IAM & Admin" > "Service Accounts"
+
+
+2. **Select or Create a Project**
+   - Choose an existing project or create a new one
+
+<Frame>
+  <img src="/images/ingestion/google_drive/service_accounts.png" alt="Google Cloud Console Service Accounts page" />
+</Frame>
+
+3. **Create a Service Account**
+   - Click "Create Service Account"
+   - Enter a name for your service account
+   - Click "Create and Continue"
+   - Optionally add a description
+   - Skip "2. Permissions" and "3. Principals with access"
+   - Click "Done"
+
+<Frame>
+  <img src="/images/ingestion/google_drive/create_service_account.png" alt="Create Service Account dialog" />
+</Frame>
+
+4. **Create and Download JSON Key**
+   - Click on the service account you just created
+   - Navigate to the "Keys" tab
+   - Click "Add Key" > "Create new key"
+   - Select "JSON" as the key type
+   - Click "Create"
+
+<Frame>
+  <img src="/images/ingestion/google_drive/sa_key.png" alt="Service Account Keys tab" />
+</Frame>
+
+<Frame>
+  <img src="/images/ingestion/google_drive/create_key.png" alt="Create new key dialog" />
+</Frame>
+
+   - The JSON key file will be automatically downloaded. **Securely store this file** as you'll need it in the next step.
+
+5. **Enable Google Drive API**
+   - Navigate to "APIs & Services" page (you can search for it in the console search bar)
+
+<Frame>
+  <img src="/images/ingestion/google_drive/apis_services.png" alt="APIs & Services page" />
+</Frame>
+
+   - Click "Enable APIs and services"
+
+<Frame>
+  <img src="/images/ingestion/google_drive/enable_apis_services.png" alt="Enable APIs and services button" />
+</Frame>
+
+   - Search for "Google Drive API"
+
+<Frame>
+  <img src="/images/ingestion/google_drive/search_google_drive_api.png" alt="Search for Google Drive API" />
+</Frame>
+
+   - Click on "Google Drive API" and then click "Enable"
+
+<Frame>
+  <img src="/images/ingestion/google_drive/enable_google_drive_api.png" alt="Enable Google Drive API" />
+</Frame>
+
+### Connect Google Drive in Gurubase
+
+1. **Navigate to Integrations**
+   - Go to the Gurubase dashboard
+   - Click on "My Gurus" under the profile
+   - Click on the Guru you want to integrate with Google Drive
+   - Click on the "Integrations" tab
+   - Click on the "Google Drive" option
+
+
+
+2. **Import Service Account JSON**
+   - You'll see the Google Drive integration page
+
+<Frame>
+  <img src="/images/ingestion/google_drive/empty_integration.png" alt="Empty Google Drive integration state" />
+</Frame>
+
+   - Paste or upload the JSON key file you downloaded in Step 1
+   - Click "Connect"
+
+3. **Integration Setup Complete**
+   - After clicking "Connect", the integration will be set up successfully
+   - You'll see the integration is now connected
+
+<Frame>
+  <img src="/images/ingestion/google_drive/no_files_shared.png" alt="No files shared message" />
+</Frame>   
+
+### Share Files with Service Account
+
+1. **Share Files in Google Drive**
+   - Go to your Google Drive
+   - Select the files or folders you want to index
+   - Right-click and select "Share" or click the "Share" button
+   - In the sharing dialog, enter the service account email address (written on the integration page, or found in the JSON key file under `client_email`)
+   - Set the permission to "Viewer" (read-only access)
+   - Click "Send"
+
+<Frame>
+  <img src="/images/ingestion/google_drive/share_files.png" alt="Share files with service account in Google Drive" />
+</Frame>
+
+<Note>
+Only files shared with the service account email address will be indexed. Make sure to share all files and folders you want to include in your Guru.
+</Note>
+
+### Sync Files
+
+1. **Return to Gurubase**
+   - Go back to the Gurubase integration page
+   - Click "Sync Now" to start indexing the shared files
+
+2. **Monitor Sync Status**
+   - Once files are shared and synced, you'll see them listed
+
+<Frame>
+  <img src="/images/ingestion/google_drive/shared-synced.png" alt="Shared and synced files" />
+</Frame>
+
+   - You can see the sync status and when files were last indexed
+
+<Frame>
+  <img src="/images/ingestion/google_drive/last_indexed_at.png" alt="Last indexed timestamp" />
+</Frame>
+
+## Supported File Types
+
+The Google Drive integration currently processes the following file types:
+
+- **Text Files**: `.txt`, `.md`
+- **Spreadsheets**: `.xls`, `.xlsx`
+- **PDFs**: `.pdf`
+- **Google Sheets**: Automatically converted to `.xlsx` format
+- **Google Docs**: Automatically converted to `.pdf` format
+
+<Note>
+Only the file types listed above will be indexed. Other file types will be skipped during the sync process.
+</Note>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="API Reference"
+    icon="code"
+    href="/api-reference/introduction"
+  >
+    Explore our API documentation
+  </Card>
+  <Card
+    title="Add Discord Bot to Your Server"
+    icon="discord"
+    href="/integrations/bots/discord"
+  >
+    Learn how to add a Discord bot to your server
+  </Card>
+</CardGroup>
+

@@ -86,7 +86,8 @@
             "integrations/ingestion/jira",
             "integrations/ingestion/confluence",
             "integrations/ingestion/slack",
-            "integrations/ingestion/salesforce"
+            "integrations/ingestion/salesforce",
+            "integrations/ingestion/google_drive"
           ]
         }
       ]
