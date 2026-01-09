@@ -76,7 +76,7 @@ For more examples like Astro - Starlight, Docusaurus, Mintlify, MKDocs, Next.js,
 | `data-shimmer-color` | Color for the animated shimmer effect on example questions. Accepts hex color values (e.g., "#0000FF"). If not set, uses `data-bg-color`. Falls back to red if neither is available. | Uses `data-bg-color` or red fallback |
 | `data-icon-url` | Custom logo URL | Fetched from Gurubase |
 | `data-name` | Custom name | Fetched from Gurubase |
-| `data-baseUrl` | URL to your Gurubase backend. **Only for self-hosted Gurubase (Enterprise plan).** | Gurubase Cloud |
+| `data-base-url` | URL to your Gurubase backend. **Only for self-hosted Gurubase (Enterprise plan).** | Gurubase Cloud |
 | `data-tooltip` | Tooltip text | null |
 | `data-tooltip-side` | `"top"`, `"bottom"`, `"left"`, `"right"`, `"top left"`, `"top right"`, `"bottom left"`, `"bottom right"` | `"left"` |
 | `data-overlap-content` | Whether to overlap the main content or shrink its width with the sidebar | `"false"` |
@@ -86,12 +86,12 @@ For more examples like Astro - Starlight, Docusaurus, Mintlify, MKDocs, Next.js,
 <Note type="warning">
 Self-hosted installations are exclusively available under the Enterprise plan. To request access, contact us at **contact@gurubase.io**.
 
-If you're using self-hosted Gurubase, you must set the Gurubase instance URL using the `data-baseUrl` attribute. The default URL of Self-hosted Gurubase instance is `http://localhost:8029/api/`. 
+If you're using self-hosted Gurubase, you must set the Gurubase instance URL using the `data-base-url` attribute. The default URL of Self-hosted Gurubase instance is `http://localhost:8029/api/`. 
 
 ```html
 <script async src="https://widget.gurubase.io/widget.latest.min.js" 
     data-widget-id="YOUR_WIDGET_ID"
-    data-baseUrl="http://localhost:8029/api/"
+    data-base-url="http://localhost:8029/api/"
     id="guru-widget-id">
 </script>
 ```
